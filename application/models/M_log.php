@@ -9,7 +9,7 @@ class M_log extends CI_Model {
     public function read($limit, $start, $key) {
         $this->db->select('a.*, b.user_name');
         $this->db->from('tbl_log a');
-        $this->db->join('tbl_user b','a.user_id=b.id_user','LEFT');
+        $this->db->join('tbl_user b','a.id_user=b.id_user','LEFT');
         
         if($key!=''){
             $this->db->like("a.log_message", $key);

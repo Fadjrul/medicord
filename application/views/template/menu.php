@@ -331,7 +331,7 @@
                                     </li>
                                     <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My Profile</a>
                                     </li>
-                                    <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Log out</a>
+                                    <li><a class="dropdown-item" href="<?php echo site_url('auth/logout')?>"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Log out</a>
                                     </li>
                                 </ul>
                             </div>
