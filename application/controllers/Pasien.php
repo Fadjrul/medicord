@@ -75,6 +75,21 @@ class Pasien extends CI_Controller {
 		TemplateApp($data, $view, $viewCategory);
     }
     
+    public function create_page() {
+        // PAGE
+        $uriSegment = 3;
+        $page       = ($this->uri->segment($uriSegment)) ? $this->uri->segment($uriSegment) : 0;
+
+        //DATA
+        $data['setting']       = getSetting();
+        $data['title']         = 'Tambah Data Pasien';
+        $data['pasien'] = $this->m_pasien->read('','','');
+		
+        // TEMPLATE
+		$view         = "pasien/add";
+		$viewCategory = "all";
+		TemplateApp($data, $view, $viewCategory);
+    }
 
     public function create() {
         csrfValidate();
@@ -83,10 +98,6 @@ class Pasien extends CI_Controller {
         $data['nama_pasien'] = $this->input->post('nama_pasien');
         $data['createtime']  = date('Y-m-d H:i:s');
         $this->m_pasien->create($data);
-
-        // LOG
-        $message    = $this->session->userdata('user_name')." menambah data pasien ".$data['nama_pasien'];
-        createLog($message);
 
         // ALERT
         $alertStatus  = "success";
@@ -104,10 +115,6 @@ class Pasien extends CI_Controller {
         $data['nama_pasien'] = $this->input->post('nama_pasien');
         $this->m_pasien->update($data);
 
-        // LOG
-        $message    = $this->session->userdata('user_name')." mengubah data pasien dengan ID = ".$data['id_pasien']." - ".$data['nama_pasien'];
-        createLog($message);
-
         // ALERT
         $alertStatus  = "success";
         $alertMessage = "Berhasil mengubah data pasien : ".$data['nama_pasien'];
@@ -121,10 +128,6 @@ class Pasien extends CI_Controller {
         csrfValidate();
         // POST
         $this->m_pasien->delete($this->input->post('id_pasien'));
-        
-        // LOG
-        $message    = $this->session->userdata('user_name')." menghapus data pasien dengan ID = ".$this->input->post('id_pasien')." - ".$this->input->post('nama_pasien');
-        createLog($message);
 
         // ALERT
         $alertStatus  = "failed";

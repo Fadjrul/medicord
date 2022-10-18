@@ -47,10 +47,6 @@ class Auth extends CI_Controller {
 					);
 					$this->session->set_userdata($data);
 
-					// LOG
-					$logMessage = $data['user_fullname'] . " melakukan login ke sistem";
-					createLog($logMessage);
-
 					redirect('dashboard/index');
 				}else{
                     // ALERT

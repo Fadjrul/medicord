@@ -9,7 +9,8 @@
                 <!-- Breadcrumb -->
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">Data Pasien</li>
+                        <li class="breadcrumb-item"><a href="<?php echo site_url('dashboard/index');?>"> Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Pasien</a></li>
                     </ol>
                 </nav>
             </div>
@@ -62,7 +63,7 @@
                                     
                                 </div>
                                 <div class="col-4 text-end">
-                                    <a href="<?= site_url('pasien/add'); ?>" class="btn btn-sm btn-primary">
+                                    <a href="<?= site_url('pasien/create_page'); ?>" class="btn btn-sm btn-primary">
                                         <i class="fas fa-plus"></i> Add
                                     </a>
                                     <!-- cetak -->
