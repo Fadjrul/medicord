@@ -1,21 +1,24 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
-class Auth extends CI_Controller {
-	function __construct() {
+<?php defined('BASEPATH') or exit('No direct script access allowed');
+class Auth extends CI_Controller
+{
+	function __construct()
+	{
 		parent::__construct();
 		$this->load->model('m_auth');
 		$this->load->model('m_user');
 	}
 
-	
-	public function index(){
+
+	public function index()
+	{
 		// check session data
 		if ($this->session->userdata('id_user')) {
 			// ALERT
 			$alertStatus  = 'success';
-			$alertMessage = 'Selamat Datang, '.$this->session->userdata('user_fullname');
+			$alertMessage = 'Selamat Datang, ' . $this->session->userdata('user_fullname');
 			getAlert($alertStatus, $alertMessage);
 			redirect('dashboard/index');
-		}else{
+		} else {
 			// DATA
 			$data['setting'] = getSetting();
 
@@ -27,12 +30,13 @@ class Auth extends CI_Controller {
 	}
 
 
-	public function validate(){
+	public function validate()
+	{
 		csrfValidate();
 		if ($_POST) {
-			$result           = $this->m_auth->validate(str_replace (' ','',$this->db->escape_str($this->input->post('username'))));
+			$result           = $this->m_auth->validate(str_replace(' ', '', $this->db->escape_str($this->input->post('username'))));
 			if (!!($result)) {
-				if(password_verify($this->input->post('password'), $result[0]->user_password)){
+				if (password_verify($this->input->post('password'), $result[0]->user_password)) {
 					// SESSION DATA
 					$data = array(
 						'id_user'         => $result[0]->id_user,
@@ -52,25 +56,26 @@ class Auth extends CI_Controller {
 					createLog($logMessage);
 
 					redirect('dashboard/index');
-				}else{
-                    // ALERT
+				} else {
+					// ALERT
 					$alertStatus  = 'failed';
 					$alertMessage = 'Username atau Password salah';
 					getAlert($alertStatus, $alertMessage);
-                    redirect('auth');
-                }
+					redirect('auth');
+				}
 			} else {
 				// ALERT
 				$alertStatus  = 'failed';
 				$alertMessage = 'Akun tidak valid';
 				getAlert($alertStatus, $alertMessage);
-                redirect('auth');
+				redirect('auth');
 			}
 		}
 	}
 
 
-	public function logout() {
+	public function logout()
+	{
 		$this->session->sess_destroy();
 		redirect('auth');
 	}
