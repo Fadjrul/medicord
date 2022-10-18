@@ -91,6 +91,22 @@ class Pasien extends CI_Controller {
 		TemplateApp($data, $view, $viewCategory);
     }
 
+    public function detail_page() {
+        // PAGE
+        $uriSegment = 3;
+        $page       = ($this->uri->segment($uriSegment)) ? $this->uri->segment($uriSegment) : 0;
+
+        //DATA
+        $data['setting']       = getSetting();
+        $data['title']         = 'Detail Data Pasien';
+        $data['pasien'] = $this->m_pasien->read('','','');
+		
+        // TEMPLATE
+		$view         = "pasien/detail";
+		$viewCategory = "all";
+		TemplateApp($data, $view, $viewCategory);
+    }
+
     public function create() {
         csrfValidate();
         // POST

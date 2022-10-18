@@ -129,9 +129,9 @@
                                                         Aksi
                                                     </button>
                                                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
-                                                        <li><a class="dropdown-item" href="#">Detail</a></li>
-                                                        <li><a class="dropdown-item" href="#">Update</a></li>
-                                                        <li><a class="dropdown-item" href="#">Delete</a></li>
+                                                        <li><a class="dropdown-item" href="<?php echo site_url('pasien/detail_page');?>">Detail</a></li>
+                                                        <li><a class="dropdown-item" href="<?php echo site_url('pasien/update_page');?>">Update</a></li>
+                                                        <li><a class="dropdown-item" href="<?php echo site_url('pasien/delete');?><?php echo csrf();?>">Delete</a></li>
                                                     </ul>
                                                 </div>
                                             </td>
