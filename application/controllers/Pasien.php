@@ -95,7 +95,7 @@ class Pasien extends CI_Controller
 
     public function detail_page()
     {
-    
+
         //DATA
         $data['setting']       = getSetting();
         $data['title']         = 'Detail Data Pasien';
@@ -113,7 +113,7 @@ class Pasien extends CI_Controller
 
     public function update_page()
     {
-        
+
         //DATA
         $data['setting']       = getSetting();
         $data['title']         = 'Ubah Data Pasien';
@@ -126,7 +126,7 @@ class Pasien extends CI_Controller
         TemplateApp($data, $view, $viewCategory);
     }
 
-    public function generate_rm() 
+    public function generate_rm()
     {
         // 00001
         $char = '0000';
@@ -135,32 +135,27 @@ class Pasien extends CI_Controller
         $char3 = '0';
         $char4 = '';
         $lastKode = $this->m_pasien->last();
-        foreach($lastKode  as $p)
-        {
-            $p2 = (int) $p->no_rekam_medis; 
-            $p3 = $p2 +1;
-            $p4 = (string) $p2 + 1; 
+        foreach ($lastKode  as $p) {
+            $p2 = (int) $p->no_rekam_medis;
+            $p3 = $p2 + 1;
+            $p4 = (string) $p2 + 1;
         }
-        if($p3 >= 10)
-        {
-            $nomor_urut = $char1 .  $p4 ;
+        if ($p3 >= 10) {
+            $nomor_urut = $char1 .  $p4;
         }
-        if($p3 >= 100)
-        {
-            $nomor_urut = $char2 .  $p4 ;
+        if ($p3 >= 100) {
+            $nomor_urut = $char2 .  $p4;
         }
-        if($p3 >= 1000)
-        {
-            $nomor_urut = $char3 .  $p4 ;
+        if ($p3 >= 1000) {
+            $nomor_urut = $char3 .  $p4;
         }
-        if($p3 >= 10000)
-        {
-            $nomor_urut = $char4.  $p4 ;
-        }    
-        if($p3 < 10){
-            $nomor_urut = $char.  $p4 ;
-        }   
-        
+        if ($p3 >= 10000) {
+            $nomor_urut = $char4 .  $p4;
+        }
+        if ($p3 < 10) {
+            $nomor_urut = $char .  $p4;
+        }
+
 
         // echo "<pre>";
         // print_r($nomor_urut );
@@ -209,7 +204,7 @@ class Pasien extends CI_Controller
     {
         csrfValidate();
         // POST
-        $data['id_pasien']   = $this->input->post('id_user');
+        $data['id_pasien']   = $this->input->post('id_pasien');
         $data['nik_pasien'] = $this->input->post('nik_pasien');
         $data['nama_pasien'] = $this->input->post('nama_pasien');
         $data['nama_kepala_keluarga'] = $this->input->post('nama_kepala_keluarga');
