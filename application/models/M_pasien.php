@@ -44,6 +44,25 @@ class M_pasien extends CI_Model
         return null;
     }
 
+    public function last()
+    {
+        $this->db->select('no_rekam_medis');
+        $this->db->from('tbl_pasien');
+        $this->db->order_by('no_rekam_medis', 'desc');
+        $this->db->limit(1);
+
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return null;
+    }
+
+    
+
     public function create($data)
     {
         $this->db->insert('tbl_pasien', $data);
