@@ -67,10 +67,6 @@ class Setting extends CI_Controller {
 		$alertMessage = 'Berhasil Update Data Informasi Aplikasi';
 		getAlert($alertStatus, $alertMessage);
 		
-		// LOG
-		$logMessage = "Update Informasi Aplikasi";
-		createLog($logMessage);
-		
 		redirect('setting/index');
 	}
 

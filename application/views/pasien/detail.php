@@ -1,5 +1,5 @@
-<!-- Page content Header -->
-<div class="page-heading">
+    <!-- Page content Header -->
+    <div class="page-heading">
         <div class="row">
             <!-- Page Title -->
             <div class="col-12 col-md-6 order-md-1 order-last">
@@ -135,7 +135,7 @@
                                                     <label for="alamat_pasien">Alamat</label>
                                                 </div>
                                                 <div class="col-md-4 form-group">
-                                                    <textarea id="alamat_pasien" class="form-control" name="alamat_pasien" placeholder="Alamat" rows="4" readonly="readonly"> <?php echo $pasien[0]->alamat_pasien;?> </textarea>
+                                                    <textarea id="alamat_pasien" class="form-control" name="alamat_pasien" placeholder="Alamat" rows="4" readonly="readonly"><?php echo $pasien[0]->alamat_pasien;?></textarea>
                                                 </div>
                                                 <div class="col-md-2 col-12">
                                                     <label for="no_telp_pasien">Nomor Telepon</label>
@@ -147,17 +147,17 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-2 col-12">
-                                                    <label for="status_pasien">Status Pasien</label>
+                                                    <label for="status_pasien_id">Status Pasien</label>
                                                 </div>   
                                                 <div class="col-md-4 form-group">
                                                     <fieldset class="form-group">
-                                                        <select class="form-select" id="status_pasien" name="status_pasien">
+                                                        <select class="form-select" id="status_pasien_id" name="status_pasien_id">
                                                             <?php
-                                                                foreach($pasien as $p){
-                                                                    if($status_pasien[0]->id_pasien == $p->id_pasien){
-                                                                        echo '<option value="'.$p->id_pasien.'" selected>'.$p->status_pasien.'</option>';
+                                                                foreach($status_pasien as $sp){
+                                                                    if($pasien[0]->status_pasien_id == $sp->id_status_pasien){
+                                                                        echo '<option value="'.$sp->id_status_pasien.'" selected>'.$sp->nama_status_pasien.'</option>';
                                                                     }else{
-                                                                        echo '<option value="'.$p->id_pasien.'">'.$p->status_pasien.'</option>';
+                                                                        echo '<option value="'.$sp->id_status_pasien.'">'.$sp->$nama_status_pasien.'</option>';
                                                                     }
                                                                 }
                                                             ?>
@@ -167,17 +167,17 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-2 col-12">
-                                                    <label for="jns_kepesertaan">Jenis Kepesertaan</label>
+                                                    <label for="kepesertaan_pasien_id">Jenis Kepesertaan</label>
                                                 </div>
                                                 <div class="col-md-4 form-group">
                                                     <fieldset class="form-group">
-                                                        <select class="form-select" id="jns_kepesertaan" name="jns_kepesertaan">
+                                                        <select class="form-select" id="kepesertaan_pasien_id" name="kepesertaan_pasien_id">
                                                             <?php
-                                                                foreach($pasien as $p){
-                                                                    if($jns_kepesertaan[0]->id_pasien == $p->id_pasien){
-                                                                        echo '<option value="'.$p->id_pasien.'" selected>'.$p->jns_kepesertaan.'</option>';
+                                                                foreach($kepesertaan_pasien as $kp){
+                                                                    if($pasien[0]->kepesertaan_pasien_id == $kp->id_kepesertaan_pasien){
+                                                                        echo '<option value="'.$kp->id_kepesertaan_pasien.'" selected>'.$kp->nama_kepesertaan_pasien.'</option>';
                                                                     }else{
-                                                                        echo '<option value="'.$p->id_pasien.'">'.$p->jns_kepesertaan.'</option>';
+                                                                        echo '<option value="'.$kp->id_kepesertaan_pasien.'">'.$kp->nama_kepesertaan_pasien.'</option>';
                                                                     }
                                                                 }
                                                             ?>
@@ -190,10 +190,12 @@
                                     <?php echo form_close(); ?>
                                 </div>
                             </div>
+                            <div class="p-3">
+                                <p><small>Page rendered in <strong>{elapsed_time}</strong> seconds.</small></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
         <!-- Data Pasien end -->
     </div>

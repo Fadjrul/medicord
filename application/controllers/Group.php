@@ -93,7 +93,7 @@ class Group extends CI_Controller {
         $alertMessage = "Berhasil menambah data group ".$data['group_name'];
         getAlert($alertStatus, $alertMessage);
 
-        redirect('group');
+        redirect('group/index');
     }
     
 
@@ -113,7 +113,7 @@ class Group extends CI_Controller {
         $alertMessage = "Berhasil mengubah data group : ".$data['group_name'];
         getAlert($alertStatus, $alertMessage);
 
-        redirect('group');
+        redirect('group/index');
     }
     
 
@@ -131,7 +131,7 @@ class Group extends CI_Controller {
         $alertMessage = "Menghapus data group : ".$this->input->post('group_name');
         getAlert($alertStatus, $alertMessage);
 
-        redirect('group');
+        redirect('group/index');
     }
     
 }

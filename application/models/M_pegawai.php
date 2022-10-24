@@ -7,11 +7,16 @@ class M_pegawai extends CI_Model {
     }
     
     public function read($limit, $start, $key) {
-        $this->db->select('id_pegawai, nama_pegawai');
+        $this->db->select('*');
         $this->db->from('tbl_pegawai');
         
         if($key!=''){
             $this->db->like("nama_pegawai", $key);
+            $this->db->like("jenis_kelamin", $key);
+            $this->db->like("status_pegawai", $key);
+            $this->db->like("bidang_pegawai", $key);
+            $this->db->like("alamat_pegawai", $key);
+            $this->db->like("no_telp_pegawai", $key);
         }
 
         if($limit !="" OR $start !=""){

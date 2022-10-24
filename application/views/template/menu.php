@@ -1,5 +1,6 @@
 <body>
-    <!-- Start app -->
+    
+    <!-- medicord App Start -->
     <div id="app">
         <div id="sidebar" class="active">
             <div class="sidebar-wrapper active">
@@ -22,7 +23,7 @@
             <li class="sidebar-title">DATA MEDICORD</li>
             
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('dashboard'); ?>">
                 <a href="<?php echo site_url('dashboard/index')?>" class='sidebar-link'>
                     <i class="bi bi-grid-fill"></i>
                     <span>Dashboard</span>
@@ -30,7 +31,7 @@
             </li>
 
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('pasien'); ?>">
                 <a href="<?php echo site_url('pasien/index')?>" class='sidebar-link'>
                     <i class="fas fa-user-injured"></i>
                     <span>Pasien</span>
@@ -38,7 +39,7 @@
             </li>
 
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('dokter'); ?>">
                 <a href="<?php echo site_url('dokter/index')?>" class='sidebar-link'>
                     <i class="fas fa-user-md"></i>
                     <span>Dokter</span>
@@ -46,7 +47,7 @@
             </li>
 
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('pegawai'); ?>">
                 <a href="<?php echo site_url('pegawai/index')?>" class='sidebar-link'>
                     <i class="fas fa-user-nurse"></i>
                     <span>Pegawai</span>
@@ -54,7 +55,7 @@
             </li>
 
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('poliklinik'); ?>">
                 <a href="<?php echo site_url('poliklinik/index')?>" class='sidebar-link'>
                     <i class="fas fa-hospital"></i>
                     <span>Poliklinik</span>
@@ -62,7 +63,7 @@
             </li>
 
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('penyakit'); ?>">
                 <a href="<?php echo site_url('penyakit/index')?>" class='sidebar-link'>
                     <i class="fas fa-disease"></i>
                     <span>Penyakit (ICD X)</span>
@@ -70,7 +71,7 @@
             </li>
 
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('obat'); ?>">
                 <a href="<?php echo site_url('obat/index')?>" class='sidebar-link'>
                     <i class="fas fa-capsules"></i>
                     <span>Obat</span>
@@ -84,13 +85,13 @@
                     <span>Rekam Medis</span>
                 </a>
                 <ul class="submenu ">
-                    <li class="submenu-item ">
+                    <li class="submenu-item <?= active_menu('pengkajian_awal'); ?>">
                         <a href="<?php echo site_url('pengkajian_awal/index')?>">Pengkajian Awal</a>
                     </li>
-                    <li class="submenu-item ">
+                    <li class="submenu-item <?= active_menu('riwayat_kunjungan_pasien'); ?>">
                         <a href="<?php echo site_url('riwayat_kunjungan_pasien/index')?>">Riwayat Kunjungan Pasien</a>
                     </li>
-                    <li class="submenu-item ">
+                    <li class="submenu-item <?= active_menu('pemeriksaan_odontogram'); ?>">
                         <a href="<?php echo site_url('pemeriksaan_odontogram/index')?>">Pemeriksaan Odontogram</a>
                     </li>
                 </ul>
@@ -99,7 +100,7 @@
             <li class="sidebar-title">LAINNYA</li>
 
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('user'); ?>">
                 <a href="<?php echo site_url('user/index')?>" class='sidebar-link'>
                     <i class="bi bi-person-fill"></i>
                     <span>User</span>
@@ -107,7 +108,7 @@
             </li>
 
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('group'); ?>">
                 <a href="<?php echo site_url('group/index')?>" class='sidebar-link'>
                     <i class="bi bi-people-fill"></i>
                     <span>User Group</span>
@@ -115,7 +116,7 @@
             </li>
 
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('faq'); ?>">
                 <a href="<?php echo site_url('faq/index')?>" class='sidebar-link'>
                     <i class="bi bi-question-circle-fill"></i>
                     <span>FAQ</span>
@@ -123,7 +124,7 @@
             </li>
 
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('backup'); ?>">
                 <a href="<?php echo site_url('backup/index')?>" class='sidebar-link'>
                     <i class="bi bi-cloud-fill"></i>
                     <span>Backup & Restore db</span>
@@ -131,7 +132,7 @@
             </li>
 
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('setting'); ?>">
                 <a href="<?php echo site_url('setting/index')?>" class='sidebar-link'>
                     <i class="bi bi-gear-fill"></i>
                     <span>Setting</span>
@@ -140,13 +141,13 @@
             
         </ul>
 
-        <!-- Dokter atau pegawai menu -->
+        <!-- Perekam Medis menu -->
         <?php }elseif($this->session->userdata('user_group')==2){?>
             <ul class="menu">
             <li class="sidebar-title">DATA MEDICORD</li>
             
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('dashboard'); ?>">
                 <a href="<?php echo site_url('dashboard/index')?>" class='sidebar-link'>
                     <i class="bi bi-grid-fill"></i>
                     <span>Dashboard</span>
@@ -154,7 +155,7 @@
             </li>
 
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('pasien'); ?>">
                 <a href="<?php echo site_url('pasien/index')?>" class='sidebar-link'>
                     <i class="fas fa-user-injured"></i>
                     <span>Pasien</span>
@@ -162,7 +163,7 @@
             </li>
 
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('dokter'); ?>">
                 <a href="<?php echo site_url('dokter/index')?>" class='sidebar-link'>
                     <i class="fas fa-user-md"></i>
                     <span>Dokter</span>
@@ -170,7 +171,7 @@
             </li>
 
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('pegawai'); ?>">
                 <a href="<?php echo site_url('pegawai/index')?>" class='sidebar-link'>
                     <i class="fas fa-user-nurse"></i>
                     <span>Pegawai</span>
@@ -178,7 +179,7 @@
             </li>
 
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('poliklinik'); ?>">
                 <a href="<?php echo site_url('poliklinik/index')?>" class='sidebar-link'>
                     <i class="fas fa-hospital"></i>
                     <span>Poliklinik</span>
@@ -186,7 +187,7 @@
             </li>
 
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('penyakit'); ?>">
                 <a href="<?php echo site_url('penyakit/index')?>" class='sidebar-link'>
                     <i class="fas fa-disease"></i>
                     <span>Penyakit (ICD X)</span>
@@ -194,7 +195,7 @@
             </li>
 
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('obat'); ?>">
                 <a href="<?php echo site_url('obat/index')?>" class='sidebar-link'>
                     <i class="fas fa-capsules"></i>
                     <span>Obat</span>
@@ -208,13 +209,13 @@
                     <span>Rekam Medis</span>
                 </a>
                 <ul class="submenu ">
-                    <li class="submenu-item ">
+                    <li class="submenu-item <?= active_menu('pengkajian_awal'); ?>">
                         <a href="<?php echo site_url('pengkajian_awal/index')?>">Pengkajian Awal</a>
                     </li>
-                    <li class="submenu-item ">
+                    <li class="submenu-item <?= active_menu('riwayat_kunjungan_pasien'); ?>">
                         <a href="<?php echo site_url('riwayat_kunjungan_pasien/index')?>">Riwayat Kunjungan Pasien</a>
                     </li>
-                    <li class="submenu-item ">
+                    <li class="submenu-item <?= active_menu('pemeriksaan_odontogram'); ?>">
                         <a href="<?php echo site_url('pemeriksaan_odontogram/index')?>">Pemeriksaan Odontogram</a>
                     </li>
                 </ul>
@@ -223,7 +224,7 @@
             <li class="sidebar-title">LAINNYA</li>
 
             <li
-                class="sidebar-item  ">
+                class="sidebar-item <?= active_menu('faq'); ?>">
                 <a href="<?php echo site_url('faq/index')?>" class='sidebar-link'>
                     <i class="bi bi-question-circle-fill"></i>
                     <span>FAQ</span>
@@ -286,9 +287,9 @@
                                     <li>
                                         <h6 class="dropdown-header">Halo, <?php echo $this->session->userdata('user_name');?></h6>
                                     </li>
-                                    <li><a class="dropdown-item" href="<?php echo site_url('admin/profile')?>"><i class="icon-mid bi bi-person me-2"></i> My Profile</a>
+                                    <li><a class="dropdown-item" href="<?php echo site_url('profile/index')?>"><i class="icon-mid bi bi-person me-2"></i> My Profile</a>
                                     </li>
-                                    <li><a class="dropdown-item" href="<?php echo site_url('auth/logout')?>"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Log out</a>
+                                    <li><a class="dropdown-item" href="<?php echo site_url('auth/logout')?>"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Sign out</a>
                                     </li>
                                 </ul>
                             </div>

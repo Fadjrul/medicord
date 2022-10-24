@@ -34,7 +34,7 @@ class Dokter extends CI_Controller {
         //DATA
         $data['setting']       = getSetting();
         $data['title']         = 'Data Dokter';
-        $data['pasien']        = $this->m_dokter->read($perPage, $page,'');
+        $data['dokter']        = $this->m_dokter->read($perPage, $page,'');
 		
         
         // TEMPLATE
@@ -67,7 +67,7 @@ class Dokter extends CI_Controller {
         //DATA
         $data['setting']       = getSetting();
         $data['title']         = 'Data Dokter';
-        $data['pasien']        = $this->m_dokter->read($perPage, $page, $data['search']);
+        $data['dokter']        = $this->m_dokter->read($perPage, $page, $data['search']);
         
         // TEMPLATE
 		$view         = "dokter/index";
@@ -75,18 +75,61 @@ class Dokter extends CI_Controller {
 		TemplateApp($data, $view, $viewCategory);
     }
     
+    public function create_page()
+    {
+
+        //DATA
+        $data['setting']       = getSetting();
+        $data['title']         = 'Tambah Data Dokter';
+        $data['dokter']       = $this->m_dokter->read('', '', '');
+
+        // TEMPLATE
+        $view         = "dokter/add";
+        $viewCategory = "all";
+        TemplateApp($data, $view, $viewCategory);
+    }
+
+    public function detail_page()
+    {
+
+        //DATA
+        $data['setting']       = getSetting();
+        $data['title']         = 'Detail Data Pasien';
+        $data['dokter']        = $this->m_dokter->get($this->uri->segment(3));
+        $data['dokters']        = $this->m_dokter->read('', '', '');
+
+        // TEMPLATE
+        $view         = "dokter/detail";
+        $viewCategory = "all";
+        TemplateApp($data, $view, $viewCategory);
+    }
+
+    public function update_page()
+    {
+
+        //DATA
+        $data['setting']       = getSetting();
+        $data['title']         = 'Ubah Data Pasien';
+        $data['dokter']        = $this->m_dokter->get($this->uri->segment(3));
+        $data['dokters']       = $this->m_dokter->read('', '', '');
+
+        // TEMPLATE
+        $view         = "dokter/update";
+        $viewCategory = "all";
+        TemplateApp($data, $view, $viewCategory);
+    }
 
     public function create() {
         csrfValidate();
         // POST
         $data['id_dokter']   = '';
         $data['nama_dokter'] = $this->input->post('nama_dokter');
+        $data['spesialis'] = $this->input->post('spesialis');
+        $data['jenis_kelamin'] = $this->input->post('jenis_kelamin');
+        $data['alamat'] = $this->input->post('alamat');
+        $data['no_telp'] = $this->input->post('no_telp');
         $data['createtime']  = date('Y-m-d H:i:s');
         $this->m_dokter->create($data);
-
-        // LOG
-        $message    = $this->session->userdata('user_name')." menambah data dokter ".$data['nama_dokter'];
-        createLog($message);
 
         // ALERT
         $alertStatus  = "success";
@@ -102,11 +145,11 @@ class Dokter extends CI_Controller {
         // POST
         $data['id_dokter']   = $this->input->post('id_dokter');
         $data['nama_dokter'] = $this->input->post('nama_dokter');
+        $data['spesialis'] = $this->input->post('spesialis');
+        $data['jenis_kelamin'] = $this->input->post('jenis_kelamin');
+        $data['alamat'] = $this->input->post('alamat');
+        $data['no_telp'] = $this->input->post('no_telp');
         $this->m_dokter->update($data);
-
-        // LOG
-        $message    = $this->session->userdata('user_name')." mengubah data dokter dengan ID = ".$data['id_dokter']." - ".$data['nama_dokter'];
-        createLog($message);
 
         // ALERT
         $alertStatus  = "success";
@@ -121,10 +164,6 @@ class Dokter extends CI_Controller {
         csrfValidate();
         // POST
         $this->m_dokter->delete($this->input->post('id_dokter'));
-        
-        // LOG
-        $message    = $this->session->userdata('user_name')." menghapus data dokter dengan ID = ".$this->input->post('id_dokter')." - ".$this->input->post('nama_dokter');
-        createLog($message);
 
         // ALERT
         $alertStatus  = "failed";

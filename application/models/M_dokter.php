@@ -7,11 +7,16 @@ class M_dokter extends CI_Model {
     }
     
     public function read($limit, $start, $key) {
-        $this->db->select('id_dokter, nama_dokter');
+        $this->db->select('*');
         $this->db->from('tbl_dokter');
         
         if($key!=''){
             $this->db->like("nama_dokter", $key);
+            $this->db->like("spesialis", $key);
+            $this->db->like("jenis_kelamin", $key);
+            $this->db->like("alamat", $key);
+            $this->db->like("no_telp", $key);
+            $this->db->like("ttd_dokter", $key);
         }
 
         if($limit !="" OR $start !=""){

@@ -41,6 +41,15 @@
         }
     }
 
+    function active_menu($page, $page2 = null) {
+        $ci = get_instance();
+        $uri = $ci->uri->segment(1);
+
+        if ($page == $uri || $page2 == $uri) {
+            return 'active';
+        }
+    }
+
 
     /**
      * Get Alert
@@ -55,40 +64,16 @@
         function getAlert($status, $message){
             switch($status){
               case "success": 
-                $alert ='<div class="callout callout-success"><p>'.$message.'</p></div>';
+                $alert ='<div class="alert alert-success alert-dismissible show fade"><p>'.$message.'</p><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
                 get_instance()->session->set_flashdata('alert', $alert);
                 break;
               case "failed": 
-                $alert ='<div class="callout callout-danger"><p>'.$message.'</p></div>';
+                $alert ='<div class="alert alert-danger alert-dismissible show fade"><p>'.$message.'</p><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
                 get_instance()->session->set_flashdata('alert', $alert);
                 break;
             }
         }
     }
-
-    
-    /**
-     * Create Log
-     * --------------------------------------------------------------------------
-     * Use for give notification about every action on the web
-     * 
-     * @param   string  message about user action
-     * 
-     */
-    if(!function_exists('createLog')){
-        function createLog($message){
-            get_instance()->load->model('m_log');
-
-            $log['id_log']        = "";
-            $log['log_time']      = date('Y-m-d H:i:s');
-            $log['log_message']   = $message;
-            $log['log_ipaddress'] = get_instance()->input->ip_address();
-            $log['user_id']       = get_instance()->session->userdata('user_id');
-            $log['createtime']    = date('Y-m-d H:i:s');
-            get_instance()->m_log->create($log);
-        }
-    }
-
 
     // INDONESIAN FORMAT SECTION
 
@@ -109,6 +94,10 @@
         }
     }
 
+    function custom_date($format, $date)
+{
+    return date($format, strtotime($date));
+}
 
     /**
      * Month Name
@@ -260,23 +249,23 @@
             $config["per_page"]        = $perPage;
             $config["uri_segment"]     = $uriSegment;
             $choice                    = $config["total_rows"] / $config["per_page"];
-            $config['full_tag_open']   = '<ul class="pagination pagination-sm no-margin pull-right">';
-            $config['full_tag_close']  = '</ul>';
+            $config['full_tag_open']   = '<nav aria-label="Page navigation example"> <ul class="pagination pagination-sm pagination-info">';
+            $config['full_tag_close']  = '</ul> </nav>';
             $config['first_link']      = 'First';
             $config['last_link']       = 'Last';
-            $config['prev_link']       = '&laquo';
-            $config['next_link']       = '&raquo';
-            $config['first_tag_open']  = '<li>';
-            $config['first_tag_close'] = '</li>';
-            $config['prev_tag_open']   = '<li class="prev">';
+            $config['prev_link']       = '<a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a>';
+            $config['next_link']       = '<a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a>';
+            $config['first_tag_open']  = '<li class="page-item"> <a class="page-link" href="#">';
+            $config['first_tag_close'] = '</a></li>';
+            $config['prev_tag_open']   = '<li class="page-item">';
             $config['prev_tag_close']  = '</li>';
-            $config['next_tag_open']   = '<li>';
+            $config['next_tag_open']   = '<li class="page-item">';
             $config['next_tag_close']  = '</li>';
-            $config['last_tag_open']   = '<li>';
-            $config['last_tag_close']  = '</li>';
-            $config['cur_tag_open']    = '<li class="active"><a href="#">';
+            $config['last_tag_open']   = '<li class="page-item"> <a class="page-link" href="#">';
+            $config['last_tag_close']  = '</a></li>';
+            $config['cur_tag_open']    = '<li class="page-item active"> <a class="page-link" href="#">';
             $config['cur_tag_close']   = '</a></li>';
-            $config['num_tag_open']    = '<li>';
+            $config['num_tag_open']    = '<li class="page-item page-link">';
             $config['num_tag_close']   = '</li>';
             
             if (get_instance()->uri->segment($uriSegment) == "") {
@@ -291,62 +280,6 @@
             return array('numbers' => $numbers, 'links' => $links);
         }
     }
-
-
-
-    /**
-     * Generate Pagination Blog
-     * --------------------------------------------------------------------------
-     * Using for generate pagination on view
-     * 
-     * @param   string  string for base url after click pagination
-     * @param   int     integer for total rows data on page
-     * @param   int     integer for limit rows data on page
-     * @param   int     integer for segement will appear
-     * @return  int,string  
-     * 
-     */
-    if (!function_exists('generatePaginationBlog')) {
-        function generatePaginationBlog($baseUrl, $totalRows, $perPage, $uriSegment){
-           
-            $config                    = array();
-            $config["base_url"]        = $baseUrl;
-            $config["total_rows"]      = $totalRows;
-            $config["per_page"]        = $perPage;
-            $config["uri_segment"]     = $uriSegment;
-            $choice                    = $config["total_rows"] / $config["per_page"];
-            $config['full_tag_open']   = '<ul class="justify-content-center">';
-            $config['full_tag_close']  = '</ul>';
-            $config['first_link']      = 'First';
-            $config['last_link']       = 'Last';
-            $config['prev_link']       = '&laquo';
-            $config['next_link']       = '&raquo';
-            $config['first_tag_open']  = '<li>';
-            $config['first_tag_close'] = '</li>';
-            $config['prev_tag_open']   = '<li class="prev">';
-            $config['prev_tag_close']  = '</li>';
-            $config['next_tag_open']   = '<li>';
-            $config['next_tag_close']  = '</li>';
-            $config['last_tag_open']   = '<li>';
-            $config['last_tag_close']  = '</li>';
-            $config['cur_tag_open']    = '<li class="active"><a href="#">';
-            $config['cur_tag_close']   = '</a></li>';
-            $config['num_tag_open']    = '<li>';
-            $config['num_tag_close']   = '</li>';
-            
-            if (get_instance()->uri->segment($uriSegment) == "") {
-                $numbers = 0;
-            } else {
-                $numbers = get_instance()->uri->segment($uriSegment);
-            }
-            
-            get_instance()->pagination->initialize($config);
-            $links = get_instance()->pagination->create_links();
-
-            return array('numbers' => $numbers, 'links' => $links);
-        }
-    }
-
     
     /**
      * Rows Page
