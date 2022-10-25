@@ -41,6 +41,11 @@
                                 </div>
                                 <hr>
                             </div>
+                            <div class="row">
+                                    <div class="col-12 text-center">
+                                        <h3>Data Pasien</h3>
+                                    </div>
+                                </div>
                         </div>
 
                         <div class="card-content">
@@ -48,21 +53,24 @@
                                 <?php echo form_open_multipart("pasien/detail_page")?>
                                 <form class="form">
                                         <div class="row">
+                                            <div class="row mb-3">
+                                                <div class="col-12 text-end">
+                                                    <strong><p>No. Rekam Medis :  <?php echo $pasien[0]->no_rekam_medis;?></p></strong>
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-md-2 col-12">
                                                     <label for="nama_pasien">Nama Pasien</label>
                                                 </div>
                                                 <div class="col-md-4 form-group">
                                                 <?php echo csrf();?>
-                                                    <input type="text" id="nama_pasien" class="form-control"
-                                                        placeholder="Nama Pasien" name="nama_pasien" required="required" value="<?php echo $pasien[0]->nama_pasien;?>" readonly="readonly">
+                                                    <p>:  <?php echo $pasien[0]->nama_pasien;?></p>
                                                 </div>
                                                 <div class="col-md-2 col-12">
                                                     <label for="nama_kepala_keluarga">Nama Kepala Keluarga</label>
                                                 </div>
                                                 <div class="col-md-4 form-group">
-                                                    <input type="text" id="nama_kepala_keluarga" class="form-control"
-                                                    name="nama_kepala_keluarga" placeholder="nama kepala keluarga" required="required" value="<?php echo $pasien[0]->nama_kepala_keluarga;?>" readonly="readonly">
+                                                    <p>:  <?php echo $pasien[0]->nama_kepala_keluarga;?></p>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -70,15 +78,13 @@
                                                     <label for="nik_pasien">NIK / No. KTP </label>
                                                 </div>
                                                 <div class="col-md-4 form-group">
-                                                    <input type="text" id="nik_pasien" class="form-control" placeholder="nik atau no. ktp"
-                                                    name="nik_pasien" required="required" value="<?php echo $pasien[0]->nik_pasien;?>" readonly="readonly">
+                                                    <p>:  <?php echo $pasien[0]->nik_pasien;?></p>
                                                 </div>
                                                 <div class="col-md-2 col-12">
-                                                    <label for="no_rekam_medis">Nomor Rekam Medis</label>
+                                                    <label for="no_bpjs_pasien">Nomor BPJS</label>
                                                 </div>
                                                 <div class="col-md-4 form-group">
-                                                    <input type="text" id="no_rekam_medis" class="form-control"
-                                                        placeholder="+62 " name="no_rekam_medis" value="<?php echo $pasien[0]->no_rekam_medis;?>" readonly="readonly">
+                                                    <p>:  <?php echo $pasien[0]->no_bpjs_pasien;?></p>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -86,23 +92,13 @@
                                                     <label for="jenis_kelamin">Jenis Kelamin</label>
                                                 </div>
                                                 <div class="col-md-4 form-group">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <input class="form-check-input" type="radio" name="jenis_kelamin" id="Laki-laki" value="Laki-laki" disabled>
-                                                            <label for="Laki-laki">Laki-laki</label>
-                                                        </div>
-                                                        <div class="col">
-                                                            <input class="form-check-input" type="radio" name="jenis_kelamin" value="Perempuan" id="Perempuan" disabled>
-                                                            <label for="Perempuan">Perempuan</label>
-                                                        </div>
-                                                    </div>
+                                                    <p>:  <?php echo $pasien[0]->jenis_kelamin;?></p>
                                                 </div>
                                                 <div class="col-md-2 col-12">
-                                                    <label for="no_bpjs_pasien">Nomor BPJS</label>
+                                                    <label for="dw">dw</label>
                                                 </div>
                                                 <div class="col-md-4 form-group">
-                                                    <input type="text" id="no_bpjs_pasien" class="form-control"
-                                                        placeholder="nomor BPJS" name="no_bpjs_pasien" value="<?php echo $pasien[0]->no_bpjs_pasien;?>" readonly="readonly">
+                                                    <p>:  <?php echo $pasien[0]->dw;?></p>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -110,24 +106,13 @@
                                                     <label for="tgl_lahir_pasien">Tanggal Lahir</label>
                                                 </div>
                                                 <div class="col-md-4 form-group">
-                                                    <input type="date" id="tgl_lahir_pasien" class="form-control" name="tgl_lahir_pasien" required="required" value="<?php echo $pasien[0]->tgl_lahir_pasien;?>" readonly="readonly">
+                                                    <p>:  <?php echo $pasien[0]->tgl_lahir_pasien;?></p>
                                                 </div>
                                                 <div class="col-md-2 col-12">
-
-                                                </div>
-                                                <div class="col-md-1 col-12">
-                                                    <label for="dw">dw</label>
-                                                </div>
-                                                <div class="col-md-1 form-group">
-                                                    <input type="text" id="dw" class="form-control"
-                                                            placeholder="dw" name="dw" value="<?php echo $pasien[0]->dw;?>" readonly="readonly">
-                                                </div>
-                                                <div class="col-md-1 col-12">
                                                     <label for="lw">lw</label>
                                                 </div>
-                                                <div class="col-md-1 form-group">
-                                                    <input type="text" id="lw" class="form-control"
-                                                            placeholder="lw" name="lw" value="<?php echo $pasien[0]->lw;?>" readonly="readonly">
+                                                <div class="col-md-4 form-group">
+                                                    <p>:  <?php echo $pasien[0]->lw;?></p>
                                                 </div>
                                             </div>    
                                             <div class="row">
@@ -135,14 +120,13 @@
                                                     <label for="alamat_pasien">Alamat</label>
                                                 </div>
                                                 <div class="col-md-4 form-group">
-                                                    <textarea id="alamat_pasien" class="form-control" name="alamat_pasien" placeholder="Alamat" rows="4" readonly="readonly"><?php echo $pasien[0]->alamat_pasien;?></textarea>
+                                                    <p>:  <?php echo $pasien[0]->alamat_pasien;?></p>
                                                 </div>
                                                 <div class="col-md-2 col-12">
                                                     <label for="no_telp_pasien">Nomor Telepon</label>
                                                 </div>
                                                 <div class="col-md-4 form-group">
-                                                    <input type="text" id="no_telp_pasien" class="form-control"
-                                                        placeholder="+62 " name="no_telp_pasien" value="<?php echo $pasien[0]->no_telp_pasien;?>" readonly="readonly">
+                                                    <p>:  <?php echo $pasien[0]->no_telp_pasien;?></p>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -150,19 +134,15 @@
                                                     <label for="status_pasien_id">Status Pasien</label>
                                                 </div>   
                                                 <div class="col-md-4 form-group">
-                                                    <fieldset class="form-group">
-                                                        <select class="form-select" id="status_pasien_id" name="status_pasien_id">
-                                                            <?php
-                                                                foreach($status_pasien as $sp){
-                                                                    if($pasien[0]->status_pasien_id == $sp->id_status_pasien){
-                                                                        echo '<option value="'.$sp->id_status_pasien.'" selected>'.$sp->nama_status_pasien.'</option>';
-                                                                    }else{
-                                                                        echo '<option value="'.$sp->id_status_pasien.'">'.$sp->$nama_status_pasien.'</option>';
-                                                                    }
+                                                    <p>: 
+                                                        <?php
+                                                            foreach($status_pasien as $sp){
+                                                                if($pasien[0]->status_pasien_id == $sp->id_status_pasien){
+                                                                    echo "$sp->nama_status_pasien";
                                                                 }
-                                                            ?>
-                                                        </select>
-                                                    </fieldset>
+                                                            }
+                                                        ?>
+                                                    </p>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -170,19 +150,15 @@
                                                     <label for="kepesertaan_pasien_id">Jenis Kepesertaan</label>
                                                 </div>
                                                 <div class="col-md-4 form-group">
-                                                    <fieldset class="form-group">
-                                                        <select class="form-select" id="kepesertaan_pasien_id" name="kepesertaan_pasien_id">
-                                                            <?php
-                                                                foreach($kepesertaan_pasien as $kp){
-                                                                    if($pasien[0]->kepesertaan_pasien_id == $kp->id_kepesertaan_pasien){
-                                                                        echo '<option value="'.$kp->id_kepesertaan_pasien.'" selected>'.$kp->nama_kepesertaan_pasien.'</option>';
-                                                                    }else{
-                                                                        echo '<option value="'.$kp->id_kepesertaan_pasien.'">'.$kp->nama_kepesertaan_pasien.'</option>';
-                                                                    }
+                                                    <p>: 
+                                                        <?php
+                                                            foreach($kepesertaan_pasien as $kp){
+                                                                if($pasien[0]->kepesertaan_pasien_id == $kp->id_kepesertaan_pasien){
+                                                                    echo "$kp->nama_kepesertaan_pasien";
                                                                 }
-                                                            ?>
-                                                        </select>
-                                                    </fieldset>
+                                                            }
+                                                        ?>
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
