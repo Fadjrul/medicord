@@ -34,7 +34,7 @@ class Penyakit extends CI_Controller {
         //DATA
         $data['setting']       = getSetting();
         $data['title']         = 'Data Penyakit';
-        $data['pasien']        = $this->m_penyakit->read($perPage, $page,'');
+        $data['penyakit']      = $this->m_penyakit->read($perPage, $page,'');
 		
         
         // TEMPLATE
@@ -67,7 +67,7 @@ class Penyakit extends CI_Controller {
         //DATA
         $data['setting']       = getSetting();
         $data['title']         = 'Data Penyakit';
-        $data['pasien']        = $this->m_penyakit->read($perPage, $page, $data['search']);
+        $data['penyakit']      = $this->m_penyakit->read($perPage, $page, $data['search']);
         
         // TEMPLATE
 		$view         = "penyakit/index";
@@ -83,10 +83,6 @@ class Penyakit extends CI_Controller {
         $data['nama_penyakit'] = $this->input->post('nama_penyakit');
         $data['createtime']  = date('Y-m-d H:i:s');
         $this->m_penyakit->create($data);
-
-        // LOG
-        $message    = $this->session->userdata('user_name')." menambah data penyakit ".$data['nama_penyakit'];
-        createLog($message);
 
         // ALERT
         $alertStatus  = "success";
@@ -104,10 +100,6 @@ class Penyakit extends CI_Controller {
         $data['nama_penyakit'] = $this->input->post('nama_penyakit');
         $this->m_penyakit->update($data);
 
-        // LOG
-        $message    = $this->session->userdata('user_name')." mengubah data penyakit dengan ID = ".$data['id_penyakit']." - ".$data['nama_penyakit'];
-        createLog($message);
-
         // ALERT
         $alertStatus  = "success";
         $alertMessage = "Berhasil mengubah data penyakit : ".$data['nama_penyakit'];
@@ -121,10 +113,6 @@ class Penyakit extends CI_Controller {
         csrfValidate();
         // POST
         $this->m_penyakit->delete($this->input->post('id_penyakit'));
-        
-        // LOG
-        $message    = $this->session->userdata('user_name')." menghapus data penyakit dengan ID = ".$this->input->post('id_penyakit')." - ".$this->input->post('nama_penyakit');
-        createLog($message);
 
         // ALERT
         $alertStatus  = "failed";

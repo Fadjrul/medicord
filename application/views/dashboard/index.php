@@ -22,7 +22,7 @@
 
                 <div class="col-12 col-lg-12">
                     <div class="row">
-                        <div class="col-6 col-lg-3 col-md-6">
+                        <div class="col-6 col-lg-6 col-md-6">
                             <div class="card">
                                 <div class="card-body px-4 py-4-5">
                                     <div class="row">
@@ -33,13 +33,13 @@
                                         </div>
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                             <h6 class="text-muted font-semibold">Total Pasien</h6>
-                                            <h6 class="font-extrabold mb-0">112.000</h6>
+                                            <h6 class="font-extrabold mb-0">1.200</h6>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 col-lg-3 col-md-6">
+                        <div class="col-6 col-lg-6 col-md-6">
                             <div class="card">
                                 <div class="card-body px-4 py-4-5">
                                     <div class="row">
@@ -50,13 +50,13 @@
                                         </div>
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                             <h6 class="text-muted font-semibold">Rekam Medis Pengkajian Awal</h6>
-                                            <h6 class="font-extrabold mb-0">80.000</h6>
+                                            <h6 class="font-extrabold mb-0">1.000</h6>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 col-lg-3 col-md-6">
+                        <div class="col-6 col-lg-6 col-md-6">
                             <div class="card">
                                 <div class="card-body px-4 py-4-5">
                                     <div class="row">
@@ -67,13 +67,13 @@
                                         </div>
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                             <h6 class="text-muted font-semibold">Rekam Medis Riwayat Kunjungan Pasien</h6>
-                                            <h6 class="font-extrabold mb-0">112</h6>
+                                            <h6 class="font-extrabold mb-0">1.000</h6>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 col-lg-3 col-md-6">
+                        <div class="col-6 col-lg-6 col-md-6">
                             <div class="card">
                                 <div class="card-body px-4 py-4-5">
                                     <div class="row">
@@ -84,7 +84,7 @@
                                         </div>
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                             <h6 class="text-muted font-semibold">Rekam Medis Pemeriksaan Odontogram</h6>
-                                            <h6 class="font-extrabold mb-0">112</h6>
+                                            <h6 class="font-extrabold mb-0">200</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -93,18 +93,8 @@
                     </div>
                 </div>
 
-            <!-- chart -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Kunjungan Pasien</h4>
-                        </div>
-                        <div class="card-body">
-                            <div id="chart-profile-visit"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="p-3">
+                <p><small>Page rendered in <strong>{elapsed_time}</strong> seconds.</small></p>
             </div>
             
         </section>

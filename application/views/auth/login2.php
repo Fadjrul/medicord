@@ -10,6 +10,7 @@
     <link href="<?php echo base_url(); ?>assets/images/<?php echo $setting[0]->setting_logo; ?>" rel="icon">
     <!-- css -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/loginStyle/style.css">
+
 </head>
 
 <body>
@@ -17,15 +18,19 @@
         <div class="form">
             <h3> <img src="<?php echo base_url() ?>assets/images/<?php echo $setting[0]->setting_logo; ?>" alt="Logo aplikasi"> <?php echo $setting[0]->setting_short_appname; ?></h3>
             <p>Sign in untuk memulai aplikasi</p>
-            <!-- ALERT -->
-            <?php
-            if ($this->session->flashdata('alert')) {
-                echo $this->session->flashdata('alert');
-            }
-            ?>
+            <div class="row">
+                <div class="col-12 text-sm text-white">
+                    <!-- ALERT -->
+                    <?php
+                    if ($this->session->flashdata('alert')) {
+                        echo $this->session->flashdata('alert');
+                    }
+                    ?>
+                </div>
+            </div>
 
             <!-- Input Form -->
-            <?php echo form_open("auth/validate",  "class='login-form'"); ?>
+            <?php echo form_open("auth/validate", "class='login-form'"); ?>
             <div class="inputBox">
                 <?php echo csrf(); ?>
                 <input type="text" required="required" name="username">
@@ -50,6 +55,7 @@
             </div>
         </div>
     </div>
+
 </body>
 
 </html>

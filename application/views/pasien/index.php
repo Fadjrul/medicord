@@ -40,11 +40,10 @@
                 </div>
 
                 <div class="card-content">
-
-                    <div class="row m-3 text-end">
-                        <div class="col-md-12 col-12">
+                    <div class="row me-4">
+                        <div class="col-md-12 col-12 text-end">
                             <a href="<?= site_url('pasien/create_page'); ?>" class="btn btn-sm btn-primary">
-                                <i class="fas fa-plus"></i> Add
+                                <i class="fas fa-plus"></i> Tambah
                             </a>
                             <!-- cetak -->
                             <a href="<?= site_url('pasien/index'); ?>" target="_blank" class="btn btn-sm btn-secondary">
@@ -52,35 +51,12 @@
                             </a>
                         </div>
                     </div>
-                    <div class="row m-3">
-                        <div class="col-md-2 col-12 text-start">
-                            <select class="form-select" id="rowpage">
-                                <?php
-                                $rowpage = array(5, 10, 25, 50, 100);
-                                for ($r = 0; $r < count($rowpage); $r++) {
-                                    if ($rowpage[$r] == $this->session->userdata('sess_rowpage')) {
-                                        echo '<option value="' . $rowpage[$r] . '" selected>' . $rowpage[$r] . '</option>';
-                                    } else {
-                                        echo '<option value="' . $rowpage[$r] . '">' . $rowpage[$r] . '</option>';
-                                    }
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="col-md-3 col-12 text-end">
-                            <div>
-                                <?php echo form_open("pasien/search") ?>
-                                <input type="text" class="form-control" name="key" placeholder="Search....">
-                                <?php echo form_close(); ?>
-                            </div>
-                        </div>
-                    </div>
 
                     <!-- data tabel -->
                     <div class="row p-4" id="table-hover-row">
                         <div class="col-12">
                             <div class="table-responsive">
-                                <table class="table table-hover mb-0">
+                                <table class="table table-hover" id="DataTable">
                                     <thead>
                                         <tr>
                                             <th>No.</th>
@@ -89,7 +65,7 @@
                                             <th>Jenis Kelamin</th>
                                             <th>Tanggal Lahir</th>
                                             <th>Alamat</th>
-                                            <th>No. Telp</th>
+                                            <th>No. Telpon</th>
                                             <th>Waktu Pendaftaran</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -127,14 +103,14 @@
                                                                 <li>
                                                                     <?php echo form_open("pasien/update_page/" . $key->id_pasien); ?>
                                                                     <?php echo csrf(); ?>
-                                                                    <button type="submit" class="dropdown-item">Update</button>
+                                                                    <button type="submit" class="dropdown-item">Ubah</button>
                                                                     <input type="hidden" class="form-control" name="id_pasien" required="required">
                                                                     <?php echo form_close(); ?>
                                                                 </li>
                                                                 <li>
                                                                     <?php echo form_open("pasien/delete") ?>
                                                                     <?php echo csrf(); ?>
-                                                                    <button type="submit" class="dropdown-item">Delete</button>
+                                                                    <button type="submit" class="dropdown-item">Hapus</button>
                                                                     <input type="hidden" class="form-control" name="id_pasien" required="required" value="<?php echo $key->id_pasien; ?>">
                                                                     <?php echo form_close(); ?>
                                                                 </li>
@@ -149,7 +125,7 @@
                                         } else {
                                             echo '
                                                 <tr>
-                                                    <td colspan="3">Tidak ada ditemukan</td>
+                                                    <td colspan="3">Tidak ada data ditemukan</td>
                                                 </tr>
                                                 ';
                                         }
@@ -165,18 +141,11 @@
                     <!-- PAGINATION -->
                     <div class="float-end"><?php echo $links; ?></div>
 
-                    <!-- COUNT DATA -->
-                    <?php if ($pasien) { ?>
-                        <div class="float-start">Tampil <?php echo ($nox + $numbers) . " - " . (count($pasien) + $numbers) . " dari " . $total_data; ?> Data</div>
-                    <?php } else { ?>
-                        <div class="float-start">Tampil 0 <?php echo " dari " . $total_data; ?> Data</div>
-                    <?php } ?>
+                    <div class="p-3">
+                        <p><small>Page rendered in <strong>{elapsed_time}</strong> seconds.</small></p>
+                    </div>
                 </div>
-                <div class="p-4">
-                    <p><small>Page rendered in <strong>{elapsed_time}</strong> seconds.</small></p>
-                </div>
-            </div>
-    </div>
-    </section>
-    <!-- Data Pasien end -->
+
+        </section>
+        <!-- Data Pasien end -->
     </div>

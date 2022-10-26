@@ -27,6 +27,15 @@
                             <h4 class="card-title">Informasi Aplikasi</h4>
                         </div>
                         <div class="card-content">
+                            <div class="row">
+                                <div class="col-12">
+                                    <?php
+                                        if($this->session->flashdata('alert')){
+                                            echo $this->session->flashdata('alert')."<br>";
+                                        }
+                                    ?>
+                                </div>
+                            </div>
                             <div class="card-body">
                             <?php echo form_open_multipart("setting/update")?>
                                 <form class="form">
@@ -35,6 +44,8 @@
                                             <div class="form-group">
                                             <?php echo csrf();?>
                                                 <label for="setting_appname">Nama Aplikasi</label>
+                                                <input type="hidden" class="form-control" name="id_setting" value="<?php echo $setting[0]->id_setting;?>" required>
+                                                <input type="hidden" class="form-control" name="setting_logo" value="<?php echo $setting[0]->setting_logo;?>" required>
                                                 <input type="text" id="setting_appname" class="form-control"
                                                     placeholder="Nama Aplikasi" name="setting_appname" value="<?php echo $setting[0]->setting_appname;?>" required>
                                             </div>
@@ -63,13 +74,13 @@
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="setting_address">Alamat</label>
-                                                <textarea id="setting_address" class="form-control" name="setting_address" placeholder="Alamat" rows="4"><?php echo $setting[0]->setting_address;?> </textarea>
+                                                <textarea id="setting_address" class="form-control" name="setting_address" placeholder="Alamat" rows="4"><?php echo $setting[0]->setting_address;?></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="about">Tentang Aplikasi</label>
-                                                <textarea id="about" class="form-control" name="setting_about" placeholder="Alamat" rows="4"><?php echo $setting[0]->setting_about;?> </textarea>
+                                                <textarea id="about" class="form-control" name="setting_about" placeholder="Alamat" rows="4"><?php echo $setting[0]->setting_about;?></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
@@ -102,9 +113,9 @@
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
-                                                <label for="setting_logo">Logo Aplikasi</label>
-                                                <input type="file" id="setting_logo" class="form-control"
-                                                    name="setting_logo">
+                                                <label for="logo">Logo Aplikasi</label>
+                                                <input type="file" id="logo" class="form-control"
+                                                    name="logo">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">

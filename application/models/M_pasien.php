@@ -8,31 +8,43 @@ class M_pasien extends CI_Model
         parent::__construct();
     }
 
-    public function read($limit, $start, $key)
+    public function read($limit, $start, $key, $status_pasien, $kepesertaan_pasien)
     {
-        $this->db->select('*');
-        $this->db->from('tbl_pasien');
+        $this->db->select('a.*, b.*, c.*');
+        $this->db->from('tbl_pasien a');
+        $this->db->join('tbl_status_pasien b','a.status_pasien_id=b.id_status_pasien','LEFT');
+        $this->db->join('tbl_kepesertaan_pasien c','a.kepesertaan_pasien_id=c.id_kepesertaan_pasien','LEFT');
+
+        if($status_pasien !=""){
+            $this->db->where('a.status_pasien_id', $status_pasien);
+        }
+
+        if($kepesertaan_pasien !=""){
+            $this->db->where('a.kepesertaan_pasien_id', $kepesertaan_pasien);
+        }
 
         if ($key != '') {
-            $this->db->like("no_rekam_medis", $key);
-            $this->db->or_like("nama_pasien", $key);
-            $this->db->or_like("nik_pasien", $key);
-            $this->db->or_like("nama_kepala_keluarga", $key);
-            $this->db->or_like("jenis_kelamin", $key);
-            $this->db->or_like("tgl_lahir_pasien", $key);
-            $this->db->or_like("alamat_pasien", $key);
-            $this->db->or_like("no_telp_pasien", $key);
-            $this->db->or_like("no_bpjs_pasien", $key);
-            $this->db->or_like("dw", $key);
-            $this->db->or_like("lw", $key);
-            $this->db->or_like("status_pasien", $key);
-            $this->db->or_like("jns_kepesertaan", $key);
-            $this->db->or_like("createtime", $key);
+            $this->db->like("a.no_rekam_medis", $key);
+            $this->db->or_like("a.nama_pasien", $key);
+            $this->db->or_like("a.nik_pasien", $key);
+            $this->db->or_like("a.nama_kepala_keluarga", $key);
+            $this->db->or_like("a.jenis_kelamin", $key);
+            $this->db->or_like("a.tgl_lahir_pasien", $key);
+            $this->db->or_like("a.alamat_pasien", $key);
+            $this->db->or_like("a.no_telp_pasien", $key);
+            $this->db->or_like("a.no_bpjs_pasien", $key);
+            $this->db->or_like("a.dw", $key);
+            $this->db->or_like("a.lw", $key);
+            $this->db->or_like("b.nama_status_pasien", $key);
+            $this->db->or_like("c.nama_kepesertaan_pasien", $key);
+            $this->db->or_like("a.createtime", $key);
         }
 
         if ($limit != "" or $start != "") {
             $this->db->limit($limit, $start);
         }
+
+        $this->db->order_by('a.id_pasien', 'DESC');
 
         $query = $this->db->get();
         if ($query->num_rows() > 0) {

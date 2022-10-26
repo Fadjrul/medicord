@@ -34,7 +34,7 @@ class Poliklinik extends CI_Controller {
         //DATA
         $data['setting']       = getSetting();
         $data['title']         = 'Data Poliklinik';
-        $data['pasien']        = $this->m_poliklinik->read($perPage, $page,'');
+        $data['poliklinik']    = $this->m_poliklinik->read($perPage, $page,'');
 		
         
         // TEMPLATE
@@ -67,7 +67,7 @@ class Poliklinik extends CI_Controller {
         //DATA
         $data['setting']       = getSetting();
         $data['title']         = 'Data Poliklinik';
-        $data['pasien']        = $this->m_poliklinik->read($perPage, $page, $data['search']);
+        $data['poliklinik']    = $this->m_poliklinik->read($perPage, $page, $data['search']);
         
         // TEMPLATE
 		$view         = "poliklinik/index";
@@ -81,6 +81,7 @@ class Poliklinik extends CI_Controller {
         // POST
         $data['id_poliklinik']   = '';
         $data['nama_poliklinik'] = $this->input->post('nama_poliklinik');
+        $data['gedung'] = $this->input->post('gedung');
         $data['createtime']  = date('Y-m-d H:i:s');
         $this->m_poliklinik->create($data);
 
@@ -102,6 +103,7 @@ class Poliklinik extends CI_Controller {
         // POST
         $data['id_poliklinik']   = $this->input->post('id_poliklinik');
         $data['nama_poliklinik'] = $this->input->post('nama_poliklinik');
+        $data['gedung'] = $this->input->post('gedung');
         $this->m_poliklinik->update($data);
 
         // LOG

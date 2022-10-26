@@ -94,10 +94,6 @@ class User extends CI_Controller {
         $data['createtime']     = date('Y-m-d H:i:s');
         $this->m_user->create($data);
 
-        // LOG
-        $message    = $this->session->userdata('user_name')." menambah data user ".$data['user_name'];
-        createLog($message);
-
         // ALERT
         $alertStatus  = "success";
         $alertMessage = "Berhasil menambah data user ".$data['user_name'];
@@ -122,10 +118,6 @@ class User extends CI_Controller {
         $data['group_id']      = $this->input->post('group_id');
         $this->m_user->update($data);
 
-        // LOG
-        $message    = $this->session->userdata('user_name')." mengubah data user dengan ID = ".$data['id_user']." - ".$data['user_name'];
-        createLog($message);
-
         // ALERT
         $alertStatus  = "success";
         $alertMessage = "Berhasil mengubah data user : ".$data['user_name'];
@@ -139,10 +131,6 @@ class User extends CI_Controller {
         csrfValidate();
         // POST
         $this->m_user->delete($this->input->post('id_user'));
-        
-        // LOG
-        $message    = $this->session->userdata('user_name')." menghapus data user dengan ID = ".$this->input->post('id_user')." - ".$this->input->post('user_name');
-        createLog($message);
 
         // ALERT
         $alertStatus  = "failed";

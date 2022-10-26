@@ -38,7 +38,7 @@ class backup extends CI_Controller {
                 // Daftar table yang tidak akan dibackup
                 'format'     => 'txt',
                 // gzip, zip, txt format filenya
-                'filename'   => 'mybackup.sql',
+                'filename'   => 'medicord_db.sql',
                 // Nama file
                 'add_drop'   => TRUE, 
                 // Untuk menambahkan drop table di backup
@@ -59,7 +59,7 @@ class backup extends CI_Controller {
         // write_file('./database/backup/coreigniter_db-'.date('YmdHis').'.gz', $backup);
 
         $this->load->helper('download');
-        force_download('coreigniter_db-'.date('YmdHis').'.'.$format, $backup);
+        force_download('medicord_db-'.date('YmdHis').'.'.$format, $backup);
     }
 
 

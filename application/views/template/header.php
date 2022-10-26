@@ -11,10 +11,12 @@
     <!-- Font awesome icon -->
     <link rel="stylesheet" href="<?php echo base_url();?>assets/extensions/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
-    
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/extensions/toastify-js/src/toastify.css">
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/extensions/simple-datatables/style.css">
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/extensions/sweetalert2/sweetalert2.min.css">
     <style type="text/css">
-        .sidebar-wrapper .menu .sidebar-item.active > .sidebar-link:active, .sidebar-wrapper .menu .sidebar-item.active > .sidebar-link:focus {
-            background: #0dcaf0 !important; 
+        .sidebar-wrapper .menu .sidebar-item.active a {
+            background-color: #0dcaf0 !important; 
         }
     </style>
 </head>

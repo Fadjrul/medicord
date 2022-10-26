@@ -20,14 +20,14 @@ class Profile extends CI_Controller {
     public function index() {
         //DATA
         $data['setting'] = getSetting();
-        $data['title']   = 'Profil';
+        $data['title']   = 'My Profile';
         $data['profile'] = $this->m_user->get($this->session->userdata('id_user'));
         $data['group']   = $this->m_group->read('','','');
 		
         // TEMPLATE
-		$view         = "profile";
+		$view         = "profile/index";
 		$viewCategory = "all";
-		renderTemplate($data, $view, $viewCategory);
+		TemplateApp($data, $view, $viewCategory);
     }
     
 
@@ -46,7 +46,7 @@ class Profile extends CI_Controller {
                         $alertStatus  = "failed";
                         $alertMessage = "Password baru tidak boleh bernilai kosong";
                         getAlert($alertStatus, $alertMessage);
-                        redirect('profile');
+                        redirect('profile/index');
                         clean_all_processes();
                     }
                 }else{
@@ -55,7 +55,7 @@ class Profile extends CI_Controller {
                     $alertStatus  = "failed";
                     $alertMessage = "Password baru dan konfirmasi tidak cocok";
                     getAlert($alertStatus, $alertMessage);
-                    redirect('profile');
+                    redirect('profile/index');
                     clean_all_processes();
                 }
             }else{
@@ -64,7 +64,7 @@ class Profile extends CI_Controller {
                 $alertStatus  = "failed";
                 $alertMessage = "Password Lama Tidak Sama dengan database";
                 getAlert($alertStatus, $alertMessage);
-                redirect('profile');
+                redirect('profile/index');
                 clean_all_processes();
             }
         }
@@ -102,7 +102,7 @@ class Profile extends CI_Controller {
 
 
         // POST
-        $data['user_id']       = $this->input->post('id_user');
+        $data['id_user']       = $this->input->post('id_user');
         $data['user_name']     = $this->input->post('user_name');
         $data['user_email']    = $this->input->post('user_email');
         $data['user_fullname'] = $this->input->post('user_fullname');
@@ -117,16 +117,12 @@ class Profile extends CI_Controller {
         );
         $this->session->set_userdata($session);
 
-        // LOG
-        $message    = $this->session->userdata('user_name')." mengubah data profile dengan ID = ".$data['id_user']." - ".$data['user_name'];
-        createLog($message);
-
         // ALERT
         $alertStatus  = "success";
         $alertMessage = "Berhasil mengubah data profile : ".$data['user_name'];
         getAlert($alertStatus, $alertMessage);
 
-        redirect('profile');
+        redirect('profile/index');
 
     }
     
