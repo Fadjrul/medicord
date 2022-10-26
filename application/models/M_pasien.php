@@ -10,7 +10,7 @@ class M_pasien extends CI_Model
 
     public function read($limit, $start, $key, $status_pasien, $kepesertaan_pasien)
     {
-        $this->db->select('a.*, b.nama_status_pasien, c.nama_kepesertaan_pasien');
+        $this->db->select('a.*, b.*, c.*');
         $this->db->from('tbl_pasien a');
         $this->db->join('tbl_status_pasien b','a.status_pasien_id=b.id_status_pasien','LEFT');
         $this->db->join('tbl_kepesertaan_pasien c','a.kepesertaan_pasien_id=c.id_kepesertaan_pasien','LEFT');

@@ -14,7 +14,7 @@ class M_kepesertaan_pasien extends CI_Model
         $this->db->from('tbl_kepesertaan_pasien');
 
         if ($key != '') {
-            $this->db->like("kepesertaan_pasien", $key);
+            $this->db->like("nama_kepesertaan_pasien", $key);
             $this->db->or_like("createtime", $key);
         }
 

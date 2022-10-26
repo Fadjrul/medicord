@@ -3,7 +3,7 @@
                 <footer>
                     <div class="footer clearfix mb-0 text-muted">
                         <div class="float-start">
-                            <p>2022 &copy; <?php echo $setting[0]->setting_short_appname;?></p>
+                            <p>&copy; <?php echo $setting[0]->setting_short_appname;?> Version 1.0 <?= date('Y'); ?></p>
                         </div>
                         <div class="float-end">
                             <p>Created by <a href="https://instagram.com/fadjrul00"><?php echo $setting[0]->setting_owner_name;?></a></p>

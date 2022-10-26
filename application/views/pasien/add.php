@@ -149,7 +149,7 @@
                                                                     if($pasien[0]->status_pasien_id == $sp->id_status_pasien){
                                                                         echo '<option value="'.$sp->id_status_pasien.'" selected>'.$sp->nama_status_pasien.'</option>';
                                                                     }else{
-                                                                        echo '<option value="'.$sp->id_status_pasien.'">'.$sp->$nama_status_pasien.'</option>';
+                                                                        echo '<option value="'.$sp->id_status_pasien.'">'.$sp->nama_status_pasien.'</option>';
                                                                     }
                                                                 }
                                                             ?>

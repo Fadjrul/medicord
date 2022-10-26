@@ -33,7 +33,7 @@
                                         </div>
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                             <h6 class="text-muted font-semibold">Total Pasien</h6>
-                                            <h6 class="font-extrabold mb-0">112.000</h6>
+                                            <h6 class="font-extrabold mb-0">1.200</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                             <h6 class="text-muted font-semibold">Rekam Medis Pengkajian Awal</h6>
-                                            <h6 class="font-extrabold mb-0">80.000</h6>
+                                            <h6 class="font-extrabold mb-0">1.000</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
                                         </div>
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                             <h6 class="text-muted font-semibold">Rekam Medis Riwayat Kunjungan Pasien</h6>
-                                            <h6 class="font-extrabold mb-0">112</h6>
+                                            <h6 class="font-extrabold mb-0">1.000</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@
                                         </div>
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                             <h6 class="text-muted font-semibold">Rekam Medis Pemeriksaan Odontogram</h6>
-                                            <h6 class="font-extrabold mb-0">112</h6>
+                                            <h6 class="font-extrabold mb-0">200</h6>
                                         </div>
                                     </div>
                                 </div>

@@ -14,7 +14,7 @@ class M_status_pasien extends CI_Model
         $this->db->from('tbl_status_pasien');
 
         if ($key != '') {
-            $this->db->like("status_pasien", $key);
+            $this->db->like("nama_status_pasien", $key);
             $this->db->or_like("createtime", $key);
         }
 

@@ -85,12 +85,31 @@
                                             <div class="col-md-4 form-group">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <input class="form-check-input" type="radio" name="jenis_kelamin" id="Laki-laki" value="Laki-laki" checked>
-                                                        <label for="Laki-laki">Laki-laki</label>
+                                                        <?php
+                                                            $l='Laki-laki';
+                                                                if($l == $pasien[0]->jenis_kelamin){
+                                                                    echo '<input class="form-check-input" type="radio" name="jenis_kelamin" id="Laki-laki" value="Laki-laki" checked>
+                                                                    <label for="Laki-laki">Laki-laki</label>';
+                                                                }else{
+                                                                    echo '<input class="form-check-input" type="radio" name="jenis_kelamin" id="Laki-laki" value="Laki-laki">
+                                                                    <label for="Laki-laki">Laki-laki</label>';
+                                                                }
+                                                            
+                                                        ?>
                                                     </div>
                                                     <div class="col">
-                                                        <input class="form-check-input" type="radio" name="jenis_kelamin" value="Perempuan" id="Perempuan">
-                                                        <label for="Perempuan">Perempuan</label>
+                                                        <?php
+                                                            $p='Perempuan';
+                                                                if($p == $pasien[0]->jenis_kelamin){
+                                                                    echo '<input class="form-check-input" type="radio" name="jenis_kelamin" value="Perempuan" id="Perempuan" checked>
+                                                                    <label for="Perempuan">Perempuan</label>';
+                                                                }else{
+                                                                    echo '<input class="form-check-input" type="radio" name="jenis_kelamin" value="Perempuan" id="Perempuan">
+                                                                    <label for="Perempuan">Perempuan</label>';
+                                                                }
+                                                            
+                                                        ?>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -144,7 +163,7 @@
                                                                 if($pasien[0]->status_pasien_id == $sp->id_status_pasien){
                                                                     echo '<option value="'.$sp->id_status_pasien.'" selected>'.$sp->nama_status_pasien.'</option>';
                                                                 }else{
-                                                                    echo '<option value="'.$sp->id_status_pasien.'">'.$sp->$nama_status_pasien.'</option>';
+                                                                    echo '<option value="'.$sp->id_status_pasien.'">'.$sp->nama_status_pasien.'</option>';
                                                                 }
                                                             }
                                                         ?>
