@@ -24,7 +24,7 @@ class Pasien extends CI_Controller
         $baseUrl    = base_url() . "pasien/index/";
         $totalRows  = count((array) $this->m_pasien->read('', '', ''));
         $perPage    = $this->session->userdata('sess_rowpage');
-        $uriSegment = 4;
+        $uriSegment = 3;
         $paging     = generatePagination($baseUrl, $totalRows, $perPage, $uriSegment);
         $page       = ($this->uri->segment($uriSegment)) ? $this->uri->segment($uriSegment) : 0;
 
@@ -40,7 +40,7 @@ class Pasien extends CI_Controller
         // TEMPLATE
         $view         = "pasien/index";
         $viewCategory = "all";
-        TemplateApp($data, $view, $viewCategory);
+        TemplateApp($data, $view, $viewCategory, 'pasien');
     }
 
 
