@@ -94,30 +94,114 @@
                                                             </button>
                                                             <ul class="dropdown-menu">
                                                                 <li>
-                                                                    <?php echo form_open("pasien/detail_page/" . $key->id_pasien); ?>
-                                                                    <?php echo csrf(); ?>
-                                                                    <button type="submit" class="dropdown-item">Detail</button>
-                                                                    <input type="hidden" class="form-control" name="id_pasien" required="required">
-                                                                    <?php echo form_close(); ?>
+                                                                    <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#FormDetail<?php echo $key->id_pasien;?>">Detail</button>
                                                                 </li>
                                                                 <li>
-                                                                    <?php echo form_open("pasien/update_page/" . $key->id_pasien); ?>
-                                                                    <?php echo csrf(); ?>
-                                                                    <button type="submit" class="dropdown-item">Ubah</button>
-                                                                    <input type="hidden" class="form-control" name="id_pasien" required="required">
-                                                                    <?php echo form_close(); ?>
+                                                                    <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#FormUbah<?php echo $key->id_pasien;?>">Ubah</button>
                                                                 </li>
                                                                 <li>
-                                                                    <?php echo form_open("pasien/delete") ?>
-                                                                    <?php echo csrf(); ?>
-                                                                    <button type="submit" class="dropdown-item">Hapus</button>
-                                                                    <input type="hidden" class="form-control" name="id_pasien" required="required" value="<?php echo $key->id_pasien; ?>">
-                                                                    <?php echo form_close(); ?>
+                                                                    <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#FormHapus<?php echo $key->id_pasien;?>">Hapus</button>
                                                                 </li>
                                                             </ul>
                                                         </div>
                                                     </td>
                                                 </tr>
+
+                                                <!-- Modal key Detail Pasien -->
+                                                <div class="modal fade text-start" id="FormDetail<?php echo $key->id_pasien;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                                        role="document">
+                                                        <div class="modal-content">
+                                                        <?php echo form_open("pasien/detail_page/" . $key->id_pasien); ?>
+                                                            <div class="modal-header text-center">
+                                                                <h4 class="modal-title" id="myModalLabel33">Masukkan Kunci</h4>
+                                                            </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <?php echo csrf();?>
+                                                                            <input type="password" class="form-control" id="nama_poliklinik" placeholder="kunci..." name="key" required="required">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-primary ml-1">
+                                                                        <i class="bx bx-check d-block d-sm-none"></i>
+                                                                        <span class="d-none d-sm-block">Ok</span>
+                                                                    </button>
+                                                                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                                                        <span class="d-none d-sm-block">Batal</span>
+                                                                    </button>
+                                                                </div>
+                                                        <?php echo form_close(); ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Modal key Ubah Pasien -->
+                                                <div class="modal fade text-start" id="FormUbah<?php echo $key->id_pasien;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                                        role="document">
+                                                        <div class="modal-content">
+                                                        <?php echo form_open("pasien/update_page/" . $key->id_pasien); ?>
+                                                            <div class="modal-header text-center">
+                                                                <h4 class="modal-title" id="myModalLabel33">Masukkan Kunci</h4>
+                                                            </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <?php echo csrf();?>
+                                                                            <input type="password" class="form-control" id="nama_poliklinik" placeholder="kunci..." name="key" required="required">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-primary ml-1">
+                                                                        <i class="bx bx-check d-block d-sm-none"></i>
+                                                                        <span class="d-none d-sm-block">Ok</span>
+                                                                    </button>
+                                                                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                                                        <span class="d-none d-sm-block">Batal</span>
+                                                                    </button>
+                                                                </div>
+                                                        <?php echo form_close(); ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Modal key Hapus Pasien -->
+                                                <div class="modal fade text-start" id="FormHapus<?php echo $key->id_pasien;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                                        role="document">
+                                                        <div class="modal-content">
+                                                        <?php echo form_open("pasien/delete" . $key->id_pasien); ?>
+                                                            <div class="modal-header text-center">
+                                                                <h4 class="modal-title" id="myModalLabel33">Masukkan Kunci</h4>
+                                                            </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <?php echo csrf();?>
+                                                                            <input type="password" class="form-control" id="nama_poliklinik" placeholder="kunci..." name="key" required="required">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-primary ml-1">
+                                                                        <i class="bx bx-check d-block d-sm-none"></i>
+                                                                        <span class="d-none d-sm-block">Ok</span>
+                                                                    </button>
+                                                                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                                                        <span class="d-none d-sm-block">Batal</span>
+                                                                    </button>
+                                                                </div>
+                                                        <?php echo form_close(); ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                         <?php
                                                 $no++;

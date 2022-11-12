@@ -114,13 +114,27 @@
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="logo">Logo Aplikasi</label>
-                                                <input type="file" id="logo" class="form-control"
+                                                <input type="file" class="form-control"
                                                     name="logo">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
-                                                <img src="<?php echo base_url();?>assets/images/upload/logo/<?php echo $setting[0]->setting_logo;?>" height="55" alt="Preview Logo">
+                                                <img src="<?php echo base_url();?>assets/images/upload/logo/<?php echo $setting[0]->setting_logo;?>" height="55" alt="Preview Logo" name="setting_logo">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="setting_key_aes">Kunci AES-128 </label><small style="color:red"><i>*Tidak boleh lebih/kurang dari 16 karakter</i></small>
+                                                <input type="text" id="setting_key_aes" class="form-control"
+                                                    placeholder="Tidak lebih/kurang dari 16 karakter" name="setting_key_aes" value="<?php echo $setting[0]->setting_key_aes;?>" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="setting_key_speck">Kunci SPECK-128 </label><small style="color:red"><i>*Tidak boleh lebih/kurang dari 16 karakter</i></small>
+                                                <input type="text" id="setting_key_speck" class="form-control"
+                                                    placeholder="Tidak lebih/kurang dari 16 karakter" name="setting_key_speck" value="<?php echo $setting[0]->setting_key_speck;?>">
                                             </div>
                                         </div>
                                         <div class="col-12 d-flex justify-content-end mt-2">

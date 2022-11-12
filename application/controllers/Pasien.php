@@ -8,6 +8,7 @@ class Pasien extends CI_Controller
         $this->load->model('m_pasien');
         $this->load->model('m_status_pasien');
         $this->load->model('m_kepesertaan_pasien');
+        $this->load->model('m_jns_key');
 
         if (!$this->session->userdata('id_user') or $this->session->userdata('user_group') != 1) {
             // ALERT
@@ -25,7 +26,7 @@ class Pasien extends CI_Controller
 
         // PAGINATION
         $baseUrl    = base_url() . "pasien/index/";
-        $totalRows  = count((array) $this->m_pasien->read('', '', '', '', ''));
+        $totalRows  = count((array) $this->m_pasien->read('', '', '', '', '', ''));
         $perPage    = $this->session->userdata('sess_rowpage');
         $uriSegment = 4;
         $paging     = generatePagination($baseUrl, $totalRows, $perPage, $uriSegment);
@@ -38,7 +39,7 @@ class Pasien extends CI_Controller
         //DATA
         $data['setting']       = getSetting();
         $data['title']         = 'Data Pasien';
-        $data['pasien']        = $this->m_pasien->read($perPage, $page, '', '', '', '', '');
+        $data['pasien']        = $this->m_pasien->read($perPage, $page, '', '', '', '', '', '');
 
         // TEMPLATE
         $view         = "pasien/index";
@@ -88,9 +89,10 @@ class Pasien extends CI_Controller
         //DATA
         $data['setting']       = getSetting();
         $data['title']         = 'Tambah Data Pasien';
-        $data['status_pasien']  = $this->m_status_pasien->read('', '', '', '', '');
-        $data['kepesertaan_pasien']  = $this->m_kepesertaan_pasien->read('', '', '', '', '');
-        $data['pasiens']       = $this->m_pasien->read('', '', '', '', '');
+        $data['status_pasien']  = $this->m_status_pasien->read('', '', '', '', '', '');
+        $data['kepesertaan_pasien']  = $this->m_kepesertaan_pasien->read('', '', '', '', '', '');
+        $data['jns_key']  = $this->m_jns_key->read('', '', '', '', '', '');
+        $data['pasiens']       = $this->m_pasien->read('', '', '', '', '', '');
 
         // TEMPLATE
         $view         = "pasien/add";
@@ -105,9 +107,10 @@ class Pasien extends CI_Controller
         $data['setting']       = getSetting();
         $data['title']         = 'Detail Data Pasien';
         $data['pasien']        = $this->m_pasien->get($this->uri->segment(3));
-        $data['status_pasien']  = $this->m_status_pasien->read('', '', '', '', '');
-        $data['kepesertaan_pasien']  = $this->m_kepesertaan_pasien->read('', '', '', '', '');
-        $data['pasiens']        = $this->m_pasien->read('', '', '', '', '');
+        $data['status_pasien']  = $this->m_status_pasien->read('', '', '', '', '', '');
+        $data['kepesertaan_pasien']  = $this->m_kepesertaan_pasien->read('', '', '', '', '', '');
+        $data['jns_key']  = $this->m_jns_key->read('', '', '', '', '', '');
+        $data['pasiens']        = $this->m_pasien->read('', '', '', '', '', '');
         // echo "<pre>";
         // echo $this->uri->segment(3);
         // print_r($data['pasiens'] );
@@ -125,9 +128,10 @@ class Pasien extends CI_Controller
         $data['setting']       = getSetting();
         $data['title']         = 'Ubah Data Pasien';
         $data['pasien']        = $this->m_pasien->get($this->uri->segment(3));
-        $data['status_pasien']  = $this->m_status_pasien->read('', '', '', '', '');
-        $data['kepesertaan_pasien']  = $this->m_kepesertaan_pasien->read('', '', '');
-        $data['pasiens']       = $this->m_pasien->read('', '', '', '', '');
+        $data['status_pasien']  = $this->m_status_pasien->read('', '', '', '', '', '');
+        $data['kepesertaan_pasien']  = $this->m_kepesertaan_pasien->read('', '', '', '', '', '');
+        $data['jns_key']  = $this->m_jns_key->read('', '', '', '', '', '');
+        $data['pasiens']       = $this->m_pasien->read('', '', '', '', '', '');
 
         // TEMPLATE
         $view         = "pasien/update";
@@ -188,6 +192,7 @@ class Pasien extends CI_Controller
         $data['nik_pasien'] = $this->input->post('nik_pasien');
         $data['nama_pasien'] = $this->input->post('nama_pasien');
         $data['nama_kepala_keluarga'] = $this->input->post('nama_kepala_keluarga');
+        $data['no_kk'] = $this->input->post('no_kk');
         $data['jenis_kelamin'] = $this->input->post('jenis_kelamin');
         $data['tgl_lahir_pasien'] = $this->input->post('tgl_lahir_pasien');
         $data['alamat_pasien'] = $this->input->post('alamat_pasien');
@@ -197,6 +202,7 @@ class Pasien extends CI_Controller
         $data['lw'] = $this->input->post('lw');
         $data['status_pasien_id'] = $this->input->post('status_pasien_id');
         $data['kepesertaan_pasien_id'] = $this->input->post('kepesertaan_pasien_id');
+        $data['jns_key_id'] = $this->input->post('jns_key_id');
         $data['createtime']  = date('Y-m-d H:i:s');
         $this->m_pasien->create($data);
 
@@ -217,6 +223,7 @@ class Pasien extends CI_Controller
         $data['nik_pasien'] = $this->input->post('nik_pasien');
         $data['nama_pasien'] = $this->input->post('nama_pasien');
         $data['nama_kepala_keluarga'] = $this->input->post('nama_kepala_keluarga');
+        $data['no_kk'] = $this->input->post('no_kk');
         $data['jenis_kelamin'] = $this->input->post('jenis_kelamin');
         $data['tgl_lahir_pasien'] = $this->input->post('tgl_lahir_pasien');
         $data['alamat_pasien'] = $this->input->post('alamat_pasien');
@@ -226,7 +233,7 @@ class Pasien extends CI_Controller
         $data['lw'] = $this->input->post('lw');
         $data['status_pasien_id'] = $this->input->post('status_pasien_id');
         $data['kepesertaan_pasien_id'] = $this->input->post('kepesertaan_pasien_id');
-        $data['createtime']  = date('Y-m-d H:i:s');
+        $data['jns_key_id'] = $this->input->post('jns_key_id');
         $this->m_pasien->update($data);
 
         // ALERT

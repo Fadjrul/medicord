@@ -7,11 +7,12 @@ class M_poliklinik extends CI_Model {
     }
     
     public function read($limit, $start, $key) {
-        $this->db->select('id_poliklinik, nama_poliklinik');
+        $this->db->select('*');
         $this->db->from('tbl_poliklinik');
         
         if($key!=''){
             $this->db->like("nama_poliklinik", $key);
+            $this->db->like("gedung", $key);
         }
 
         if($limit !="" OR $start !=""){

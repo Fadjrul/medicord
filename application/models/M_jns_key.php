@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class M_log extends CI_Model
+class M_jns_key extends CI_Model
 {
 
     function __construct()
@@ -10,21 +10,17 @@ class M_log extends CI_Model
 
     public function read($limit, $start, $key)
     {
-        $this->db->select('a.*, b.*');
-        $this->db->from('tbl_log a');
-        $this->db->join('tbl_user b', 'a.id_user=b.id_user', 'LEFT');
+        $this->db->select('*');
+        $this->db->from('tbl_jns_key');
 
         if ($key != '') {
-            $this->db->like("a.log_message", $key);
-            $this->db->or_like("a.log_time", $key);
-            $this->db->or_like("a.log_ipaddress", $key);
-            $this->db->or_like("b.user_name", $key);
+            $this->db->like("nama_jns_key", $key);
         }
 
         if ($limit != "" or $start != "") {
             $this->db->limit($limit, $start);
         }
-        $this->db->order_by('a.id_log', 'DESC');
+
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $row) {
@@ -35,12 +31,12 @@ class M_log extends CI_Model
         return null;
     }
 
-    public function create($data)
+    public function get($id)
     {
-        $this->db->insert('tbl_log', $data);
+        $this->db->where('id_jns_key', $id);
+        $query = $this->db->get('tbl_jns_key', 1);
+        return $query->result();
     }
-
-
 
     function __destruct()
     {

@@ -4,6 +4,8 @@ class Dokter extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('m_dokter');
+        $this->load->library('upload');
+        
         if (!$this->session->userdata('id_user') OR $this->session->userdata('user_group')!=1) {
 			// ALERT
 			$alertStatus  = 'failed';
@@ -121,6 +123,25 @@ class Dokter extends CI_Controller {
 
     public function create() {
         csrfValidate();
+        $formatName                	= $this->input->post('id_dokter').date('YmdHis');
+        // Upload For ttd dokter
+		if ($_FILES['ttd']['name'] != '') {
+
+			$config_ttd['upload_path']     = './assets/core-images/';
+			$config_ttd['allowed_types']   = "gif|jpg|jpeg|png|svg";
+			$config_ttd['overwrite']       = "true";
+			$config_ttd['file_name']       = 'dokter' . $formatName;
+			$this->upload->initialize($config_ttd);
+
+			if (!$this->upload->do_upload('ttd')) {
+				echo $this->upload->display_errors();
+			} else {
+				unlink("./assets/core-images/".$this->input->post('ttd_dokter'));
+				$ttd                    = $this->upload->data();
+				$data['ttd_dokter']    = $ttd['file_name'];
+			}
+		}
+
         // POST
         $data['id_dokter']   = '';
         $data['nama_dokter'] = $this->input->post('nama_dokter');
@@ -142,6 +163,25 @@ class Dokter extends CI_Controller {
 
     public function update() {
         csrfValidate();
+        $formatName                	= $this->input->post('id_dokter').date('YmdHis');
+        // Upload For ttd dokter
+		if ($_FILES['ttd']['name'] != '') {
+
+			$config_ttd['upload_path']     = './assets/core-images/';
+			$config_ttd['allowed_types']   = "gif|jpg|jpeg|png|svg";
+			$config_ttd['overwrite']       = "true";
+			$config_ttd['file_name']       = 'dokter' . $formatName;
+			$this->upload->initialize($config_ttd);
+
+			if (!$this->upload->do_upload('ttd')) {
+				echo $this->upload->display_errors();
+			} else {
+				unlink("./assets/core-images/".$this->input->post('ttd_dokter'));
+				$ttd                    = $this->upload->data();
+				$data['ttd_dokter']    = $ttd['file_name'];
+			}
+		}
+
         // POST
         $data['id_dokter']   = $this->input->post('id_dokter');
         $data['nama_dokter'] = $this->input->post('nama_dokter');

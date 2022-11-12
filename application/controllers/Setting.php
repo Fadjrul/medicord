@@ -33,16 +33,15 @@ class Setting extends CI_Controller {
 		// Upload For Logo
 		if ($_FILES['logo']['name'] != '') {
 
-			$config_logo['upload_path']     = './assets/images/upload/logo/';
+			$config_logo['upload_path']     = './assets/images/upload/logo';
 			$config_logo['allowed_types']   = "gif|jpg|jpeg|png|svg";
 			$config_logo['overwrite']       = "true";
 			$config_logo['file_name']       = 'medicord' . $formatName;
 			$this->upload->initialize($config_logo);
-
 			if (!$this->upload->do_upload('logo')) {
 				echo $this->upload->display_errors();
 			} else {
-				unlink("./assets/images/upload/logo/".$this->input->post('setting_logo'));
+				unlink("./assets/images/upload/logo".$this->input->post('setting_logo'));
 				$logo                    = $this->upload->data();
 				$data['setting_logo']    = $logo['file_name'];
 			}
@@ -59,6 +58,8 @@ class Setting extends CI_Controller {
 		$data['setting_instagram']       = $this->input->post('setting_instagram');
 		$data['setting_facebook']        = $this->input->post('setting_facebook');
 		$data['setting_youtube']         = $this->input->post('setting_youtube');
+		$data['setting_key_aes']         = $this->input->post('setting_key_aes');
+		$data['setting_key_speck']         = $this->input->post('setting_key_speck');
 
 		$this->m_setting->update_setting($data);
 			

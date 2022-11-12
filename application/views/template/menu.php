@@ -7,7 +7,7 @@
     <div class="sidebar-header position-relative">
         <div class="d-flex justify-content-between align-items-center">
             <div class="logo">
-                <a href="<?php echo site_url('dashboard/index')?>"><img src="<?php echo base_url();?>assets/images/medicord.svg" alt="Logo" srcset=""></a> <span class="text-info"><?php echo $setting[0]->setting_short_appname;?></span>
+                <a href="<?php echo site_url('dashboard/index')?>"><img src="<?php echo base_url()?>assets/images/upload/logo/<?php echo $setting[0]->setting_logo;?>" alt="Logo" srcset=""></a> <span class="text-info"><?php echo $setting[0]->setting_short_appname;?></span>
             </div>
             
             <div class="sidebar-toggler x">
@@ -59,22 +59,6 @@
                 <a href="<?php echo site_url('poliklinik/index')?>" class='sidebar-link'>
                     <i class="fas fa-hospital"></i>
                     <span>Poliklinik</span>
-                </a>
-            </li>
-
-            <li
-                class="sidebar-item <?= active_menu('penyakit'); ?>">
-                <a href="<?php echo site_url('penyakit/index')?>" class='sidebar-link'>
-                    <i class="fas fa-disease"></i>
-                    <span>Penyakit (ICD X)</span>
-                </a>
-            </li>
-
-            <li
-                class="sidebar-item <?= active_menu('obat'); ?>">
-                <a href="<?php echo site_url('obat/index')?>" class='sidebar-link'>
-                    <i class="fas fa-capsules"></i>
-                    <span>Obat</span>
                 </a>
             </li>
             
@@ -159,46 +143,6 @@
                 <a href="<?php echo site_url('pasien/index')?>" class='sidebar-link'>
                     <i class="fas fa-user-injured"></i>
                     <span>Pasien</span>
-                </a>
-            </li>
-
-            <li
-                class="sidebar-item <?= active_menu('dokter'); ?>">
-                <a href="<?php echo site_url('dokter/index')?>" class='sidebar-link'>
-                    <i class="fas fa-user-md"></i>
-                    <span>Dokter</span>
-                </a>
-            </li>
-
-            <li
-                class="sidebar-item <?= active_menu('pegawai'); ?>">
-                <a href="<?php echo site_url('pegawai/index')?>" class='sidebar-link'>
-                    <i class="fas fa-user-nurse"></i>
-                    <span>Pegawai</span>
-                </a>
-            </li>
-
-            <li
-                class="sidebar-item <?= active_menu('poliklinik'); ?>">
-                <a href="<?php echo site_url('poliklinik/index')?>" class='sidebar-link'>
-                    <i class="fas fa-hospital"></i>
-                    <span>Poliklinik</span>
-                </a>
-            </li>
-
-            <li
-                class="sidebar-item <?= active_menu('penyakit'); ?>">
-                <a href="<?php echo site_url('penyakit/index')?>" class='sidebar-link'>
-                    <i class="fas fa-disease"></i>
-                    <span>Penyakit (ICD X)</span>
-                </a>
-            </li>
-
-            <li
-                class="sidebar-item <?= active_menu('obat'); ?>">
-                <a href="<?php echo site_url('obat/index')?>" class='sidebar-link'>
-                    <i class="fas fa-capsules"></i>
-                    <span>Obat</span>
                 </a>
             </li>
             

@@ -55,13 +55,13 @@
                                             <div class="col-md-4 form-group">
                                                 <?php echo csrf(); ?>
                                                 <input type="hidden" id="id_pasien" class="form-control" name="id_pasien" required="required" value="<?php echo $pasien[0]->id_pasien; ?>">
-                                                <input type="text" id="nama_pasien" class="form-control" placeholder="Nama Pasien" name="nama_pasien" required="required" value="<?php echo $pasien[0]->nama_pasien; ?>">
+                                                <input type="text" id="nama_pasien" class="form-control" placeholder="Cnth. John" name="nama_pasien" required="required" value="<?php echo $pasien[0]->nama_pasien; ?>">
                                             </div>
                                             <div class="col-md-2 col-12">
                                                 <label for="nama_kepala_keluarga">Nama Kepala Keluarga</label>
                                             </div>
                                             <div class="col-md-4 form-group">
-                                                <input type="text" id="nama_kepala_keluarga" class="form-control" name="nama_kepala_keluarga" placeholder="nama kepala keluarga" required="required" value="<?php echo $pasien[0]->nama_kepala_keluarga; ?>">
+                                                <input type="text" id="nama_kepala_keluarga" class="form-control" name="nama_kepala_keluarga" placeholder="Cnth. John" required="required" value="<?php echo $pasien[0]->nama_kepala_keluarga; ?>">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -72,10 +72,10 @@
                                                 <input type="text" id="nik_pasien" class="form-control" placeholder="nik atau no. ktp" name="nik_pasien" required="required" value="<?php echo $pasien[0]->nik_pasien; ?>">
                                             </div>
                                             <div class="col-md-2 col-12">
-                                                <label for="no_telp_pasien">Nomor Telepon</label>
+                                                <label for="no_kk">No. Kartu Keluarga</label>
                                             </div>
                                             <div class="col-md-4 form-group">
-                                                <input type="text" id="no_telp_pasien" class="form-control" placeholder="+62 " name="no_telp_pasien" value="<?php echo $pasien[0]->no_telp_pasien; ?>">
+                                                <input type="text" id="no_kk" class="form-control" name="no_kk" value="<?php echo $pasien[0]->no_kk; ?>" required="required">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -114,10 +114,10 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-2 col-12">
-                                                <label for="no_bpjs_pasien">Nomor BPJS</label>
+                                                <label for="no_telp_pasien">Nomor Telepon</label>
                                             </div>
                                             <div class="col-md-4 form-group">
-                                                <input type="text" id="no_bpjs_pasien" class="form-control" placeholder="nomor BPJS" name="no_bpjs_pasien" value="<?php echo $pasien[0]->no_bpjs_pasien; ?>">
+                                                <input type="text" id="no_telp_pasien" class="form-control" placeholder="+62 " name="no_telp_pasien" value="<?php echo $pasien[0]->no_telp_pasien; ?>">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -126,6 +126,33 @@
                                             </div>
                                             <div class="col-md-4 form-group">
                                                 <input type="date" id="tgl_lahir_pasien" class="form-control" name="tgl_lahir_pasien" required="required" value="<?php echo $pasien[0]->tgl_lahir_pasien; ?>">
+                                            </div>
+                                            <div class="col-md-2 col-12">
+                                                <label for="no_bpjs_pasien">Nomor BPJS</label>
+                                            </div>
+                                            <div class="col-md-4 form-group">
+                                                <input type="text" id="no_bpjs_pasien" class="form-control" placeholder="nomor BPJS" name="no_bpjs_pasien" value="<?php echo $pasien[0]->no_bpjs_pasien; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2 col-12">
+                                                <label for="status_pasien_id">Status Pasien</label>
+                                            </div>   
+                                            <div class="col-md-4 form-group">
+                                                <fieldset class="form-group">
+                                                    <select class="form-select" id="status_pasien_id" name="status_pasien_id">
+                                                        <option>- Pilih Status Pasien - </option>
+                                                        <?php
+                                                            foreach($status_pasien as $sp){
+                                                                if($pasien[0]->status_pasien_id == $sp->id_status_pasien){
+                                                                    echo '<option value="'.$sp->id_status_pasien.'" selected>'.$sp->nama_status_pasien.'</option>';
+                                                                }else{
+                                                                    echo '<option value="'.$sp->id_status_pasien.'">'.$sp->nama_status_pasien.'</option>';
+                                                                }
+                                                            }
+                                                        ?>
+                                                    </select>
+                                                </fieldset>
                                             </div>
                                             <div class="col-md-2 col-12">
 
@@ -145,39 +172,12 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-2 col-12">
-                                                <label for="alamat_pasien">Alamat</label>
-                                            </div>
-                                            <div class="col-md-4 form-group">
-                                                <textarea id="alamat_pasien" class="form-control" name="alamat_pasien" placeholder="Alamat" rows="4"><?php echo $pasien[0]->alamat_pasien; ?></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-2 col-12">
-                                                <label for="status_pasien_id">Status Pasien</label>
-                                            </div>   
-                                            <div class="col-md-4 form-group">
-                                                <fieldset class="form-group">
-                                                    <select class="form-select" id="status_pasien_id" name="status_pasien_id">
-                                                        <?php
-                                                            foreach($status_pasien as $sp){
-                                                                if($pasien[0]->status_pasien_id == $sp->id_status_pasien){
-                                                                    echo '<option value="'.$sp->id_status_pasien.'" selected>'.$sp->nama_status_pasien.'</option>';
-                                                                }else{
-                                                                    echo '<option value="'.$sp->id_status_pasien.'">'.$sp->nama_status_pasien.'</option>';
-                                                                }
-                                                            }
-                                                        ?>
-                                                    </select>
-                                                </fieldset>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-2 col-12">
                                                 <label for="kepesertaan_pasien_id">Jenis Kepesertaan</label>
                                             </div>
                                             <div class="col-md-4 form-group">
                                                 <fieldset class="form-group">
                                                     <select class="form-select" id="kepesertaan_pasien_id" name="kepesertaan_pasien_id">
+                                                    <option>- Pilih Jenis Kepesertaan - </option>
                                                         <?php
                                                             foreach($kepesertaan_pasien as $kp){
                                                                 if($pasien[0]->kepesertaan_pasien_id == $kp->id_kepesertaan_pasien){
@@ -189,6 +189,30 @@
                                                         ?>
                                                     </select>
                                                 </fieldset>
+                                            </div>
+                                            <div class="col-md-4 form-group">
+                                                    <fieldset class="form-group">
+                                                        <select class="form-select" id="jns_key_id" name="jns_key_id">
+                                                            <option>- Pilih Jenis Kunci - </option>
+                                                            <?php
+                                                                foreach($jns_key as $jk){
+                                                                    if($pasien[0]->jns_key_id == $jk->id_jns_key){
+                                                                        echo '<option value="'.$jk->id_jns_key.'" selected>'.$jk->nama_jns_key.'</option>';
+                                                                    }else{
+                                                                        echo '<option value="'.$jk->id_jns_key.'">'.$jk->nama_jns_key.'</option>';
+                                                                    }
+                                                                }
+                                                            ?>
+                                                        </select>
+                                                    </fieldset>
+                                                </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2 col-12">
+                                                <label for="alamat_pasien">Alamat</label>
+                                            </div>
+                                            <div class="col-md-4 form-group">
+                                                <textarea id="alamat_pasien" class="form-control" name="alamat_pasien" placeholder="Alamat" rows="4"><?php echo $pasien[0]->alamat_pasien; ?></textarea>
                                             </div>
                                         </div>
                                     </div>

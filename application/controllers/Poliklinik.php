@@ -85,10 +85,6 @@ class Poliklinik extends CI_Controller {
         $data['createtime']  = date('Y-m-d H:i:s');
         $this->m_poliklinik->create($data);
 
-        // LOG
-        $message    = $this->session->userdata('user_name')." menambah data poliklinik ".$data['nama_poliklinik'];
-        createLog($message);
-
         // ALERT
         $alertStatus  = "success";
         $alertMessage = "Berhasil menambah data poliklinik ".$data['nama_poliklinik'];
@@ -106,10 +102,6 @@ class Poliklinik extends CI_Controller {
         $data['gedung'] = $this->input->post('gedung');
         $this->m_poliklinik->update($data);
 
-        // LOG
-        $message    = $this->session->userdata('user_name')." mengubah data poliklinik dengan ID = ".$data['id_poliklinik']." - ".$data['nama_poliklinik'];
-        createLog($message);
-
         // ALERT
         $alertStatus  = "success";
         $alertMessage = "Berhasil mengubah data poliklinik : ".$data['nama_poliklinik'];
@@ -124,10 +116,6 @@ class Poliklinik extends CI_Controller {
         // POST
         $this->m_poliklinik->delete($this->input->post('id_poliklinik'));
         
-        // LOG
-        $message    = $this->session->userdata('user_name')." menghapus data poliklinik dengan ID = ".$this->input->post('id_poliklinik')." - ".$this->input->post('nama_poliklinik');
-        createLog($message);
-
         // ALERT
         $alertStatus  = "failed";
         $alertMessage = "Menghapus data poliklinik : ".$this->input->post('nama_poliklinik');
