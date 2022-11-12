@@ -1,12 +1,14 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
-class Setting extends CI_Controller {
-	function __construct() {
+<?php defined('BASEPATH') or exit('No direct script access allowed');
+class Setting extends CI_Controller
+{
+	function __construct()
+	{
 		parent::__construct();
 		$this->load->model("m_setting");
 		$this->load->library('upload');
-        
-        // check session data
-		if (!$this->session->userdata('id_user') OR $this->session->userdata('user_group')!=1) {
+
+		// check session data
+		if (!$this->session->userdata('id_user') or $this->session->userdata('user_group') != 1) {
 			// ALERT
 			$alertStatus  = 'failed';
 			$alertMessage = 'Anda tidak memiliki Hak Akses atau Session anda sudah habis';
@@ -14,8 +16,9 @@ class Setting extends CI_Controller {
 			redirect('auth');
 		}
 	}
-		
-	public function index(){
+
+	public function index()
+	{
 		// DATA
 		$data['setting'] = getSetting();
 		$data['title']   = 'Setting';
@@ -26,14 +29,15 @@ class Setting extends CI_Controller {
 		TemplateApp($data, $view, $viewCategory);
 	}
 
-	public function update() {
+	public function update()
+	{
 		csrfValidate();
-		$formatName                	= $this->input->post('id_setting').date('YmdHis');
+		$formatName                	= $this->input->post('id_setting') . date('YmdHis');
 
 		// Upload For Logo
 		if ($_FILES['logo']['name'] != '') {
 
-			$config_logo['upload_path']     = './assets/images/upload/logo/';
+			$config_logo['upload_path']     = './assets/core-images/';
 			$config_logo['allowed_types']   = "gif|jpg|jpeg|png|svg";
 			$config_logo['overwrite']       = "true";
 			$config_logo['file_name']       = 'medicord' . $formatName;
@@ -42,7 +46,7 @@ class Setting extends CI_Controller {
 			if (!$this->upload->do_upload('logo')) {
 				echo $this->upload->display_errors();
 			} else {
-				unlink("./assets/images/upload/logo/".$this->input->post('setting_logo'));
+				unlink("./assets/core-images/" . $this->input->post('setting_logo'));
 				$logo                    = $this->upload->data();
 				$data['setting_logo']    = $logo['file_name'];
 			}
@@ -61,17 +65,18 @@ class Setting extends CI_Controller {
 		$data['setting_youtube']         = $this->input->post('setting_youtube');
 
 		$this->m_setting->update_setting($data);
-			
+
 		// ALERT
 		$alertStatus  = 'success';
 		$alertMessage = 'Berhasil Update Data Informasi Aplikasi';
 		getAlert($alertStatus, $alertMessage);
-		
+
 		redirect('setting/index');
 	}
 
 
-	public function setRows(){
+	public function setRows()
+	{
 		rowpage($this->input->post('row'));
 	}
 }

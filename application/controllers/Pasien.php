@@ -8,6 +8,7 @@ class Pasien extends CI_Controller
         $this->load->model('m_pasien');
         $this->load->model('m_status_pasien');
         $this->load->model('m_kepesertaan_pasien');
+        $this->load->library('encryption');
 
         if (!$this->session->userdata('id_user') or $this->session->userdata('user_group') != 1) {
             // ALERT
@@ -81,9 +82,26 @@ class Pasien extends CI_Controller
 
     public function create_page()
     {
-        // PAGE
-        // $uriSegment = 3;
-        // $page       = ($this->uri->segment($uriSegment)) ? $this->uri->segment($uriSegment) : 0;
+        $key = 'puskesmasmekar01';
+        $this->encryption->initialize(
+            array(
+                'cipher' => 'aes-128',
+                'mode' => 'cbc',
+                'key' => $key,
+            )
+        );
+
+        $plain_text = '085241818939';
+        $ciphertext = $this->encryption->encrypt($plain_text);
+        $decrypttext = $this->encryption->decrypt($ciphertext);
+
+        // Outputs: This is a plain-text message!
+        // echo $this->encryption->decrypt($ciphertext);
+
+        echo "<pre>";
+        print_r($ciphertext);
+        echo "</pre>";
+        die;
 
         //DATA
         $data['setting']       = getSetting();
@@ -165,14 +183,6 @@ class Pasien extends CI_Controller
             $nomor_urut = $char .  $p4;
         }
 
-
-        // echo "<pre>";
-        // print_r($nomor_urut );
-        // echo "</pre>";
-        // die; 
-        // $noUrut = (int) substr($lastKode, -5, 5);
-        // $noUrut++;
-
         return $nomor_urut;
     }
 
@@ -199,7 +209,6 @@ class Pasien extends CI_Controller
         $data['kepesertaan_pasien_id'] = $this->input->post('kepesertaan_pasien_id');
         $data['createtime']  = date('Y-m-d H:i:s');
         $this->m_pasien->create($data);
-
         // ALERT
         $alertStatus  = "success";
         $alertMessage = "Berhasil menambah data pasien " . $data['nama_pasien'];

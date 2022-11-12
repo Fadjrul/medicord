@@ -30,102 +30,93 @@
                             <div class="row">
                                 <div class="col-12">
                                     <?php
-                                        if($this->session->flashdata('alert')){
-                                            echo $this->session->flashdata('alert')."<br>";
-                                        }
+                                    if ($this->session->flashdata('alert')) {
+                                        echo $this->session->flashdata('alert') . "<br>";
+                                    }
                                     ?>
                                 </div>
                             </div>
                             <div class="card-body">
-                            <?php echo form_open_multipart("setting/update")?>
+                                <?php echo form_open_multipart("setting/update") ?>
                                 <form class="form">
                                     <div class="row">
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
-                                            <?php echo csrf();?>
+                                                <?php echo csrf(); ?>
                                                 <label for="setting_appname">Nama Aplikasi</label>
-                                                <input type="hidden" class="form-control" name="id_setting" value="<?php echo $setting[0]->id_setting;?>" required>
-                                                <input type="hidden" class="form-control" name="setting_logo" value="<?php echo $setting[0]->setting_logo;?>" required>
-                                                <input type="text" id="setting_appname" class="form-control"
-                                                    placeholder="Nama Aplikasi" name="setting_appname" value="<?php echo $setting[0]->setting_appname;?>" required>
+                                                <input type="hidden" class="form-control" name="id_setting" value="<?php echo $setting[0]->id_setting; ?>" required>
+                                                <input type="hidden" class="form-control" name="setting_logo" value="<?php echo $setting[0]->setting_logo; ?>" required>
+                                                <input type="text" id="setting_appname" class="form-control" placeholder="Nama Aplikasi" name="setting_appname" value="<?php echo $setting[0]->setting_appname; ?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="setting_short_appname">Nama Aplikasi (singkatan)</label>
-                                                <input type="text" id="setting_short_appname" class="form-control"
-                                                    placeholder="Nama Aplikasi (Singkatan)" name="setting_short_appname" value="<?php echo $setting[0]->setting_short_appname;?>" required>
+                                                <input type="text" id="setting_short_appname" class="form-control" placeholder="Nama Aplikasi (Singkatan)" name="setting_short_appname" value="<?php echo $setting[0]->setting_short_appname; ?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="setting_phone">Telepon </label>
-                                                <input type="text" id="setting_phone" class="form-control" placeholder="+62 ..."
-                                                name="setting_phone" value="<?php echo $setting[0]->setting_phone;?>">
+                                                <input type="text" id="setting_phone" class="form-control" placeholder="+62 ..." name="setting_phone" value="<?php echo $setting[0]->setting_phone; ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="setting_email">Email</label>
-                                                <input type="email" id="setting_email" class="form-control"
-                                                name="setting_email" value="<?php echo $setting[0]->setting_email;?>" placeholder="@....">
+                                                <input type="email" id="setting_email" class="form-control" name="setting_email" value="<?php echo $setting[0]->setting_email; ?>" placeholder="@....">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="setting_address">Alamat</label>
-                                                <textarea id="setting_address" class="form-control" name="setting_address" placeholder="Alamat" rows="4"><?php echo $setting[0]->setting_address;?></textarea>
+                                                <textarea id="setting_address" class="form-control" name="setting_address" placeholder="Alamat" rows="4"><?php echo $setting[0]->setting_address; ?></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="about">Tentang Aplikasi</label>
-                                                <textarea id="about" class="form-control" name="setting_about" placeholder="Alamat" rows="4"><?php echo $setting[0]->setting_about;?></textarea>
+                                                <textarea id="about" class="form-control" name="setting_about" placeholder="Alamat" rows="4"><?php echo $setting[0]->setting_about; ?></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="setting_instagram">Instagram</label>
-                                                <input type="text" id="setting_instagram" class="form-control"
-                                                    placeholder="www.instagram.com/" name="setting_instagram" value="<?php echo $setting[0]->setting_instagram;?>">
+                                                <input type="text" id="setting_instagram" class="form-control" placeholder="www.instagram.com/" name="setting_instagram" value="<?php echo $setting[0]->setting_instagram; ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="setting_youtube">Youtube</label>
-                                                <input type="text" id="setting_youtube" class="form-control"
-                                                    placeholder="www.youtube.com/" name="setting_youtube" value="<?php echo $setting[0]->setting_youtube;?>">
+                                                <input type="text" id="setting_youtube" class="form-control" placeholder="www.youtube.com/" name="setting_youtube" value="<?php echo $setting[0]->setting_youtube; ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="setting_owner_name">Pembuat Aplikasi</label>
-                                                <input type="text" id="setting_owner_name" class="form-control"
-                                                    placeholder="nama pembuat" name="setting_owner_name" value="<?php echo $setting[0]->setting_owner_name;?>" required>
+                                                <input type="text" id="setting_owner_name" class="form-control" placeholder="nama pembuat" name="setting_owner_name" value="<?php echo $setting[0]->setting_owner_name; ?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="setting_facebook">Facebook</label>
-                                                <input type="text" id="setting_facebook" class="form-control"
-                                                    placeholder="www.facebook.com/" name="setting_facebook" value="<?php echo $setting[0]->setting_facebook;?>">
+                                                <input type="text" id="setting_facebook" class="form-control" placeholder="www.facebook.com/" name="setting_facebook" value="<?php echo $setting[0]->setting_facebook; ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="logo">Logo Aplikasi</label>
-                                                <input type="file" id="logo" class="form-control"
-                                                    name="logo">
+                                                <input type="file" id="logo" class="form-control" name="logo">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
-                                                <img src="<?php echo base_url();?>assets/images/upload/logo/<?php echo $setting[0]->setting_logo;?>" height="55" alt="Preview Logo">
+                                                <img src="<?php echo base_url(); ?>assets/core-images/<?php echo $setting[0]->setting_logo; ?>" height="55" alt="Preview Logo">
                                             </div>
                                         </div>
                                         <div class="col-12 d-flex justify-content-end mt-2">
                                             <button type="submit" class="btn btn-primary me-1 mb-1" title="Update data setting">Update</button>
-                                            <a href="<?php echo site_url('setting')?>" class="btn btn-light-secondary me-1 mb-1" title="Refresh Halaman">Reset</a>
+                                            <a href="<?php echo site_url('setting') ?>" class="btn btn-light-secondary me-1 mb-1" title="Refresh Halaman">Reset</a>
                                         </div>
                                     </div>
                                 </form>
