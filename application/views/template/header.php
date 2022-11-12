@@ -18,5 +18,12 @@
         .sidebar-wrapper .menu .sidebar-item.active a {
             background-color: #0dcaf0 !important; 
         }
+        .input-border-bottom {
+            box-sizing: border-box !important;
+            border: none !important;
+            border-radius: 0 !important;
+            border-bottom: 1px solid !important;
+        }
+        
     </style>
 </head>

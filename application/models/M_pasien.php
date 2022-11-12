@@ -8,12 +8,13 @@ class M_pasien extends CI_Model
         parent::__construct();
     }
 
-    public function read($limit, $start, $key, $status_pasien, $kepesertaan_pasien)
+    public function read($limit, $start, $key, $status_pasien, $kepesertaan_pasien, $jns_key)
     {
-        $this->db->select('a.*, b.*, c.*');
+        $this->db->select('a.*, b.*, c.*, d.* ');
         $this->db->from('tbl_pasien a');
         $this->db->join('tbl_status_pasien b','a.status_pasien_id=b.id_status_pasien','LEFT');
         $this->db->join('tbl_kepesertaan_pasien c','a.kepesertaan_pasien_id=c.id_kepesertaan_pasien','LEFT');
+        $this->db->join('tbl_jns_key d','a.jns_key_id=d.id_jns_key','LEFT');
 
         if($status_pasien !=""){
             $this->db->where('a.status_pasien_id', $status_pasien);
@@ -23,11 +24,16 @@ class M_pasien extends CI_Model
             $this->db->where('a.kepesertaan_pasien_id', $kepesertaan_pasien);
         }
 
+        if($jns_key !=""){
+            $this->db->where('a.jns_key_id', $jns_key);
+        }
+
         if ($key != '') {
             $this->db->like("a.no_rekam_medis", $key);
             $this->db->or_like("a.nama_pasien", $key);
             $this->db->or_like("a.nik_pasien", $key);
             $this->db->or_like("a.nama_kepala_keluarga", $key);
+            $this->db->or_like("a.no_kk", $key);
             $this->db->or_like("a.jenis_kelamin", $key);
             $this->db->or_like("a.tgl_lahir_pasien", $key);
             $this->db->or_like("a.alamat_pasien", $key);
@@ -37,6 +43,7 @@ class M_pasien extends CI_Model
             $this->db->or_like("a.lw", $key);
             $this->db->or_like("b.nama_status_pasien", $key);
             $this->db->or_like("c.nama_kepesertaan_pasien", $key);
+            $this->db->or_like("d.nama_jns_key", $key);
             $this->db->or_like("a.createtime", $key);
         }
 

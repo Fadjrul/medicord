@@ -13,10 +13,9 @@ class M_pegawai extends CI_Model {
         if($key!=''){
             $this->db->like("nama_pegawai", $key);
             $this->db->like("jenis_kelamin", $key);
+            $this->db->like("keterangan", $key);
             $this->db->like("status_pegawai", $key);
             $this->db->like("bidang_pegawai", $key);
-            $this->db->like("alamat_pegawai", $key);
-            $this->db->like("no_telp_pegawai", $key);
         }
 
         if($limit !="" OR $start !=""){

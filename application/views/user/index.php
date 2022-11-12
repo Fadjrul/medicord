@@ -194,7 +194,7 @@
                                                 </tr>
 
                                                 <!-- Modal Detail User -->
-                                                <div class="modal fade text-start" id="FormDetail<?php echo $key->id_user?>" tabindex="-1" role="dialog"
+                                                <div class="modal fade text-start" id="FormDetail<?php echo $key->id_user;?>" tabindex="-1" role="dialog"
                                                     aria-labelledby="myModalLabel33" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
                                                         role="document">
@@ -252,7 +252,7 @@
                                                 </div>
 
                                                 <!-- Modal Ubah User -->
-                                                <div class="modal fade text-start" id="FormUbah<?php echo $key->id_user?>" tabindex="-1" role="dialog"
+                                                <div class="modal fade text-start" id="FormUbah<?php echo $key->id_user;?>" tabindex="-1" role="dialog"
                                                     aria-labelledby="myModalLabel33" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
                                                         role="document">

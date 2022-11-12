@@ -32,21 +32,6 @@ class M_kepesertaan_pasien extends CI_Model
         return null;
     }
 
-    public function create($data)
-    {
-        $this->db->insert('tbl_kepesertaan_pasien', $data);
-    }
-
-    public function update($data)
-    {
-        $this->db->update('tbl_kepesertaan_pasien', $data, array('id_kepesertaan_pasien' => $data['id_kepesertaan_pasien']));
-    }
-
-    public function delete($id)
-    {
-        $this->db->delete('tbl_kepesertaan_pasien', array('id_kepesertaan_pasien' => $id));
-    }
-
     public function get($id)
     {
         $this->db->where('id_kepesertaan_pasien', $id);

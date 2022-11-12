@@ -32,21 +32,6 @@ class M_status_pasien extends CI_Model
         return null;
     }
 
-    public function create($data)
-    {
-        $this->db->insert('tbl_status_pasien', $data);
-    }
-
-    public function update($data)
-    {
-        $this->db->update('tbl_status_pasien', $data, array('id_status_pasien' => $data['id_status_pasien']));
-    }
-
-    public function delete($id)
-    {
-        $this->db->delete('tbl_status_pasien', array('id_status_pasien' => $id));
-    }
-
     public function get($id)
     {
         $this->db->where('id_status_pasien', $id);
