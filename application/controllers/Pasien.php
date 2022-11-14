@@ -122,19 +122,14 @@ class Pasien extends CI_Controller
         //initialize
         $settings       = getSetting();
         $jns_key_id =  $this->input->post('jns_key_id');
-        $key = $settings[0]->setting_key_aes;
         $keys =  $this->input->post('key');
-        $this->encryption->initialize(
-            array(
-                'cipher' => 'aes-128',
-                'mode' => 'cbc',
-                'key' => $key,
-            )
-        );
+        include "_speck.class.php";
+
 
         $password = $this->verification_key($jns_key_id,    $keys);
 
         if ($password == 1) {
+
             //DATA
             $data['setting']       = getSetting();
             $data['title']         = 'Detail Data Pasien';
@@ -144,11 +139,33 @@ class Pasien extends CI_Controller
             $data['jns_key']  = $this->m_jns_key->read('', '', '', '', '', '');
             $data['pasiens']        = $this->m_pasien->read('', '', '', '', '', '');
 
-            //decrypt
-            $data['nik_pasien'] =  $this->encryption->decrypt($data['pasien'][0]->nik_pasien);
-            $data['no_kk'] =  $this->encryption->decrypt($data['pasien'][0]->no_kk);
-            $data['alamat_pasien'] =  $this->encryption->decrypt($data['pasien'][0]->alamat_pasien);
-            $data['no_telp_pasien'] =  $this->encryption->decrypt($data['pasien'][0]->no_telp_pasien);
+            if ($jns_key_id == 1) {
+                $key = $settings[0]->setting_key_aes;
+                $this->encryption->initialize(
+                    array(
+                        'cipher' => 'aes-128',
+                        'mode' => 'cbc',
+                        'key' => $key,
+                    )
+                );
+                //decrypt
+                $data['nik_pasien'] =  $this->encryption->decrypt($data['pasien'][0]->nik_pasien);
+                $data['no_kk'] =  $this->encryption->decrypt($data['pasien'][0]->no_kk);
+                $data['alamat_pasien'] =  $this->encryption->decrypt($data['pasien'][0]->alamat_pasien);
+                $data['no_telp_pasien'] =  $this->encryption->decrypt($data['pasien'][0]->no_telp_pasien);
+            } else {
+                $keys = $settings[0]->setting_key_speck;
+
+                $key_schedule = array(); // declaration of variable Key Expansion
+                $key =  $keys; //example of Key (16 characters or 128 bit)
+                $speck = new _SPECK(); //instantiation 
+                $key_schedule = $speck->expandKey($key, $key_schedule);
+
+                $data['no_telp_pasien'] =  $speck->decrypt($data['pasien'][0]->no_telp_pasien, $key_schedule);
+                $data['alamat_pasien'] =  $speck->decrypt($data['pasien'][0]->alamat_pasien, $key_schedule);
+                $data['nik_pasien'] =  $speck->decrypt($data['pasien'][0]->nik_pasien, $key_schedule);
+                $data['no_kk'] = $speck->decrypt($data['pasien'][0]->no_kk, $key_schedule);
+            }
 
             // TEMPLATE
             $view         = "pasien/detail";
@@ -204,6 +221,7 @@ class Pasien extends CI_Controller
             $viewCategory = "all";
             TemplateApp($data, $view, $viewCategory);
         } else {
+
             // ALERT
             $alertStatus  = "failed";
             $alertMessage = "Key Salah 🙂";
@@ -250,6 +268,7 @@ class Pasien extends CI_Controller
     public function create()
     {
         csrfValidate();
+        include "_speck.class.php";
 
         $nomor_urut_send = $this->generate_rm();
 
@@ -278,31 +297,27 @@ class Pasien extends CI_Controller
         }
         //set encryption speck
         else {
-            $key = $settings[0]->setting_key_aes;
-            $this->encryption->initialize(
-                array(
-                    'cipher' => 'aes-128',
-                    'mode' => 'cbc',
-                    'key' => $key,
-                )
-            );
+            $keys = $settings[0]->setting_key_speck;
+
+            $key_schedule = array(); // declaration of variable Key Expansion
+            $key = $keys; //example of Key (16 characters or 128 bit)
+            $speck = new _SPECK(); //instantiation 
+            $key_schedule = $speck->expandKey($key, $key_schedule); //Create Key Expansion
 
             //POST
             $no_telp_pasien = $this->input->post('no_telp_pasien');
             $alamat_pasien = $this->input->post('alamat_pasien');
             $nik_pasien = $this->input->post('nik_pasien');
             $no_kk = $this->input->post('no_kk');
-            //encpryt_aes
-            $data['no_telp_pasien'] = $this->encryption->encrypt($no_telp_pasien);
-            $data['alamat_pasien'] = $this->encryption->encrypt($alamat_pasien);
-            $data['nik_pasien'] = $this->encryption->encrypt($nik_pasien);
-            $data['no_kk'] = $this->encryption->encrypt($no_kk);
+
+            //encpryt_speck
+            $data['no_telp_pasien'] =  $speck->encrypt($no_telp_pasien, $key_schedule);
+            $data['alamat_pasien'] =  $speck->encrypt($alamat_pasien, $key_schedule);
+            $data['nik_pasien'] =  $speck->encrypt($nik_pasien, $key_schedule);
+            $data['no_kk'] = $speck->encrypt($no_kk, $key_schedule);
         }
 
-        // echo "<pre>";
-        // print_r($data['no_kk']);
-        // echo "</pre>";
-        // die;
+
 
         // POST
         $data['id_pasien']   = $this->input->post('id_pasien');
@@ -330,9 +345,8 @@ class Pasien extends CI_Controller
 
     public function update()
     {
-
-
         csrfValidate();
+        include "_speck.class.php";
         $settings       = getSetting();
 
         //set encryption aes
@@ -351,22 +365,20 @@ class Pasien extends CI_Controller
             $alamat_pasien = $this->input->post('alamat_pasien');
             $nik_pasien = $this->input->post('nik_pasien');
             $no_kk = $this->input->post('no_kk');
-            //encpryt_aes
-            $data['no_telp_pasien'] = $this->encryption->encrypt($no_telp_pasien);
-            $data['alamat_pasien'] = $this->encryption->encrypt($alamat_pasien);
-            $data['nik_pasien'] = $this->encryption->encrypt($nik_pasien);
-            $data['no_kk'] = $this->encryption->encrypt($no_kk);
+            //encpryt_speck
+            $data['no_telp_pasien'] =  $speck->encrypt($no_telp_pasien, $key_schedule);
+            $data['alamat_pasien'] =  $speck->encrypt($alamat_pasien, $key_schedule);
+            $data['nik_pasien'] =  $speck->encrypt($nik_pasien, $key_schedule);
+            $data['no_kk'] = $speck->encrypt($no_kk, $key_schedule);
         }
         //set encryption speck
         else {
-            $key = $settings[0]->setting_key_aes;
-            $this->encryption->initialize(
-                array(
-                    'cipher' => 'aes-128',
-                    'mode' => 'cbc',
-                    'key' => $key,
-                )
-            );
+            $keys = $settings[0]->setting_key_speck;
+
+            $key_schedule = array(); // declaration of variable Key Expansion
+            $key = $keys; //example of Key (16 characters or 128 bit)
+            $speck = new _SPECK(); //instantiation 
+            $key_schedule = $speck->expandKey($key, $key_schedule); //Create Key Expansion
 
             //POST
             $no_telp_pasien = $this->input->post('no_telp_pasien');
