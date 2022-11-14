@@ -98,121 +98,81 @@ class Pasien extends CI_Controller
         TemplateApp($data, $view, $viewCategory);
     }
 
-    public function verification_key($jns_key_id, $key)
-    {
-        $settings       = getSetting();
-        if ($jns_key_id == 1) {
-            if ($key ==  $settings[0]->setting_key_aes) {
-                return 1;
-            } else {
-                return 0;
-            }
-        } else {
-            if ($key ==  $settings[0]->setting_key_speck) {
-                return 1;
-            } else {
-                return 0;
-            }
-        }
-    }
-
     public function detail_page()
     {
 
-        //initialize
-        $settings       = getSetting();
-        $jns_key_id =  $this->input->post('jns_key_id');
-        $key = $settings[0]->setting_key_aes;
-        $keys =  $this->input->post('key');
-        $this->encryption->initialize(
-            array(
-                'cipher' => 'aes-128',
-                'mode' => 'cbc',
-                'key' => $key,
-            )
-        );
-
-        $password = $this->verification_key($jns_key_id,    $keys);
-
-        if ($password == 1) {
-            //DATA
-            $data['setting']       = getSetting();
-            $data['title']         = 'Detail Data Pasien';
-            $data['pasien']        = $this->m_pasien->get($this->uri->segment(3));
-            $data['status_pasien']  = $this->m_status_pasien->read('', '', '', '', '', '');
-            $data['kepesertaan_pasien']  = $this->m_kepesertaan_pasien->read('', '', '', '', '', '');
-            $data['jns_key']  = $this->m_jns_key->read('', '', '', '', '', '');
-            $data['pasiens']        = $this->m_pasien->read('', '', '', '', '', '');
-
-            //decrypt
-            $data['nik_pasien'] =  $this->encryption->decrypt($data['pasien'][0]->nik_pasien);
-            $data['no_kk'] =  $this->encryption->decrypt($data['pasien'][0]->no_kk);
-            $data['alamat_pasien'] =  $this->encryption->decrypt($data['pasien'][0]->alamat_pasien);
-            $data['no_telp_pasien'] =  $this->encryption->decrypt($data['pasien'][0]->no_telp_pasien);
-
-            // TEMPLATE
-            $view         = "pasien/detail";
-            $viewCategory = "all";
-            TemplateApp($data, $view, $viewCategory);
-        } else {;
-
-            $alertStatus  = "failed";
-            $alertMessage = "Key Salah 🙂";
-            getAlert($alertStatus, $alertMessage);
-
-            redirect('pasien/index');
-        }
+        //DATA
+        $data['setting']       = getSetting();
+        $data['title']         = 'Detail Data Pasien';
+        $data['pasien']        = $this->m_pasien->get($this->uri->segment(3));
+        $data['status_pasien']  = $this->m_status_pasien->read('', '', '', '', '', '');
+        $data['kepesertaan_pasien']  = $this->m_kepesertaan_pasien->read('', '', '', '', '', '');
+        $data['jns_key']  = $this->m_jns_key->read('', '', '', '', '', '');
+        $data['pasiens']        = $this->m_pasien->read('', '', '', '', '', '');
+        // TEMPLATE
+        $view         = "pasien/detail";
+        $viewCategory = "all";
+        TemplateApp($data, $view, $viewCategory);
     }
 
     public function update_page()
     {
 
-        //initialize
-        $settings       = getSetting();
-        $jns_key_id =  $this->input->post('jns_key_id');
-        $key = $settings[0]->setting_key_aes;
-        $keys =  $this->input->post('key');
-        $this->encryption->initialize(
-            array(
-                'cipher' => 'aes-128',
-                'mode' => 'cbc',
-                'key' => $key,
-            )
-        );
+        //DATA
+        $data['setting']       = getSetting();
+        $data['title']         = 'Ubah Data Pasien';
+        $data['pasien']        = $this->m_pasien->get($this->uri->segment(3));
+        $data['status_pasien']  = $this->m_status_pasien->read('', '', '', '', '', '');
+        $data['kepesertaan_pasien']  = $this->m_kepesertaan_pasien->read('', '', '', '', '', '');
+        $data['jns_key']  = $this->m_jns_key->read('', '', '', '', '', '');
+        $data['pasiens']       = $this->m_pasien->read('', '', '', '', '', '');
 
-        $password = $this->verification_key($jns_key_id,    $keys);
-
-        if ($password == 1) {
-            //DATA
-            $data['setting']       = getSetting();
-            $data['title']         = 'Ubah Data Pasien';
-            $data['pasien']        = $this->m_pasien->get($this->uri->segment(3));
-            $data['status_pasien']  = $this->m_status_pasien->read('', '', '', '', '', '');
-            $data['kepesertaan_pasien']  = $this->m_kepesertaan_pasien->read('', '', '', '', '', '');
-            $data['jns_key']  = $this->m_jns_key->read('', '', '', '', '', '');
-            $data['pasiens']       = $this->m_pasien->read('', '', '', '', '', '');
-
-            //decrypt
-            $data['nik_pasien'] =  $this->encryption->decrypt($data['pasien'][0]->nik_pasien);
-            $data['no_kk'] =  $this->encryption->decrypt($data['pasien'][0]->no_kk);
-            $data['alamat_pasien'] =  $this->encryption->decrypt($data['pasien'][0]->alamat_pasien);
-            $data['no_telp_pasien'] =  $this->encryption->decrypt($data['pasien'][0]->no_telp_pasien);
-
-
-            // TEMPLATE
-            $view         = "pasien/update";
-            $viewCategory = "all";
-            TemplateApp($data, $view, $viewCategory);
-        } else {
-            // ALERT
-            $alertStatus  = "failed";
-            $alertMessage = "Key Salah 🙂";
-            getAlert($alertStatus, $alertMessage);
-
-            redirect('pasien/index');
-        }
+        // TEMPLATE
+        $view         = "pasien/update";
+        $viewCategory = "all";
+        TemplateApp($data, $view, $viewCategory);
     }
 
+    public function verification_key()
+    {
+        $settings       = getSetting();
+        if ($this->input->post('jns_key_id') == 1) {
+            if ($this->input->post('key') ==  $settings[0]->setting_key_aes) {
+                // ALERT
+                $alertStatus  = "Correct";
+                $alertMessage = "Kata Sandi Benar";
+                getAlert($alertStatus, $alertMessage);
+                echo "<pre>";
+                print_r($alertStatus);
+                echo "</pre>";
+                die;
+                redirect('pasien/detail_page');
+            } else {
+                // ALERT
+                $alertStatus  = "Not Correct !!";
+                $alertMessage = "Kata Sandi Salah";
+                getAlert($alertStatus, $alertMessage);
+
+                redirect('pasien/index');
+            }
+        } else {
+            if ($this->input->post('key') ==  $settings[0]->setting_key_speck) {
+                // ALERT
+                $alertStatus  = "Correct";
+                $alertMessage = "Kata Sandi Benar";
+                getAlert($alertStatus, $alertMessage);
+
+                redirect('pasien/detail_page');
+            } else {
+                // ALERT
+                $alertStatus  = "Not Correct !!";
+                $alertMessage = "Kata Sandi Salah";
+                getAlert($alertStatus, $alertMessage);
+
+                redirect('pasien/index');
+            }
+        }
+    }
 
     public function generate_rm()
     {
@@ -252,8 +212,8 @@ class Pasien extends CI_Controller
         csrfValidate();
 
         $nomor_urut_send = $this->generate_rm();
-
         $settings       = getSetting();
+
         //set encryption aes
         if ($this->input->post('jns_key_id') == 1) {
             $key = $settings[0]->setting_key_aes;
@@ -264,7 +224,7 @@ class Pasien extends CI_Controller
                     'key' => $key,
                 )
             );
-
+            // $plain_text = '085241818939';
             //POST
             $no_telp_pasien = $this->input->post('no_telp_pasien');
             $alamat_pasien = $this->input->post('alamat_pasien');
@@ -275,29 +235,11 @@ class Pasien extends CI_Controller
             $data['alamat_pasien'] = $this->encryption->encrypt($alamat_pasien);
             $data['nik_pasien'] = $this->encryption->encrypt($nik_pasien);
             $data['no_kk'] = $this->encryption->encrypt($no_kk);
-        }
-        //set encryption speck
-        else {
-            $key = $settings[0]->setting_key_aes;
-            $this->encryption->initialize(
-                array(
-                    'cipher' => 'aes-128',
-                    'mode' => 'cbc',
-                    'key' => $key,
-                )
-            );
 
-            //POST
-            $no_telp_pasien = $this->input->post('no_telp_pasien');
-            $alamat_pasien = $this->input->post('alamat_pasien');
-            $nik_pasien = $this->input->post('nik_pasien');
-            $no_kk = $this->input->post('no_kk');
-            //encpryt_aes
-            $data['no_telp_pasien'] = $this->encryption->encrypt($no_telp_pasien);
-            $data['alamat_pasien'] = $this->encryption->encrypt($alamat_pasien);
-            $data['nik_pasien'] = $this->encryption->encrypt($nik_pasien);
-            $data['no_kk'] = $this->encryption->encrypt($no_kk);
+            // $decrypttext = $this->encryption->decrypt($ciphertext);
         }
+
+        // echo $this->encryption->decrypt($ciphertext);
 
         // echo "<pre>";
         // print_r($data['no_kk']);
@@ -330,62 +272,17 @@ class Pasien extends CI_Controller
 
     public function update()
     {
-
-
         csrfValidate();
-        $settings       = getSetting();
-
-        //set encryption aes
-        if ($this->input->post('jns_key_id') == 1) {
-            $key = $settings[0]->setting_key_aes;
-            $this->encryption->initialize(
-                array(
-                    'cipher' => 'aes-128',
-                    'mode' => 'cbc',
-                    'key' => $key,
-                )
-            );
-
-            //POST
-            $no_telp_pasien = $this->input->post('no_telp_pasien');
-            $alamat_pasien = $this->input->post('alamat_pasien');
-            $nik_pasien = $this->input->post('nik_pasien');
-            $no_kk = $this->input->post('no_kk');
-            //encpryt_aes
-            $data['no_telp_pasien'] = $this->encryption->encrypt($no_telp_pasien);
-            $data['alamat_pasien'] = $this->encryption->encrypt($alamat_pasien);
-            $data['nik_pasien'] = $this->encryption->encrypt($nik_pasien);
-            $data['no_kk'] = $this->encryption->encrypt($no_kk);
-        }
-        //set encryption speck
-        else {
-            $key = $settings[0]->setting_key_aes;
-            $this->encryption->initialize(
-                array(
-                    'cipher' => 'aes-128',
-                    'mode' => 'cbc',
-                    'key' => $key,
-                )
-            );
-
-            //POST
-            $no_telp_pasien = $this->input->post('no_telp_pasien');
-            $alamat_pasien = $this->input->post('alamat_pasien');
-            $nik_pasien = $this->input->post('nik_pasien');
-            $no_kk = $this->input->post('no_kk');
-            //encpryt_aes
-            $data['no_telp_pasien'] = $this->encryption->encrypt($no_telp_pasien);
-            $data['alamat_pasien'] = $this->encryption->encrypt($alamat_pasien);
-            $data['nik_pasien'] = $this->encryption->encrypt($nik_pasien);
-            $data['no_kk'] = $this->encryption->encrypt($no_kk);
-        }
-
         // POST
         $data['id_pasien']   = $this->input->post('id_pasien');
+        $data['nik_pasien'] = $this->input->post('nik_pasien');
         $data['nama_pasien'] = $this->input->post('nama_pasien');
         $data['nama_kepala_keluarga'] = $this->input->post('nama_kepala_keluarga');
+        $data['no_kk'] = $this->input->post('no_kk');
         $data['jenis_kelamin'] = $this->input->post('jenis_kelamin');
         $data['tgl_lahir_pasien'] = $this->input->post('tgl_lahir_pasien');
+        $data['alamat_pasien'] = $this->input->post('alamat_pasien');
+        $data['no_telp_pasien'] = $this->input->post('no_telp_pasien');
         $data['no_bpjs_pasien'] = $this->input->post('no_bpjs_pasien');
         $data['dw'] = $this->input->post('dw');
         $data['lw'] = $this->input->post('lw');

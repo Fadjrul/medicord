@@ -69,13 +69,13 @@
                                                 <label for="nik_pasien">NIK / No. KTP </label>
                                             </div>
                                             <div class="col-md-4 form-group">
-                                                <input type="text" id="nik_pasien" class="form-control" placeholder="nik atau no. ktp" name="nik_pasien" required="required" value="<?php echo $pasien[0]->nik_pasien; ?>">
+                                                <input type="text" id="nik_pasien" class="form-control" placeholder="nik atau no. ktp" name="nik_pasien" required="required" value="<?php echo $nik_pasien; ?>">
                                             </div>
                                             <div class="col-md-2 col-12">
                                                 <label for="no_kk">No. Kartu Keluarga</label>
                                             </div>
                                             <div class="col-md-4 form-group">
-                                                <input type="text" id="no_kk" class="form-control" name="no_kk" value="<?php echo $pasien[0]->no_kk; ?>" required="required">
+                                                <input type="text" id="no_kk" class="form-control" name="no_kk" value="<?php echo $no_kk; ?>" required="required">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -86,30 +86,30 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <?php
-                                                            $l='Laki-laki';
-                                                                if($l == $pasien[0]->jenis_kelamin){
-                                                                    echo '<input class="form-check-input" type="radio" name="jenis_kelamin" id="Laki-laki" value="Laki-laki" checked>
+                                                        $l = 'Laki-laki';
+                                                        if ($l == $pasien[0]->jenis_kelamin) {
+                                                            echo '<input class="form-check-input" type="radio" name="jenis_kelamin" id="Laki-laki" value="Laki-laki" checked>
                                                                     <label for="Laki-laki">Laki-laki</label>';
-                                                                }else{
-                                                                    echo '<input class="form-check-input" type="radio" name="jenis_kelamin" id="Laki-laki" value="Laki-laki">
+                                                        } else {
+                                                            echo '<input class="form-check-input" type="radio" name="jenis_kelamin" id="Laki-laki" value="Laki-laki">
                                                                     <label for="Laki-laki">Laki-laki</label>';
-                                                                }
-                                                            
+                                                        }
+
                                                         ?>
                                                     </div>
                                                     <div class="col">
                                                         <?php
-                                                            $p='Perempuan';
-                                                                if($p == $pasien[0]->jenis_kelamin){
-                                                                    echo '<input class="form-check-input" type="radio" name="jenis_kelamin" value="Perempuan" id="Perempuan" checked>
+                                                        $p = 'Perempuan';
+                                                        if ($p == $pasien[0]->jenis_kelamin) {
+                                                            echo '<input class="form-check-input" type="radio" name="jenis_kelamin" value="Perempuan" id="Perempuan" checked>
                                                                     <label for="Perempuan">Perempuan</label>';
-                                                                }else{
-                                                                    echo '<input class="form-check-input" type="radio" name="jenis_kelamin" value="Perempuan" id="Perempuan">
+                                                        } else {
+                                                            echo '<input class="form-check-input" type="radio" name="jenis_kelamin" value="Perempuan" id="Perempuan">
                                                                     <label for="Perempuan">Perempuan</label>';
-                                                                }
-                                                            
+                                                        }
+
                                                         ?>
-                                                        
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -117,7 +117,7 @@
                                                 <label for="no_telp_pasien">Nomor Telepon</label>
                                             </div>
                                             <div class="col-md-4 form-group">
-                                                <input type="text" id="no_telp_pasien" class="form-control" placeholder="+62 " name="no_telp_pasien" value="<?php echo $pasien[0]->no_telp_pasien; ?>">
+                                                <input type="text" id="no_telp_pasien" class="form-control" placeholder="+62 " name="no_telp_pasien" value="<?php echo $no_telp_pasien; ?>">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -137,19 +137,19 @@
                                         <div class="row">
                                             <div class="col-md-2 col-12">
                                                 <label for="status_pasien_id">Status Pasien</label>
-                                            </div>   
+                                            </div>
                                             <div class="col-md-4 form-group">
                                                 <fieldset class="form-group">
                                                     <select class="form-select" id="status_pasien_id" name="status_pasien_id">
                                                         <option>- Pilih Status Pasien - </option>
                                                         <?php
-                                                            foreach($status_pasien as $sp){
-                                                                if($pasien[0]->status_pasien_id == $sp->id_status_pasien){
-                                                                    echo '<option value="'.$sp->id_status_pasien.'" selected>'.$sp->nama_status_pasien.'</option>';
-                                                                }else{
-                                                                    echo '<option value="'.$sp->id_status_pasien.'">'.$sp->nama_status_pasien.'</option>';
-                                                                }
+                                                        foreach ($status_pasien as $sp) {
+                                                            if ($pasien[0]->status_pasien_id == $sp->id_status_pasien) {
+                                                                echo '<option value="' . $sp->id_status_pasien . '" selected>' . $sp->nama_status_pasien . '</option>';
+                                                            } else {
+                                                                echo '<option value="' . $sp->id_status_pasien . '">' . $sp->nama_status_pasien . '</option>';
                                                             }
+                                                        }
                                                         ?>
                                                     </select>
                                                 </fieldset>
@@ -177,42 +177,42 @@
                                             <div class="col-md-4 form-group">
                                                 <fieldset class="form-group">
                                                     <select class="form-select" id="kepesertaan_pasien_id" name="kepesertaan_pasien_id">
-                                                    <option>- Pilih Jenis Kepesertaan - </option>
+                                                        <option>- Pilih Jenis Kepesertaan - </option>
                                                         <?php
-                                                            foreach($kepesertaan_pasien as $kp){
-                                                                if($pasien[0]->kepesertaan_pasien_id == $kp->id_kepesertaan_pasien){
-                                                                    echo '<option value="'.$kp->id_kepesertaan_pasien.'" selected>'.$kp->nama_kepesertaan_pasien.'</option>';
-                                                                }else{
-                                                                    echo '<option value="'.$kp->id_kepesertaan_pasien.'">'.$kp->nama_kepesertaan_pasien.'</option>';
-                                                                }
+                                                        foreach ($kepesertaan_pasien as $kp) {
+                                                            if ($pasien[0]->kepesertaan_pasien_id == $kp->id_kepesertaan_pasien) {
+                                                                echo '<option value="' . $kp->id_kepesertaan_pasien . '" selected>' . $kp->nama_kepesertaan_pasien . '</option>';
+                                                            } else {
+                                                                echo '<option value="' . $kp->id_kepesertaan_pasien . '">' . $kp->nama_kepesertaan_pasien . '</option>';
                                                             }
+                                                        }
                                                         ?>
                                                     </select>
                                                 </fieldset>
                                             </div>
                                             <div class="col-md-4 form-group">
-                                                    <fieldset class="form-group">
-                                                        <select class="form-select" id="jns_key_id" name="jns_key_id">
-                                                            <option>- Pilih Jenis Kunci - </option>
-                                                            <?php
-                                                                foreach($jns_key as $jk){
-                                                                    if($pasien[0]->jns_key_id == $jk->id_jns_key){
-                                                                        echo '<option value="'.$jk->id_jns_key.'" selected>'.$jk->nama_jns_key.'</option>';
-                                                                    }else{
-                                                                        echo '<option value="'.$jk->id_jns_key.'">'.$jk->nama_jns_key.'</option>';
-                                                                    }
-                                                                }
-                                                            ?>
-                                                        </select>
-                                                    </fieldset>
-                                                </div>
+                                                <fieldset class="form-group">
+                                                    <select class="form-select" id="jns_key_id" name="jns_key_id">
+                                                        <option>- Pilih Jenis Kunci - </option>
+                                                        <?php
+                                                        foreach ($jns_key as $jk) {
+                                                            if ($pasien[0]->jns_key_id == $jk->id_jns_key) {
+                                                                echo '<option value="' . $jk->id_jns_key . '" selected>' . $jk->nama_jns_key . '</option>';
+                                                            } else {
+                                                                echo '<option value="' . $jk->id_jns_key . '">' . $jk->nama_jns_key . '</option>';
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-2 col-12">
                                                 <label for="alamat_pasien">Alamat</label>
                                             </div>
                                             <div class="col-md-4 form-group">
-                                                <textarea id="alamat_pasien" class="form-control" name="alamat_pasien" placeholder="Alamat" rows="4"><?php echo $pasien[0]->alamat_pasien; ?></textarea>
+                                                <textarea id="alamat_pasien" class="form-control" name="alamat_pasien" placeholder="Alamat" rows="4"><?php echo $alamat_pasien; ?></textarea>
                                             </div>
                                         </div>
                                     </div>
