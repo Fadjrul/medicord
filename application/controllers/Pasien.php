@@ -25,6 +25,16 @@ class Pasien extends CI_Controller
     {
         $this->session->unset_userdata('sess_search_pasien');
 
+        include "_speck.class.php";
+        $key_schedule = array(); // declaration of variable Key Expansion
+        $key = "abcdefghijklmnop"; //example of Key (16 characters or 128 bit)
+        $speck = new _SPECK(); //instantiation 
+        $key_schedule = $speck->expandKey($key, $key_schedule); //Create Key Expansion
+        $plaintext = "abcdefgh"; //plain is 8 characters(64 bit)
+        $ciphertext = $speck->encrypt($plaintext, $key_schedule); // call encrypt function	
+        echo $ciphertext;
+        die;
+
         // PAGINATION
         $baseUrl    = base_url() . "pasien/index/";
         $totalRows  = count((array) $this->m_pasien->read('', '', '', '', '', ''));
@@ -123,7 +133,7 @@ class Pasien extends CI_Controller
         $settings       = getSetting();
         $jns_key_id =  $this->input->post('jns_key_id');
         $keys =  $this->input->post('key');
-        include "_speck.class.php";
+
 
 
         $password = $this->verification_key($jns_key_id,    $keys);
@@ -140,6 +150,7 @@ class Pasien extends CI_Controller
             $data['pasiens']        = $this->m_pasien->read('', '', '', '', '', '');
 
             if ($jns_key_id == 1) {
+
                 $key = $settings[0]->setting_key_aes;
                 $this->encryption->initialize(
                     array(
@@ -154,6 +165,7 @@ class Pasien extends CI_Controller
                 $data['alamat_pasien'] =  $this->encryption->decrypt($data['pasien'][0]->alamat_pasien);
                 $data['no_telp_pasien'] =  $this->encryption->decrypt($data['pasien'][0]->no_telp_pasien);
             } else {
+                include "_speck.class.php";
                 $keys = $settings[0]->setting_key_speck;
 
                 $key_schedule = array(); // declaration of variable Key Expansion
@@ -165,6 +177,11 @@ class Pasien extends CI_Controller
                 $data['alamat_pasien'] =  $speck->decrypt($data['pasien'][0]->alamat_pasien, $key_schedule);
                 $data['nik_pasien'] =  $speck->decrypt($data['pasien'][0]->nik_pasien, $key_schedule);
                 $data['no_kk'] = $speck->decrypt($data['pasien'][0]->no_kk, $key_schedule);
+
+                echo "<pre>";
+                print_r($data['no_telp_pasien']);
+                echo "</pre>";
+                die;
             }
 
             // TEMPLATE
