@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo $setting[0]->setting_short_appname;?></title>
     <!-- Favicons -->
-	<link href="<?php echo base_url();?>assets/images/<?php echo $setting[0]->setting_logo;?>" rel="icon">
+	<link href="<?php echo base_url();?>assets/core-images/<?php echo $setting[0]->setting_logo;?>" rel="icon">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/main/app.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/main/app-dark.css">
     <!-- Font awesome icon -->
@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="<?php echo base_url();?>assets/extensions/toastify-js/src/toastify.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/extensions/simple-datatables/style.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/extensions/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/core-thirdparty/dropzone/dist/dropzone.css">
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/core-thirdparty/dropzone/dist/basic.css">
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/extensions/choices.js/public/assets/styles/choices.css">
     <style type="text/css">
         .sidebar-wrapper .menu .sidebar-item.active a {
             background-color: #0dcaf0 !important; 
@@ -24,6 +27,10 @@
             border-radius: 0 !important;
             border-bottom: 1px solid !important;
         }
+
+        .dropzone {
+                border: 2px dashed;
+            }
         
     </style>
 </head>

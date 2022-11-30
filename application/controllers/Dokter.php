@@ -6,7 +6,7 @@ class Dokter extends CI_Controller {
         $this->load->model('m_dokter');
         $this->load->library('upload');
         
-        if (!$this->session->userdata('id_user') OR $this->session->userdata('user_group')!=1) {
+        if (!$this->session->userdata('user_id') OR $this->session->userdata('user_group')!=1) {
 			// ALERT
 			$alertStatus  = 'failed';
 			$alertMessage = 'Anda tidak memiliki Hak Akses atau Session anda sudah habis';
@@ -76,125 +76,107 @@ class Dokter extends CI_Controller {
 		$viewCategory = "all";
 		TemplateApp($data, $view, $viewCategory);
     }
-    
-    public function create_page()
-    {
-
-        //DATA
-        $data['setting']       = getSetting();
-        $data['title']         = 'Tambah Data Dokter';
-        $data['dokter']       = $this->m_dokter->read('', '', '');
-
-        // TEMPLATE
-        $view         = "dokter/add";
-        $viewCategory = "all";
-        TemplateApp($data, $view, $viewCategory);
-    }
-
-    public function detail_page()
-    {
-
-        //DATA
-        $data['setting']       = getSetting();
-        $data['title']         = 'Detail Data Pasien';
-        $data['dokter']        = $this->m_dokter->get($this->uri->segment(3));
-        $data['dokters']        = $this->m_dokter->read('', '', '');
-
-        // TEMPLATE
-        $view         = "dokter/detail";
-        $viewCategory = "all";
-        TemplateApp($data, $view, $viewCategory);
-    }
-
-    public function update_page()
-    {
-
-        //DATA
-        $data['setting']       = getSetting();
-        $data['title']         = 'Ubah Data Pasien';
-        $data['dokter']        = $this->m_dokter->get($this->uri->segment(3));
-        $data['dokters']       = $this->m_dokter->read('', '', '');
-
-        // TEMPLATE
-        $view         = "dokter/update";
-        $viewCategory = "all";
-        TemplateApp($data, $view, $viewCategory);
-    }
 
     public function create() {
         csrfValidate();
-        $formatName                	= $this->input->post('id_dokter').date('YmdHis');
-        // Upload For ttd dokter
-		if ($_FILES['ttd']['name'] != '') {
 
-			$config_ttd['upload_path']     = './assets/core-images/';
-			$config_ttd['allowed_types']   = "gif|jpg|jpeg|png|svg";
-			$config_ttd['overwrite']       = "true";
-			$config_ttd['file_name']       = 'dokter' . $formatName;
-			$this->upload->initialize($config_ttd);
+        // Upload TTD Dokter
+        $path = './upload/ttd/';
 
-			if (!$this->upload->do_upload('ttd')) {
-				echo $this->upload->display_errors();
-			} else {
-				unlink("./assets/core-images/".$this->input->post('ttd_dokter'));
-				$ttd                    = $this->upload->data();
-				$data['ttd_dokter']    = $ttd['file_name'];
-			}
-		}
+        $filename_1              = "dokter-".date('YmdHis');
+        $config['upload_path']   = $path;
+        $config['allowed_types'] = "jpg|jpeg|png|svg";
+        $config['overwrite']     = "true";
+        $config['max_size']      = "0";
+        $config['file_name']     = '' . $filename_1;
+        $this->upload->initialize($config);
+        if (!$this->upload->do_upload('ttd_dokter')) { 
+            // ALERT
+            $alertStatus  = "failed";
+            $alertMessage = $this->upload->display_errors();
+            getAlert($alertStatus, $alertMessage);
+        } else {
+            $dat  = $this->upload->data();
 
-        // POST
-        $data['id_dokter']   = '';
-        $data['nama_dokter'] = $this->input->post('nama_dokter');
-        $data['spesialis'] = $this->input->post('spesialis');
-        $data['jenis_kelamin'] = $this->input->post('jenis_kelamin');
-        $data['alamat'] = $this->input->post('alamat');
-        $data['no_telp'] = $this->input->post('no_telp');
-        $data['createtime']  = date('Y-m-d H:i:s');
-        $this->m_dokter->create($data);
+            // POST
+            $data['dokter_id']   = '';
+            $data['nama_dokter'] = $this->input->post('nama_dokter');
+            $data['spesialis'] = $this->input->post('spesialis');
+            $data['jenis_kelamin'] = $this->input->post('jenis_kelamin');
+            $data['ttd_dokter'] = $dat['file_name'];
+            $data['createtime']  = date('Y-m-d H:i:s');
+            $this->m_dokter->create($data);
 
-        // ALERT
-        $alertStatus  = "success";
-        $alertMessage = "Berhasil menambah data dokter ".$data['nama_dokter'];
-        getAlert($alertStatus, $alertMessage);
+            // LOG
+            $message    = $this->session->userdata('user_name')." menambah data dokter dengan nama = ".$data['nama_dokter'];
+            createLog($message);
 
-        redirect('dokter/index');
+            // ALERT
+            $alertStatus  = "success";
+            $alertMessage = "Berhasil menambah data dokter ".$data['nama_dokter'];
+            getAlert($alertStatus, $alertMessage);
+
+            redirect('dokter/index');
+        }
     }
     
 
     public function update() {
         csrfValidate();
-        $formatName                	= $this->input->post('id_dokter').date('YmdHis');
-        // Upload For ttd dokter
-		if ($_FILES['ttd']['name'] != '') {
+        
+        // Update TTD Dokter
+        if($_FILES['ttd_dokter']['name'] !="") {
+            $path = './upload/ttd/';
 
-			$config_ttd['upload_path']     = './assets/core-images/';
-			$config_ttd['allowed_types']   = "gif|jpg|jpeg|png|svg";
-			$config_ttd['overwrite']       = "true";
-			$config_ttd['file_name']       = 'dokter' . $formatName;
-			$this->upload->initialize($config_ttd);
+            $filename_1              = "dokter-".date('YmdHis');
+            $config['upload_path']   = $path;
+            $config['allowed_types'] = "jpg|jpeg|png|svg";
+            $config['overwrite']     = "true";
+            $config['max_size']      = "0";
+            $config['file_name']     = '' . $filename_1;
+            $this->upload->initialize($config);
+            if (!$this->upload->do_upload('ttd_dokter')) { 
+                // ALERT
+                $alertStatus  = "failed";
+                $alertMessage = $this->upload->display_errors();
+                getAlert($alertStatus, $alertMessage);
+            } else {
+                $dat  = $this->upload->data();
+                unlink($path.$this->input->post('ttd_dokter_old'));
+                // POST
+                $data['dokter_id']   = $this->input->post('dokter_id');
+                $data['nama_dokter'] = $this->input->post('nama_dokter');
+                $data['spesialis'] = $this->input->post('spesialis');
+                $data['jenis_kelamin'] = $this->input->post('jenis_kelamin');
+                $data['ttd_dokter'] = $dat['file_name'];
+                $this->m_dokter->update($data);
 
-			if (!$this->upload->do_upload('ttd')) {
-				echo $this->upload->display_errors();
-			} else {
-				unlink("./assets/core-images/".$this->input->post('ttd_dokter'));
-				$ttd                    = $this->upload->data();
-				$data['ttd_dokter']    = $ttd['file_name'];
-			}
-		}
+                // LOG
+                $message    = $this->session->userdata('user_name')." mengubah data dokter dengan nama = ".$data['nama_dokter'];
+                createLog($message);
 
+                // ALERT
+                $alertStatus  = "success";
+                $alertMessage = "Berhasil mengubah data dokter : ".$data['nama_dokter'];
+                getAlert($alertStatus, $alertMessage);
+
+
+            }
+
+        }else{
         // POST
-        $data['id_dokter']   = $this->input->post('id_dokter');
+        $data['dokter_id']   = $this->input->post('dokter_id');
         $data['nama_dokter'] = $this->input->post('nama_dokter');
         $data['spesialis'] = $this->input->post('spesialis');
         $data['jenis_kelamin'] = $this->input->post('jenis_kelamin');
-        $data['alamat'] = $this->input->post('alamat');
-        $data['no_telp'] = $this->input->post('no_telp');
         $this->m_dokter->update($data);
 
         // ALERT
         $alertStatus  = "success";
         $alertMessage = "Berhasil mengubah data dokter : ".$data['nama_dokter'];
         getAlert($alertStatus, $alertMessage);
+
+        }
 
         redirect('dokter/index');
     }
@@ -203,7 +185,12 @@ class Dokter extends CI_Controller {
     public function delete() {
         csrfValidate();
         // POST
-        $this->m_dokter->delete($this->input->post('id_dokter'));
+        $this->m_dokter->delete($this->input->post('dokter_id'));
+        unlink('./upload/ttd/'.$this->input->post('ttd_dokter'));
+
+        // LOG
+        $message    = $this->session->userdata('user_name')." menghapus data dokter dengan nama = ".$data['nama_dokter'];
+        createLog($message);
 
         // ALERT
         $alertStatus  = "failed";
@@ -214,4 +201,5 @@ class Dokter extends CI_Controller {
     }
     
 }
+
 ?>

@@ -7,7 +7,7 @@
     <div class="sidebar-header position-relative">
         <div class="d-flex justify-content-between align-items-center">
             <div class="logo">
-                <a href="<?php echo site_url('dashboard/index')?>"><img src="<?php echo base_url()?>assets/images/upload/logo/<?php echo $setting[0]->setting_logo;?>" alt="Logo" srcset=""></a> <span class="text-info"><?php echo $setting[0]->setting_short_appname;?></span>
+                <a href="<?php echo site_url('dashboard/index')?>"><img src="<?php echo base_url()?>assets/core-images/<?php echo $setting[0]->setting_logo;?>" alt="Logo" srcset=""></a> <span class="text-info"><?php echo $setting[0]->setting_short_appname;?></span>
             </div>
             
             <div class="sidebar-toggler x">
@@ -81,6 +81,79 @@
                 </ul>
             </li>
 
+            <li class="sidebar-title">KONTEN DAN BERITA</li>
+
+            <li
+                class="sidebar-item  has-sub">
+                <a href="#" class='sidebar-link'>
+                    <i class="fas fa-clinic-medical"></i>
+                    <span>Profil Puskesmas</span>
+                </a>
+                <ul class="submenu ">
+                    <li class="submenu-item <?= active_menu('content/page/sejarah'); ?>">
+                        <a href="<?php echo site_url('content/page/sejarah')?>">Sejarah</a>
+                    </li>
+                    <li class="submenu-item <?= active_menu('content/page/visi'); ?>">
+                        <a href="<?php echo site_url('content/page/visi')?>">Visi Misi</a>
+                    </li>
+                    <li class="submenu-item <?= active_menu('content/page/sambutan'); ?>">
+                        <a href="<?php echo site_url('content/page/sambutan')?>">Sambutan</a>
+                    </li>
+                    <li class="submenu-item <?= active_menu('content/page/tupoksi'); ?>">
+                        <a href="<?php echo site_url('content/page/tupoksi')?>">Tugas dan Fungsi</a>
+                    </li>
+                    <li class="submenu-item <?= active_menu('content/page/maklumat'); ?>">
+                        <a href="<?php echo site_url('content/page/maklumat')?>">Maklumat Pelayanan</a>
+                    </li>
+                    <li class="submenu-item <?= active_menu('content/page/struktur'); ?>">
+                        <a href="<?php echo site_url('content/page/struktur')?>">Struktur Organisasi</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li
+                class="sidebar-item  has-sub">
+                <a href="#" class='sidebar-link'>
+                    <i class="bi bi-newspaper"></i>
+                    <span>Informasi</span>
+                </a>
+                <ul class="submenu ">
+                    <li class="submenu-item <?= active_menu('news'); ?>">
+                        <a href="<?php echo site_url('news')?>">Daftar Informasi</a>
+                    </li>
+                    <li class="submenu-item <?= active_menu('news_category'); ?>">
+                        <a href="<?php echo site_url('news_category')?>">Kategori Informasi</a>
+                    </li>
+                    <li class="submenu-item <?= active_menu('field'); ?>">
+                        <a href="<?php echo site_url('field')?>">Bidang Publikasi</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li
+                class="sidebar-item  has-sub">
+                <a href="#" class='sidebar-link'>
+                    <i class="bi bi-folder-fill"></i>
+                    <span>Galeri</span>
+                </a>
+                <ul class="submenu ">
+                    <li class="submenu-item <?= active_menu('gallery/data/photo'); ?>">
+                        <a href="<?php echo site_url('gallery/data/photo')?>">Foto</a>
+                    </li>
+                    <li class="submenu-item <?= active_menu('gallery/data/video'); ?>">
+                        <a href="<?php echo site_url('gallery/data/video')?>">Video</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li
+                class="sidebar-item <?= active_menu('slider'); ?>">
+                <a href="<?php echo site_url('slider/index')?>" class='sidebar-link'>
+                    <i class="fas fa-image"></i>
+                    <span>Slider Landing Page</span>
+                </a>
+            </li>
+
             <li class="sidebar-title">LAINNYA</li>
 
             <li
@@ -101,17 +174,33 @@
 
             <li
                 class="sidebar-item <?= active_menu('faq'); ?>">
-                <a href="<?php echo site_url('faq/index')?>" class='sidebar-link'>
+                <a href="<?php echo site_url('faq')?>" class='sidebar-link'>
                     <i class="bi bi-question-circle-fill"></i>
                     <span>FAQ</span>
                 </a>
             </li>
 
             <li
-                class="sidebar-item <?= active_menu('backup'); ?>">
-                <a href="<?php echo site_url('backup/index')?>" class='sidebar-link'>
-                    <i class="bi bi-cloud-fill"></i>
-                    <span>Backup & Restore db</span>
+                class="sidebar-item <?= active_menu('message'); ?>">
+                <a href="<?php echo site_url('message/index')?>" class='sidebar-link'>
+                    <i class="bi bi-envelope-fill"></i>
+                    <span>Pesan</span>
+                </a>
+            </li>
+
+            <li
+                class="sidebar-item <?= active_menu('link'); ?>">
+                <a href="<?php echo site_url('link')?>" class='sidebar-link'>
+                    <i class="bi bi-arrow-right-circle-fill"></i>
+                    <span>Link Terkait</span>
+                </a>
+            </li>
+
+            <li
+                class="sidebar-item <?= active_menu('log'); ?>">
+                <a href="<?php echo site_url('log/index')?>" class='sidebar-link'>
+                    <i class="bi bi-arrow-repeat"></i>
+                    <span>Log</span>
                 </a>
             </li>
 
@@ -127,7 +216,7 @@
 
         <!-- Perekam Medis menu -->
         <?php }elseif($this->session->userdata('user_group')==2){?>
-            <ul class="menu">
+        <ul class="menu">
             <li class="sidebar-title">DATA MEDICORD</li>
             
             <li
@@ -176,6 +265,31 @@
             </li>
             
         </ul>
+
+        <!-- Pengelola Berita menu -->
+        <?php }elseif($this->session->userdata('user_group')==6){?>
+        <ul class="menu">
+            <li class="sidebar-title">BERITA</li>
+            
+            <li
+                class="sidebar-item  has-sub">
+                <a href="#" class='sidebar-link'>
+                    <i class="bi bi-newspaper"></i>
+                    <span>Informasi</span>
+                </a>
+                <ul class="submenu ">
+                    <li class="submenu-item <?= active_menu('pengkajian_awal'); ?>">
+                        <a href="<?php echo site_url('pengkajian_awal/index')?>">Daftar Informasi</a>
+                    </li>
+                    <li class="submenu-item <?= active_menu('riwayat_kunjungan_pasien'); ?>">
+                        <a href="<?php echo site_url('riwayat_kunjungan_pasien/index')?>">Kategori Informasi</a>
+                    </li>
+                    <li class="submenu-item <?= active_menu('pemeriksaan_odontogram'); ?>">
+                        <a href="<?php echo site_url('pemeriksaan_odontogram/index')?>">Bidang Publikasi</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
         <?php }?>
     </div>
 </div>
@@ -218,9 +332,9 @@
                                             <div class="avatar avatar-md">
                                                 <?php 
                                                     if($this->session->userdata('user_photo')==""){ 
-                                                        echo '<img src="'.base_url().'assets/images/upload/user/noimage.png" alt="User Image">';
+                                                        echo '<img src="'.base_url().'upload/user/noimage.png" alt="User Image">';
                                                     }else{
-                                                        echo '<img src="'.base_url().'assets/images/upload/user/'.$this->session->userdata('user_photo').'" alt="User Image">';
+                                                        echo '<img src="'.base_url().'upload/user/'.$this->session->userdata('user_photo').'" alt="User Image">';
                                                     }
                                                 ?>
                                             </div>

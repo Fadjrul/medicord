@@ -4,7 +4,7 @@ class Faq extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('m_faq');
-        if (!$this->session->userdata('id_user') OR $this->session->userdata('user_group')!=1) {
+        if (!$this->session->userdata('user_id') OR $this->session->userdata('user_group')!=1) {
 			// ALERT
 			$alertStatus  = 'failed';
 			$alertMessage = 'Anda tidak memiliki Hak Akses atau Session anda sudah habis';
@@ -21,7 +21,7 @@ class Faq extends CI_Controller {
         $baseUrl    = base_url() . "faq/index/";
         $totalRows  = count((array) $this->m_faq->read('','',''));
         $perPage    = $this->session->userdata('sess_rowpage');
-        $uriSegment = 4;
+        $uriSegment = 3;
         $paging     = generatePagination($baseUrl, $totalRows, $perPage, $uriSegment);
         $page       = ($this->uri->segment($uriSegment)) ? $this->uri->segment($uriSegment) : 0;
         
@@ -33,7 +33,7 @@ class Faq extends CI_Controller {
         
         //DATA
         $data['setting'] = getSetting();
-        $data['title']   = 'Faq';
+        $data['title']   = 'F.A.Q';
         $data['faq']   = $this->m_faq->read($perPage, $page,'');
 		
         
@@ -56,7 +56,7 @@ class Faq extends CI_Controller {
         $baseUrl    = base_url() . "faq/search/".$data['search']."/";
         $totalRows  = count((array)$this->m_faq->read('','',$data['search']));
         $perPage    = $this->session->userdata('sess_rowpage');
-        $uriSegment = 5;
+        $uriSegment = 3;
         $paging     = generatePagination($baseUrl, $totalRows, $perPage, $uriSegment);
         $page       = ($this->uri->segment($uriSegment)) ? $this->uri->segment($uriSegment) : 0;
         
@@ -79,18 +79,19 @@ class Faq extends CI_Controller {
     public function create() {
         csrfValidate();
         // POST
-        $data['id_faq']   = '';
+        $data['faq_id']   = '';
         $data['faq_question'] = $this->input->post('faq_question');
+        $data['faq_answer'] = $this->input->post('faq_answer');
         $data['createtime'] = date('Y-m-d H:i:s');
         $this->m_faq->create($data);
 
         // LOG
-        $message    = $this->session->userdata('user_name')." menambah data faq ".$data['faq_question'];
+        $message    = $this->session->userdata('user_name')." menambah data faq dengan ID = ".$data['faq_id'];
         createLog($message);
 
         // ALERT
         $alertStatus  = "success";
-        $alertMessage = "Berhasil menambah data faq ".$data['faq_question'];
+        $alertMessage = "Berhasil menambah data faq dengan ID : ".$data['faq_id'];
         getAlert($alertStatus, $alertMessage);
 
         redirect('faq');
@@ -100,17 +101,18 @@ class Faq extends CI_Controller {
     public function update() {
         csrfValidate();
         // POST
-        $data['id_faq']      = $this->input->post('id_faq');
+        $data['faq_id']      = $this->input->post('faq_id');
         $data['faq_question']    = $this->input->post('faq_question');
+        $data['faq_answer'] = $this->input->post('faq_answer');
         $this->m_faq->update($data);
 
         // LOG
-        $message    = $this->session->userdata('user_name')." mengubah data faq dengan ID = ".$data['id_faq']." - ".$data['faq_question'];
+        $message    = $this->session->userdata('user_name')." mengubah data faq dengan ID = ".$data['faq_id'];
         createLog($message);
 
         // ALERT
         $alertStatus  = "success";
-        $alertMessage = "Berhasil mengubah data faq : ".$data['faq_question'];
+        $alertMessage = "Berhasil mengubah data faq dengan ID : ".$data['faq_id'];
         getAlert($alertStatus, $alertMessage);
 
         redirect('faq');
@@ -120,15 +122,15 @@ class Faq extends CI_Controller {
     public function delete() {
         csrfValidate();
         // POST
-        $this->m_faq->delete($this->input->post('id_faq'));
+        $this->m_faq->delete($this->input->post('faq_id'));
         
         // LOG
-        $message    = $this->session->userdata('user_name')." menghapus data faq dengan ID = ".$this->input->post('id_faq')." - ".$this->input->post('faq_question');
+        $message    = $this->session->userdata('user_name')." menghapus data faq dengan ID = ".$this->input->post('faq_id');
         createLog($message);
 
         // ALERT
         $alertStatus  = "failed";
-        $alertMessage = "Menghapus data faq : ".$this->input->post('faq_question');
+        $alertMessage = "Menghapus data faq dengan ID : ".$this->input->post('faq_id');
         getAlert($alertStatus, $alertMessage);
 
         redirect('faq');

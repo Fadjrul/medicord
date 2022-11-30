@@ -12,9 +12,9 @@ class M_pasien extends CI_Model
     {
         $this->db->select('a.*, b.*, c.*, d.* ');
         $this->db->from('tbl_pasien a');
-        $this->db->join('tbl_status_pasien b','a.status_pasien_id=b.id_status_pasien','LEFT');
-        $this->db->join('tbl_kepesertaan_pasien c','a.kepesertaan_pasien_id=c.id_kepesertaan_pasien','LEFT');
-        $this->db->join('tbl_jns_key d','a.jns_key_id=d.id_jns_key','LEFT');
+        $this->db->join('tbl_status_pasien b','a.status_pasien_id=b.status_pasien_id','LEFT');
+        $this->db->join('tbl_kepesertaan_pasien c','a.kepesertaan_pasien_id=c.kepesertaan_pasien_id','LEFT');
+        $this->db->join('tbl_jns_key d','a.jns_key_id=d.jns_key_id','LEFT');
 
         if($status_pasien !=""){
             $this->db->where('a.status_pasien_id', $status_pasien);
@@ -51,7 +51,7 @@ class M_pasien extends CI_Model
             $this->db->limit($limit, $start);
         }
 
-        $this->db->order_by('a.id_pasien', 'DESC');
+        $this->db->order_by('a.pasien_id', 'DESC');
 
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -89,17 +89,17 @@ class M_pasien extends CI_Model
 
     public function update($data)
     {
-        $this->db->update('tbl_pasien', $data, array('id_pasien' => $data['id_pasien']));
+        $this->db->update('tbl_pasien', $data, array('pasien_id' => $data['pasien_id']));
     }
 
     public function delete($id)
     {
-        $this->db->delete('tbl_pasien', array('id_pasien' => $id));
+        $this->db->delete('tbl_pasien', array('pasien_id' => $id));
     }
 
     public function get($id)
     {
-        $this->db->where('id_pasien', $id);
+        $this->db->where('pasien_id', $id);
         $query = $this->db->get('tbl_pasien', 1);
         return $query->result();
     }
@@ -107,7 +107,7 @@ class M_pasien extends CI_Model
     public function widget()
     {
         $query  = $this->db->query(" SELECT
-            (SELECT count(id_pasien) FROM tbl_pasien) as total_pasien
+            (SELECT count(pasien_id) FROM tbl_pasien) as total_pasien
         ");
         return $query->result();
     }

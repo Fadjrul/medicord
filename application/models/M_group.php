@@ -7,7 +7,7 @@ class M_group extends CI_Model {
     }
     
     public function read($limit, $start, $key) {
-        $this->db->select('id_group, group_name');
+        $this->db->select('group_id, group_name');
         $this->db->from('tbl_group');
         
         if($key!=''){
@@ -33,15 +33,15 @@ class M_group extends CI_Model {
     }
     
     public function update($data) {
-        $this->db->update('tbl_group', $data, array('id_group' => $data['id_group']));
+        $this->db->update('tbl_group', $data, array('group_id' => $data['group_id']));
     }
     
     public function delete($id) {
-        $this->db->delete('tbl_group', array('id_group' => $id));
+        $this->db->delete('tbl_group', array('group_id' => $id));
     }
     
     public function get($id) {
-        $this->db->where('id_group', $id);
+        $this->db->where('group_id', $id);
         $query = $this->db->get('tbl_group', 1);
         return $query->result();
     }

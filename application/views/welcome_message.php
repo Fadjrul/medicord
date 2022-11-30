@@ -1,100 +1,98 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
+	<head>
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1.0" name="viewport">
+		<title><?php echo $setting[0]->setting_appname;?></title>
+		<meta content="" name="description">
+		<meta content="" name="keywords">
+		<!-- Favicons -->
+		<link href="<?php echo base_url();?>assets/core-images/<?php echo $setting[0]->setting_logo;?>" rel="icon">
+		<link href="<?php echo base_url();?>assets/core-images/<?php echo $setting[0]->setting_logo;?>" rel="apple-touch-icon">
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+		<!-- Vendor CSS Files -->
+		<link href="<?php echo base_url()?>assets/core-front/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="<?php echo base_url()?>assets/core-front/vendor/icofont/icofont.min.css" rel="stylesheet">
+		<link href="<?php echo base_url()?>assets/core-front/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+		<link href="<?php echo base_url()?>assets/core-front/vendor/animate.css/animate.min.css" rel="stylesheet">
+		<link href="<?php echo base_url()?>assets/core-front/vendor/remixicon/remixicon.css" rel="stylesheet">
+		<link href="<?php echo base_url()?>assets/core-front/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+		<link href="<?php echo base_url()?>assets/core-front/vendor/venobox/venobox.css" rel="stylesheet">
+		<link href="<?php echo base_url()?>assets/core-front/vendor/aos/aos.css" rel="stylesheet">
+		<!-- Template Main CSS File -->
+		<link href="<?php echo base_url()?>assets/core-front/css/style.css" rel="stylesheet">
+	</head>
+	<body style="background-size: cover; background-image: url(<?php echo base_url();?>assets/core-images/bg-tes.png)">
+	
+		<main id="main" style="margin-top:100px">
+			<center>
+				<img src="<?php echo base_url();?>assets/core-images/<?php echo $setting[0]->setting_logo;?>" height="100"><br>
+				<h1 class="title"><?php echo $setting[0]->setting_owner_name;?></h1>
+			</center>
+			<section id="icon-boxes" class="icon-boxes" style="margin-top:5%">
+				<div class="container">
+					<center>
+					<div class="row">
+						<div class="col-lg-1  aos-init aos-animate" data-aos="fade-up"></div>
+						<div class="col-lg-2  aos-init aos-animate" data-aos="fade-up">
+							<a href="<?php echo site_url('page/layanan')?>">
+								<img class="animate__animated animate__fadeInDown" src="<?php echo base_url();?>assets/core-front/img/icon/syarat-rounded.png" height="170">
+								<h4 class="title animate__animated animate__fadeInDown" >Syarat</h4>
+							</a>
+						</div>
+						<div class="col-lg-2  aos-init aos-animate" data-aos="fade-up">
+							<a href="<?php echo site_url('page/tracking')?>">
+								<img class="animate__animated animate__fadeInDown" src="<?php echo base_url();?>assets/core-front/img/icon/tracking-rounded.png" height="170">
+								<h4 class="title animate__animated animate__fadeInDown" >Tracking</h4>
+							</a>
+						</div>
+						<div class="col-lg-2  aos-init aos-animate" data-aos="fade-up">
+							<a href="<?php echo site_url('page/regulasi')?>">
+								<img class="animate__animated animate__fadeInDown" src="<?php echo base_url();?>assets/core-front/img/icon/regulasi-rounded.png" height="170">
+								<h4 class="title animate__animated animate__fadeInDown" >Regulasi</h4>
+							</a>
+						</div>
+						<div class="col-lg-2  aos-init aos-animate" data-aos="fade-up">
+							<a href="<?php echo site_url('page/link_terkait')?>">
+								<img class="animate__animated animate__fadeInDown" src="<?php echo base_url();?>assets/core-front/img/icon/link-rounded.png" height="170">
+								<h4 class="title animate__animated animate__fadeInDown" >Link Terkait</h4>
+							</a>
+						</div>
+						<div class="col-lg-2  aos-init aos-animate" data-aos="fade-up">
+							<a href="<?php echo site_url('home')?>">
+								<img class="animate__animated animate__fadeInDown" src="<?php echo base_url();?>assets/core-front/img/icon/website-rounded.png" height="170">
+								<h4 class="title animate__animated animate__fadeInDown" >Website</h4>
+							</a>
+						</div>
+						<div class="col-lg-1  aos-init aos-animate" data-aos="fade-up"></div>
+					</div>
+					</center>
+				</div>
+			</section>
+		</main>
 
-	<style type="text/css">
 
-	::selection { background-color: #E13300; color: white; }
-	::-moz-selection { background-color: #E13300; color: white; }
 
-	body {
-		background-color: #fff;
-		margin: 40px;
-		font: 13px/20px normal Helvetica, Arial, sans-serif;
-		color: #4F5155;
-	}
-
-	a {
-		color: #003399;
-		background-color: transparent;
-		font-weight: normal;
-		text-decoration: none;
-	}
-
-	a:hover {
-		color: #97310e;
-	}
-
-	h1 {
-		color: #444;
-		background-color: transparent;
-		border-bottom: 1px solid #D0D0D0;
-		font-size: 19px;
-		font-weight: normal;
-		margin: 0 0 14px 0;
-		padding: 14px 15px 10px 15px;
-	}
-
-	code {
-		font-family: Consolas, Monaco, Courier New, Courier, monospace;
-		font-size: 12px;
-		background-color: #f9f9f9;
-		border: 1px solid #D0D0D0;
-		color: #002166;
-		display: block;
-		margin: 14px 0 14px 0;
-		padding: 12px 10px 12px 10px;
-	}
-
-	#body {
-		margin: 0 15px 0 15px;
-		min-height: 96px;
-	}
-
-	p {
-		margin: 0 0 10px;
-		padding:0;
-	}
-
-	p.footer {
-		text-align: right;
-		font-size: 11px;
-		border-top: 1px solid #D0D0D0;
-		line-height: 32px;
-		padding: 0 10px 0 10px;
-		margin: 20px 0 0 0;
-	}
-
-	#container {
-		margin: 10px;
-		border: 1px solid #D0D0D0;
-		box-shadow: 0 0 8px #D0D0D0;
-	}
-	</style>
-</head>
-<body>
-
-<div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
-
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
-
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
-
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="userguide3/">User Guide</a>.</p>
-	</div>
-
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
-</div>
-
-</body>
+		<div id="preloader"></div>
+		<!-- Vendor JS Files -->
+		<script src="<?php echo base_url()?>assets/core-front/vendor/jquery/jquery.min.js"></script>
+		<script src="<?php echo base_url()?>assets/core-front/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script src="<?php echo base_url()?>assets/core-front/vendor/jquery.easing/jquery.easing.min.js"></script>
+		<script src="<?php echo base_url()?>assets/core-front/vendor/php-email-form/validate.js"></script>
+		<script src="<?php echo base_url()?>assets/core-front/vendor/owl.carousel/owl.carousel.min.js"></script>
+		<script src="<?php echo base_url()?>assets/core-front/vendor/venobox/venobox.min.js"></script>
+		<script src="<?php echo base_url()?>assets/core-front/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+		<script src="<?php echo base_url()?>assets/core-front/vendor/aos/aos.js"></script>
+		<!-- Template Main JS File -->
+		<script src="<?php echo base_url()?>assets/core-front/js/main.js"></script>
+		<script language="JavaScript" type="text/javascript">
+				$(document).ready(function(){
+					$('.carousel').carousel({
+						interval: 5000
+					})
+				});    
+		</script>
+	</body>
 </html>
+

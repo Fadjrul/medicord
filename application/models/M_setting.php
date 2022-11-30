@@ -10,7 +10,7 @@ class M_setting extends CI_Model {
     public function fetch_setting() {
         $this->db->select("*");
         $this->db->from('tbl_setting');
-        $this->db->where('id_setting', 1);
+        $this->db->where('setting_id', 1);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $row) {
@@ -23,7 +23,7 @@ class M_setting extends CI_Model {
     
 
     public function update_setting($data) {
-        $this->db->update('tbl_setting', $data, array('id_setting' => $data['id_setting']));
+        $this->db->update('tbl_setting', $data, array('setting_id' => $data['setting_id']));
     }
     
 

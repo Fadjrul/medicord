@@ -9,22 +9,29 @@
                 <!-- Breadcrumb -->
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?php echo site_url('dashboard/index'); ?>"> Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Data Poliklinik</li>
                     </ol>
                 </nav>
             </div>
         </div>
+        <?php 
+            if ($this->session->flashdata('alert')) {
+                echo $this->session->flashdata('alert');
+                unset($_SESSION['alert']);
+            } 
+        ?>
     </div>
 
     <!-- Page content -->
     <div class="page-content">
-        <!-- Data Pegawai start -->
+        <!-- Data Poliklinik start -->
         <section class="section">
             <div class="card">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-2 text-center">
-                            <img src="<?php echo base_url(); ?>assets/images/kota_kendari.png" alt="Logo Kota Kendari" height="120">
+                            <img src="<?php echo base_url(); ?>assets/core-images/kota_kendari.png" alt="Logo Kota Kendari" height="120">
                         </div>
                         <div class="col-8 text-center">
                             <h4>DINAS KESEHATAN KOTA KENDARI</h4>
@@ -32,7 +39,7 @@
                             <p><small><?php echo $setting[0]->setting_address; ?> Telp <?php echo $setting[0]->setting_phone; ?> <br> Email : <?php echo $setting[0]->setting_email; ?></small></p>
                         </div>
                         <div class="col-2 text-center">
-                            <img src="<?php echo base_url(); ?>assets/images/puskesmas.png" alt="Logo Puskesmas" height="120">
+                            <img src="<?php echo base_url(); ?>assets/core-images/puskesmas.png" alt="Logo Puskesmas" height="120">
                         </div>
                         <hr>
                     </div>
@@ -100,11 +107,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- cetak -->
-                            <a href="<?= site_url('polklinik/index'); ?>" target="_blank" class="btn btn-sm btn-secondary">
-                                <i class="fas fa-print"></i> Cetak
-                            </a>
                         </div>
                     </div>
 
@@ -140,16 +142,16 @@
                                                             </button>
                                                             <ul class="dropdown-menu">
                                                                 <li>
-                                                                    <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#FormDetail<?php echo $key->id_poliklinik;?>">Detail</button>
+                                                                    <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#FormDetail<?php echo $key->poliklinik_id;?>">Detail</button>
                                                                 </li>
                                                                 <li>
-                                                                    <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#FormUbah<?php echo $key->id_poliklinik;?>">Ubah</button>
+                                                                    <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#FormUbah<?php echo $key->poliklinik_id;?>">Ubah</button>
                                                                 </li>
                                                                 <li>
                                                                     <?php echo form_open("poliklinik/delete") ?>
                                                                     <?php echo csrf(); ?>
                                                                     <button type="submit" class="dropdown-item">Hapus</button>
-                                                                    <input type="hidden" class="form-control" name="id_poliklinik" required="required" value="<?php echo $key->id_poliklinik; ?>">
+                                                                    <input type="hidden" class="form-control" name="poliklinik_id" required="required" value="<?php echo $key->poliklinik_id; ?>">
                                                                     <?php echo form_close(); ?>
                                                                 </li>
                                                             </ul>
@@ -158,7 +160,7 @@
                                                 </tr>
 
                                                 <!-- Modal Detail Poliklinik -->
-                                                <div class="modal fade text-start" id="FormDetail<?php echo $key->id_poliklinik;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+                                                <div class="modal fade text-start" id="FormDetail<?php echo $key->poliklinik_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
                                                         role="document">
                                                         <div class="modal-content">
@@ -199,7 +201,7 @@
                                                 </div>
 
                                                 <!-- Modal Ubah Poliklinik -->
-                                                <div class="modal fade text-start" id="FormUbah<?php echo $key->id_poliklinik;?>" tabindex="-1" role="dialog"
+                                                <div class="modal fade text-start" id="FormUbah<?php echo $key->poliklinik_id;?>" tabindex="-1" role="dialog"
                                                     aria-labelledby="myModalLabel33" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
                                                         role="document">
@@ -278,5 +280,5 @@
             </div>
     
         </section>
-        <!-- Data Pegawai end -->
+        <!-- Data Poliklinik end -->
     </div>

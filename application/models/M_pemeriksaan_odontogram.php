@@ -7,7 +7,7 @@ class M_pemeriksaan_odontogram extends CI_Model {
     }
     
     public function read($limit, $start, $key) {
-        $this->db->select('id_pemeriksaan_odontogram, pasien_id');
+        $this->db->select('*');
         $this->db->from('tbl_rm_pemeriksaan_odontogram');
         
         if($key!=''){
@@ -33,22 +33,22 @@ class M_pemeriksaan_odontogram extends CI_Model {
     }
     
     public function update($data) {
-        $this->db->update('tbl_rm_pemeriksaan_odontogram', $data, array('id_pemeriksaan_odontogram' => $data['id_pemeriksaan_odontogram']));
+        $this->db->update('tbl_rm_pemeriksaan_odontogram', $data, array('pemeriksaan_odontogram_id' => $data['pemeriksaan_odontogram_id']));
     }
     
     public function delete($id) {
-        $this->db->delete('tbl_rm_pemeriksaan_odontogram', array('id_pemeriksaan_odontogram' => $id));
+        $this->db->delete('tbl_rm_pemeriksaan_odontogram', array('pemeriksaan_odontogram_id' => $id));
     }
     
     public function get($id) {
-        $this->db->where('id_pemeriksaan_odontogram', $id);
+        $this->db->where('pemeriksaan_odontogram_id', $id);
         $query = $this->db->get('tbl_rm_pemeriksaan_odontogram', 1);
         return $query->result();
     }
 
     public function widget() {
         $query  = $this->db->query(" SELECT
-            (SELECT count(id_pemeriksaan_odontogram) FROM tbl_rm_pemeriksaan_odontogram) as total_rm_pemeriksaan_odontogram
+            (SELECT count(pemeriksaan_odontogram_id) FROM tbl_rm_pemeriksaan_odontogram) as total_rm_pemeriksaan_odontogram
         ");
         return $query->result();
     }

@@ -11,7 +11,7 @@ class Pasien extends CI_Controller
         $this->load->model('m_jns_key');
         $this->load->library('encryption');
 
-        if (!$this->session->userdata('id_user') or $this->session->userdata('user_group') != 1) {
+        if (!$this->session->userdata('user_id') or $this->session->userdata('user_group') != 1) {
             // ALERT
             $alertStatus  = 'failed';
             $alertMessage = 'Anda tidak memiliki Hak Akses atau Session anda sudah habis';
@@ -174,7 +174,7 @@ class Pasien extends CI_Controller
         } else {;
 
             $alertStatus  = "failed";
-            $alertMessage = "Key Salah 🙂";
+            $alertMessage = "Maaf, Kunci yang anda masukan salah 🙂";
             getAlert($alertStatus, $alertMessage);
 
             redirect('pasien/index');
@@ -224,7 +224,7 @@ class Pasien extends CI_Controller
 
             // ALERT
             $alertStatus  = "failed";
-            $alertMessage = "Key Salah 🙂";
+            $alertMessage = "Maaf, Kunci yang anda masukan salah 🙂";
             getAlert($alertStatus, $alertMessage);
 
             redirect('pasien/index');
@@ -320,7 +320,7 @@ class Pasien extends CI_Controller
 
 
         // POST
-        $data['id_pasien']   = $this->input->post('id_pasien');
+        $data['pasien_id']   = $this->input->post('pasien_id');
         $data['no_rekam_medis']   = $nomor_urut_send;
         $data['nama_pasien'] = $this->input->post('nama_pasien');
         $data['nama_kepala_keluarga'] = $this->input->post('nama_kepala_keluarga');
@@ -393,7 +393,7 @@ class Pasien extends CI_Controller
         }
 
         // POST
-        $data['id_pasien']   = $this->input->post('id_pasien');
+        $data['pasien_id']   = $this->input->post('pasien_id');
         $data['nama_pasien'] = $this->input->post('nama_pasien');
         $data['nama_kepala_keluarga'] = $this->input->post('nama_kepala_keluarga');
         $data['jenis_kelamin'] = $this->input->post('jenis_kelamin');
@@ -419,7 +419,7 @@ class Pasien extends CI_Controller
     {
         csrfValidate();
         // POST
-        $this->m_pasien->delete($this->input->post('id_pasien'));
+        $this->m_pasien->delete($this->input->post('pasien_id'));
 
         // ALERT
         $alertStatus  = "failed";

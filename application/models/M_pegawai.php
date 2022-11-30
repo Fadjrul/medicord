@@ -37,22 +37,22 @@ class M_pegawai extends CI_Model {
     }
     
     public function update($data) {
-        $this->db->update('tbl_pegawai', $data, array('id_pegawai' => $data['id_pegawai']));
+        $this->db->update('tbl_pegawai', $data, array('pegawai_id' => $data['pegawai_id']));
     }
     
     public function delete($id) {
-        $this->db->delete('tbl_pegawai', array('id_pegawai' => $id));
+        $this->db->delete('tbl_pegawai', array('pegawai_id' => $id));
     }
     
     public function get($id) {
-        $this->db->where('id_pegawai', $id);
+        $this->db->where('pegawai_id', $id);
         $query = $this->db->get('tbl_pegawai', 1);
         return $query->result();
     }
 
     public function widget() {
         $query  = $this->db->query(" SELECT
-            (SELECT count(id_pegawai) FROM tbl_pegawai) as total_pegawai
+            (SELECT count(pegawai_id) FROM tbl_pegawai) as total_pegawai
         ");
         return $query->result();
     }

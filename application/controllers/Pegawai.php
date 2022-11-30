@@ -4,7 +4,7 @@ class Pegawai extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('m_pegawai');
-        if (!$this->session->userdata('id_user') OR $this->session->userdata('user_group')!=1) {
+        if (!$this->session->userdata('user_id') OR $this->session->userdata('user_group')!=1) {
 			// ALERT
 			$alertStatus  = 'failed';
 			$alertMessage = 'Anda tidak memiliki Hak Akses atau Session anda sudah habis';
@@ -78,7 +78,7 @@ class Pegawai extends CI_Controller {
     public function create() {
         csrfValidate();
         // POST
-        $data['id_pegawai']   = '';
+        $data['pegawai_id']   = '';
         $data['nama_pegawai'] = $this->input->post('nama_pegawai');
         $data['jenis_kelamin'] = $this->input->post('jenis_kelamin');
         $data['keterangan'] = $this->input->post('keterangan');
@@ -99,7 +99,7 @@ class Pegawai extends CI_Controller {
     public function update() {
         csrfValidate();
         // POST
-        $data['id_pegawai']   = $this->input->post('id_pegawai');
+        $data['pegawai_id']   = $this->input->post('pegawai_id');
         $data['nama_pegawai'] = $this->input->post('nama_pegawai');
         $data['jenis_kelamin'] = $this->input->post('jenis_kelamin');
         $data['keterangan'] = $this->input->post('keterangan');
@@ -119,7 +119,7 @@ class Pegawai extends CI_Controller {
     public function delete() {
         csrfValidate();
         // POST
-        $this->m_pegawai->delete($this->input->post('id_pegawai'));
+        $this->m_pegawai->delete($this->input->post('pegawai_id'));
 
         // ALERT
         $alertStatus  = "failed";

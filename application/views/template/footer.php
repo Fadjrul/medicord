@@ -3,7 +3,7 @@
                 <footer>
                     <div class="footer clearfix mb-0 text-muted">
                         <div class="float-start">
-                            <p>&copy; <?php echo $setting[0]->setting_short_appname;?> Version 1.0 <?= date('Y'); ?></p>
+                            <p>Copyright &copy; <?php echo $setting[0]->setting_short_appname;?> <?= date('Y'); ?>, version 1.0</p>
                         </div>
                         <div class="float-end">
                             <p>Created by <a href="https://instagram.com/fadjrul00"><?php echo $setting[0]->setting_owner_name;?></a></p>
@@ -23,6 +23,11 @@
     <script src="<?php echo base_url();?>assets/extensions/dayjs/dayjs.min.js"></script>
     <script src="<?php echo base_url();?>assets/extensions/toastify-js/src/toastify.js"></script>
     <script src="<?php echo base_url();?>assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
+    <script src="<?php echo base_url();?>assets/extensions/choices.js/public/assets/scripts/choices.js"></script>
+    <script src="<?php echo base_url();?>assets/js/pages/form-element-select.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/core-thirdparty/ckfinder/ckfinder.js"></script>
+    <script src="<?php echo base_url();?>assets/extensions/tinymce/tinymce.min.js"></script>
+    <script src="<?php echo base_url();?>assets/js/pages/tinymce.js"></script>
 
     <script type="text/javascript">
         // Data table

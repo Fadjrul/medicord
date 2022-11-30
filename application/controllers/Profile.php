@@ -7,7 +7,7 @@ class Profile extends CI_Controller {
         $this->load->model('m_group');
         $this->load->library('upload');
 
-        if (!($this->session->userdata('id_user'))) {
+        if (!($this->session->userdata('user_id'))) {
             // ALERT
 			$alertStatus  = 'failed';
 			$alertMessage = 'Anda tidak memiliki Hak Akses atau Session anda sudah habis';
@@ -21,7 +21,7 @@ class Profile extends CI_Controller {
         //DATA
         $data['setting'] = getSetting();
         $data['title']   = 'My Profile';
-        $data['profile'] = $this->m_user->get($this->session->userdata('id_user'));
+        $data['profile'] = $this->m_user->get($this->session->userdata('user_id'));
         $data['group']   = $this->m_group->read('','','');
 		
         // TEMPLATE
@@ -72,13 +72,13 @@ class Profile extends CI_Controller {
 
         // IMAGE VALIDATOR
         if($_FILES['userfile']['name'] != ''){
-            $path = '.images/upload/user/';
+            $path = './upload/user/';
 
             // REMOVE OLD PHOTO
             unlink($path.$this->input->post('old_photo'));
 
             // IMAGE CONFIG
-            $filename                = "profile-".$this->input->post('id_user').'-'.date('YmdHis');
+            $filename                = "profile-".$this->input->post('user_id').'-'.date('YmdHis');
 			$config['upload_path']   = $path;
 			$config['allowed_types'] = "jpg|jpeg|png";
 			$config['overwrite']     = "true";
@@ -102,7 +102,7 @@ class Profile extends CI_Controller {
 
 
         // POST
-        $data['id_user']       = $this->input->post('id_user');
+        $data['user_id']       = $this->input->post('user_id');
         $data['user_name']     = $this->input->post('user_name');
         $data['user_email']    = $this->input->post('user_email');
         $data['user_fullname'] = $this->input->post('user_fullname');

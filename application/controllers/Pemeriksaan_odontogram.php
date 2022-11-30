@@ -4,7 +4,7 @@ class Pemeriksaan_odontogram extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('m_pemeriksaan_odontogram');
-        if (!$this->session->userdata('id_user') OR $this->session->userdata('user_group')!=1) {
+        if (!$this->session->userdata('user_id') OR $this->session->userdata('user_group')!=1) {
 			// ALERT
 			$alertStatus  = 'failed';
 			$alertMessage = 'Anda tidak memiliki Hak Akses atau Session anda sudah habis';
@@ -79,7 +79,7 @@ class Pemeriksaan_odontogram extends CI_Controller {
     public function create() {
         csrfValidate();
         // POST
-        $data['id_pemeriksaan_odontogram']   = '';
+        $data['pemeriksaan_odontogram_id']   = '';
         $data['pasien_id'] = $this->input->post('pasien_id');
         $data['createtime']  = date('Y-m-d H:i:s');
         $this->m_pemeriksaan_odontogram->create($data);
@@ -100,12 +100,12 @@ class Pemeriksaan_odontogram extends CI_Controller {
     public function update() {
         csrfValidate();
         // POST
-        $data['id_pemeriksaan_odontogram']   = $this->input->post('id_pemeriksaan_odontogram');
+        $data['pemeriksaan_odontogram_id']   = $this->input->post('pemeriksaan_odontogram_id');
         $data['pasien_id'] = $this->input->post('pasien_id');
         $this->m_pemeriksaan_odontogram->update($data);
 
         // LOG
-        $message    = $this->session->userdata('user_name')." mengubah data rekam medis pemeriksaan odontogram dengan ID = ".$data['id_pemeriksaan_odontogram']." - ".$data['pasien_id'];
+        $message    = $this->session->userdata('user_name')." mengubah data rekam medis pemeriksaan odontogram dengan ID = ".$data['pemeriksaan_odontogram_id']." - ".$data['pasien_id'];
         createLog($message);
 
         // ALERT
@@ -120,10 +120,10 @@ class Pemeriksaan_odontogram extends CI_Controller {
     public function delete() {
         csrfValidate();
         // POST
-        $this->m_pemeriksaan_odontogram->delete($this->input->post('id_pemeriksaan_odontogram'));
+        $this->m_pemeriksaan_odontogram->delete($this->input->post('pemeriksaan_odontogram_id'));
         
         // LOG
-        $message    = $this->session->userdata('user_name')." menghapus data rekam medis pemeriksaan odontogram dengan ID = ".$this->input->post('id_pemeriksaan_odontogram')." - ".$this->input->post('pasien_id');
+        $message    = $this->session->userdata('user_name')." menghapus data rekam medis pemeriksaan odontogram dengan ID = ".$this->input->post('pemeriksaan_odontogram_id')." - ".$this->input->post('pasien_id');
         createLog($message);
 
         // ALERT

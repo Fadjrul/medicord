@@ -34,22 +34,22 @@ class M_poliklinik extends CI_Model {
     }
     
     public function update($data) {
-        $this->db->update('tbl_poliklinik', $data, array('id_poliklinik' => $data['id_poliklinik']));
+        $this->db->update('tbl_poliklinik', $data, array('poliklinik_id' => $data['poliklinik_id']));
     }
     
     public function delete($id) {
-        $this->db->delete('tbl_poliklinik', array('id_poliklinik' => $id));
+        $this->db->delete('tbl_poliklinik', array('poliklinik_id' => $id));
     }
     
     public function get($id) {
-        $this->db->where('id_poliklinik', $id);
+        $this->db->where('poliklinik_id', $id);
         $query = $this->db->get('tbl_poliklinik', 1);
         return $query->result();
     }
 
     public function widget() {
         $query  = $this->db->query(" SELECT
-            (SELECT count(id_poliklinik) FROM tbl_poliklinik) as total_poliklinik
+            (SELECT count(poliklinik_id) FROM tbl_poliklinik) as total_poliklinik
         ");
         return $query->result();
     }

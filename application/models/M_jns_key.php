@@ -33,7 +33,7 @@ class M_jns_key extends CI_Model
 
     public function get($id)
     {
-        $this->db->where('id_jns_key', $id);
+        $this->db->where('jns_key_id', $id);
         $query = $this->db->get('tbl_jns_key', 1);
         return $query->result();
     }

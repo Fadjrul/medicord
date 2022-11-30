@@ -30,7 +30,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-2 text-center">
-                            <img src="<?php echo base_url(); ?>assets/images/kota_kendari.png" alt="Logo Kota Kendari" height="120">
+                            <img src="<?php echo base_url(); ?>assets/core-images/kota_kendari.png" alt="Logo Kota Kendari" height="120">
                         </div>
                         <div class="col-8 text-center">
                             <h4>DINAS KESEHATAN KOTA KENDARI</h4>
@@ -38,7 +38,7 @@
                             <p><small><?php echo $setting[0]->setting_address; ?> Telp <?php echo $setting[0]->setting_phone; ?> <br> Email : <?php echo $setting[0]->setting_email; ?></small></p>
                         </div>
                         <div class="col-2 text-center">
-                            <img src="<?php echo base_url(); ?>assets/images/puskesmas.png" alt="Logo Puskesmas" height="120">
+                            <img src="<?php echo base_url(); ?>assets/core-images/puskesmas.png" alt="Logo Puskesmas" height="120">
                         </div>
                         <hr>
                     </div>
@@ -49,10 +49,6 @@
                         <div class="col-md-12 col-12 text-end">
                             <a href="<?= site_url('pasien/create_page'); ?>" class="btn btn-sm btn-primary">
                                 <i class="fas fa-plus"></i> Tambah
-                            </a>
-                            <!-- cetak -->
-                            <a href="<?= site_url('pasien/index'); ?>" target="_blank" class="btn btn-sm btn-secondary">
-                                <i class="fas fa-print"></i> Cetak
                             </a>
                         </div>
                     </div>
@@ -94,13 +90,13 @@
                                                             </button>
                                                             <ul class="dropdown-menu">
                                                                 <li>
-                                                                    <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#FormDetail<?php echo $key->id_pasien; ?>">Detail</button>
+                                                                    <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#FormDetail<?php echo $key->pasien_id; ?>">Detail</button>
                                                                 </li>
                                                                 <li>
-                                                                    <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#FormUbah<?php echo $key->id_pasien; ?>">Ubah</button>
+                                                                    <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#FormUbah<?php echo $key->pasien_id; ?>">Ubah</button>
                                                                 </li>
                                                                 <li>
-                                                                    <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#FormHapus<?php echo $key->id_pasien; ?>">Hapus</button>
+                                                                    <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#FormHapus<?php echo $key->pasien_id; ?>">Hapus</button>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -108,14 +104,14 @@
                                                 </tr>
 
                                                 <!-- Modal key Detail Pasien -->
-                                                <div class="modal fade text-start" id="FormDetail<?php echo $key->id_pasien; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+                                                <div class="modal fade text-start" id="FormDetail<?php echo $key->pasien_id; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                                         <div class="modal-content">
-                                                            <?php echo form_open("pasien/detail_page/" . $key->id_pasien); ?>
+                                                            <?php echo form_open("pasien/detail_page/" . $key->pasien_id); ?>
                                                             <div class="modal-header text-center">
                                                                 <h4 class="modal-title" id="myModalLabel33">Masukkan Kunci <?php if ($key->jns_key_id == 1) {
-                                                                                                                                echo "(Key AES-128)";
-                                                                                                                            } else echo "(Key SPECK-128)"; ?></h4>
+                                                                    echo "(Key AES-128)";
+                                                                    } else echo "(Key SPECK-128)"; ?></h4>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
@@ -142,10 +138,10 @@
                                                 </div>
 
                                                 <!-- Modal key Ubah Pasien -->
-                                                <div class="modal fade text-start" id="FormUbah<?php echo $key->id_pasien; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+                                                <div class="modal fade text-start" id="FormUbah<?php echo $key->pasien_id; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                                         <div class="modal-content">
-                                                            <?php echo form_open("pasien/update_page/" . $key->id_pasien); ?>
+                                                            <?php echo form_open("pasien/update_page/" . $key->pasien_id); ?>
                                                             <div class="modal-header text-center">
                                                                 <h4 class="modal-title" id="myModalLabel33">Masukkan Kunci</h4>
                                                             </div>
@@ -174,10 +170,10 @@
                                                 </div>
 
                                                 <!-- Modal key Hapus Pasien -->
-                                                <div class="modal fade text-start" id="FormHapus<?php echo $key->id_pasien; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+                                                <div class="modal fade text-start" id="FormHapus<?php echo $key->pasien_id; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                                         <div class="modal-content">
-                                                            <?php echo form_open("pasien/delete" . $key->id_pasien); ?>
+                                                            <?php echo form_open("pasien/delete" . $key->pasien_id); ?>
                                                             <div class="modal-header text-center">
                                                                 <h4 class="modal-title" id="myModalLabel33">Masukkan Kunci</h4>
                                                             </div>
@@ -209,8 +205,8 @@
                                             }
                                         } else {
                                             echo '
-                                                <tr>
-                                                    <td colspan="3">Tidak ada data ditemukan</td>
+                                                <tr class="text-center">
+                                                    <td colspan="7">Tidak ada data ditemukan</td>
                                                 </tr>
                                                 ';
                                         }

@@ -9,11 +9,18 @@
                 <!-- Breadcrumb -->
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?php echo site_url('dashboard/index'); ?>"> Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Data User Group</li>
                     </ol>
                 </nav>
             </div>
         </div>
+        <?php 
+            if ($this->session->flashdata('alert')) {
+                echo $this->session->flashdata('alert');
+                unset($_SESSION['alert']);
+            } 
+        ?>
     </div>
 
     <!-- Page content -->
@@ -21,16 +28,8 @@
         <!-- Data User Group start -->
         <section class="section">
             <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-12 text-Start">
-                            <h3>Data User Group</h3>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="card-content">
-                    <div class="row me-4">
+                    <div class="row me-4 mt-4">
                         <div class="col-md-12 col-12 text-end">
                             <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#FormTambah"><i class="fas fa-plus"></i>
@@ -114,13 +113,13 @@
                                                             <ul class="dropdown-menu">
                                                                 <li>
                                                                     <button type="submit" class="dropdown-item" data-bs-toggle="modal"
-                                                                            data-bs-target="#FormDetail<?php echo $key->id_group;?>">
+                                                                            data-bs-target="#FormDetail<?php echo $key->group_id;?>">
                                                                             Detail
                                                                     </button>
                                                                 </li>
                                                                 <li>
                                                                     <button type="submit" class="dropdown-item" data-bs-toggle="modal"
-                                                                            data-bs-target="#FormUbah<?php echo $key->id_group;?>">
+                                                                            data-bs-target="#FormUbah<?php echo $key->group_id;?>">
                                                                             Ubah
                                                                     </button>
                                                                 </li>
@@ -128,7 +127,7 @@
                                                                     <?php echo form_open("group/delete") ?>
                                                                     <?php echo csrf(); ?>
                                                                     <button type="submit" class="dropdown-item">Hapus</button>
-                                                                    <input type="hidden" class="form-control" name="id_group" required="required" value="<?php echo $key->id_group; ?>">
+                                                                    <input type="hidden" class="form-control" name="group_id" required="required" value="<?php echo $key->group_id; ?>">
                                                                     <?php echo form_close(); ?>
                                                                 </li>
                                                             </ul>
@@ -137,7 +136,7 @@
                                                 </tr>
 
                                                 <!-- Modal Detail User Group -->
-                                                <div class="modal fade text-start" id="FormDetail<?php echo $key->id_group?>" tabindex="-1" role="dialog"
+                                                <div class="modal fade text-start" id="FormDetail<?php echo $key->group_id?>" tabindex="-1" role="dialog"
                                                     aria-labelledby="myModalLabel33" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
                                                         role="document">
@@ -170,7 +169,7 @@
                                                 </div>
 
                                                 <!-- Modal Ubah User -->
-                                                <div class="modal fade text-start" id="FormUbah<?php echo $key->id_group?>" tabindex="-1" role="dialog"
+                                                <div class="modal fade text-start" id="FormUbah<?php echo $key->group_id?>" tabindex="-1" role="dialog"
                                                     aria-labelledby="myModalLabel33" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
                                                         role="document">
@@ -219,7 +218,7 @@
                                             }
                                         } else {
                                             echo '
-                                                <tr>
+                                                <tr class="text-center">
                                                     <td colspan="3">Tidak ada data ditemukan</td>
                                                 </tr>
                                                 ';

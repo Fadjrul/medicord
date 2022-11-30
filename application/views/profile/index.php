@@ -15,11 +15,17 @@
                 </nav>
             </div>
         </div>
+        <?php 
+            if ($this->session->flashdata('alert')) {
+                echo $this->session->flashdata('alert');
+                unset($_SESSION['alert']);
+            } 
+        ?>
     </div>
 
     <!-- Page content -->
     <div class="page-content">
-        <!-- Data Pasien start -->
+        <!-- Data Profile start -->
         <section class="section">
             <div class="row">
                 <div class="col-md-4">
@@ -32,9 +38,9 @@
                                 <div class="col-12">
                                     <?php 
                                         if($this->session->userdata('user_photo')==""){
-                                            echo '<img class="user-img avatar avatar-sm" style="width: 150px;" src="'.base_url().'assets/images/upload/user/noimage.png" alt="User profile picture">';
+                                            echo '<img class="user-img avatar avatar-sm" style="width: 150px;" src="'.base_url().'upload/user/noimage.png" alt="User profile picture">';
                                         }else{
-                                            echo '<img class="user-img avatar avatar-sm" style="width: 150px;" src="'.base_url().'assets/images/upload/user/'.$profile[0]->user_photo.'" alt="User profile picture">';
+                                            echo '<img class="user-img avatar avatar-sm" style="width: 150px;" src="'.base_url().'upload/user/'.$profile[0]->user_photo.'" alt="User profile picture">';
                                         }
                                     ?>
                                 </div>
@@ -108,8 +114,8 @@
                                         </div>
                                         <div class="col-md-8 col-12 form-group">
                                             <?php echo csrf();?>
-                                            <input type="hidden" id="id_user" class="form-control"
-                                                    name="id_user" placeholder="User Name" value="<?php echo $profile[0]->id_user;?>" required>
+                                            <input type="hidden" id="user_id" class="form-control"
+                                                    name="user_id" placeholder="User Name" value="<?php echo $profile[0]->user_id;?>" required>
                                             <input type="text" id="user_fullname" class="form-control"
                                                     name="user_fullname" placeholder="User Name" value="<?php echo $profile[0]->user_fullname;?>" required="required">
                                             <input type="hidden" class="form-control" name="old_photo" value="<?php echo $profile[0]->user_photo;?>" required>
@@ -154,7 +160,7 @@
                                     </div>
                                     <div class="col-12 d-flex justify-content-end my-2">
                                         <button type="submit" class="btn btn-primary me-1 mb-1" title="Update Data">Update</button>
-                                        <button type="reset" class="btn btn-white me-1 mb-1" title="reset">Reset</button>    
+                                        <button type="reset" class="btn btn-light-secondary me-1 mb-1" title="reset">Reset</button>    
                                     </div>
                                 </form>
                                 <?php echo form_close(); ?>

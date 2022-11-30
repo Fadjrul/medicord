@@ -8,7 +8,7 @@ class Setting extends CI_Controller
 		$this->load->library('upload');
 
 		// check session data
-		if (!$this->session->userdata('id_user') or $this->session->userdata('user_group') != 1) {
+		if (!$this->session->userdata('user_id') or $this->session->userdata('user_group') != 1) {
 			// ALERT
 			$alertStatus  = 'failed';
 			$alertMessage = 'Anda tidak memiliki Hak Akses atau Session anda sudah habis';
@@ -32,12 +32,12 @@ class Setting extends CI_Controller
 	public function update()
 	{
 		csrfValidate();
-		$formatName                	= $this->input->post('id_setting') . date('YmdHis');
+		$formatName                	= $this->input->post('setting_id') . date('YmdHis');
 
 		// Upload For Logo
 		if ($_FILES['logo']['name'] != '') {
 
-			$config_logo['upload_path']     = './assets/images/upload/logo';
+			$config_logo['upload_path']     = './assets/core-images';
 			$config_logo['allowed_types']   = "gif|jpg|jpeg|png|svg";
 			$config_logo['overwrite']       = "true";
 			$config_logo['file_name']       = 'medicord' . $formatName;
@@ -45,13 +45,30 @@ class Setting extends CI_Controller
 			if (!$this->upload->do_upload('logo')) {
 				echo $this->upload->display_errors();
 			} else {
-				unlink("./assets/images/upload/logo" . $this->input->post('setting_logo'));
+				unlink("./assets/core-images" . $this->input->post('setting_logo'));
 				$logo                    = $this->upload->data();
 				$data['setting_logo']    = $logo['file_name'];
 			}
 		}
 
-		$data['id_setting']              = $this->input->post('id_setting');
+		// Upload For Background
+		if ($_FILES['background']['name'] != '') {
+			$config_background['upload_path']     = './assets/core-images/';
+			$config_background['allowed_types']   = "gif|jpg|jpeg|png";
+			$config_background['overwrite']       = "true";
+			$config_background['file_name']       = 'background-login' . $formatName;
+			$this->upload->initialize($config_background);
+
+			if (!$this->upload->do_upload('background')) {
+				echo $this->upload->display_errors();
+			} else {
+				unlink("./assets/core-images/".$this->input->post('setting_background'));
+				$background              	= $this->upload->data();
+				$data['setting_background']	= $background['file_name'];
+			}
+		}
+
+		$data['setting_id']              = $this->input->post('setting_id');
 		$data['setting_appname']         = $this->input->post('setting_appname');
 		$data['setting_short_appname']   = $this->input->post('setting_short_appname');
 		$data['setting_owner_name']      = $this->input->post('setting_owner_name');
@@ -71,6 +88,10 @@ class Setting extends CI_Controller
 		$alertStatus  = 'success';
 		$alertMessage = 'Berhasil Update Data Informasi Aplikasi';
 		getAlert($alertStatus, $alertMessage);
+
+		// LOG
+		$logMessage = "Update Informasi Sistem";
+		createLog($logMessage);
 
 		redirect('setting/index');
 	}

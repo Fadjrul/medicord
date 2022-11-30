@@ -4,7 +4,7 @@ class Group extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('m_group');
-        if (!$this->session->userdata('id_user') OR $this->session->userdata('user_group')!=1) {
+        if (!$this->session->userdata('user_id') OR $this->session->userdata('user_group')!=1) {
 			// ALERT
 			$alertStatus  = 'failed';
 			$alertMessage = 'Anda tidak memiliki Hak Akses atau Session anda sudah habis';
@@ -79,7 +79,7 @@ class Group extends CI_Controller {
     public function create() {
         csrfValidate();
         // POST
-        $data['id_group']   = '';
+        $data['group_id']   = '';
         $data['group_name'] = $this->input->post('group_name');
         $data['createtime'] = date('Y-m-d H:i:s');
         $this->m_group->create($data);
@@ -100,12 +100,12 @@ class Group extends CI_Controller {
     public function update() {
         csrfValidate();
         // POST
-        $data['id_group']      = $this->input->post('id_group');
+        $data['group_id']      = $this->input->post('group_id');
         $data['group_name']    = $this->input->post('group_name');
         $this->m_group->update($data);
 
         // LOG
-        $message    = $this->session->userdata('user_name')." mengubah data group dengan ID = ".$data['id_group']." - ".$data['group_name'];
+        $message    = $this->session->userdata('user_name')." mengubah data group dengan ID = ".$data['group_id']." - ".$data['group_name'];
         createLog($message);
 
         // ALERT
@@ -120,10 +120,10 @@ class Group extends CI_Controller {
     public function delete() {
         csrfValidate();
         // POST
-        $this->m_group->delete($this->input->post('id_group'));
+        $this->m_group->delete($this->input->post('group_id'));
         
         // LOG
-        $message    = $this->session->userdata('user_name')." menghapus data group dengan ID = ".$this->input->post('id_group')." - ".$this->input->post('group_name');
+        $message    = $this->session->userdata('user_name')." menghapus data group dengan ID = ".$this->input->post('group_id')." - ".$this->input->post('group_name');
         createLog($message);
 
         // ALERT

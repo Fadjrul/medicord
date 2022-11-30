@@ -3,7 +3,7 @@
     defined('BASEPATH') OR exit('No direct script access allowed');
 
     /**
-     * Render Template
+     * App Template
      * --------------------------------------------------------------------------
      * Every function which using template must be set by this variable :
      * 
@@ -23,6 +23,31 @@
                     get_instance()->load->view("template/menu");
                     get_instance()->load->view($view);
                     get_instance()->load->view("template/footer");
+            }
+        }
+    }
+
+    /**
+     * Landing Page Template
+     * --------------------------------------------------------------------------
+     * Every function which using template must be set by this variable :
+     * 
+     * @param   array   every data will show in view page
+     * @param   string  view path page
+     * @param   string  view category (single or all)
+     * 
+     */
+    if(!function_exists('TemplateLandingPage')){
+        function TemplateLandingPage($data, $view, $viewCategory){
+            switch($viewCategory){
+                case "single": 
+                    get_instance()->load->view($view,$data);
+                    break;
+                default:
+                    get_instance()->load->view("landing_page/template/header", $data);
+                    get_instance()->load->view("landing_page/template/menu");
+                    get_instance()->load->view($view);
+                    get_instance()->load->view("landing_page/template/footer");
             }
         }
     }
@@ -72,6 +97,28 @@
                 get_instance()->session->set_flashdata('alert', $alert);
                 break;
             }
+        }
+    }
+
+    /**
+     * Create Log
+     * --------------------------------------------------------------------------
+     * Use for give notification about every action on the web
+     * 
+     * @param   string  message about user action
+     * 
+     */
+    if(!function_exists('createLog')){
+        function createLog($message){
+            get_instance()->load->model('m_log');
+
+            $log['log_id']        = "";
+            $log['log_time']      = date('Y-m-d H:i:s');
+            $log['log_message']   = $message;
+            $log['log_ipaddress'] = get_instance()->input->ip_address();
+            $log['user_id']       = get_instance()->session->userdata('user_id');
+            $log['createtime']    = date('Y-m-d H:i:s');
+            get_instance()->m_log->create($log);
         }
     }
 
@@ -266,6 +313,59 @@
             $config['cur_tag_open']    = '<li class="page-item active"> <a class="page-link" href="#">';
             $config['cur_tag_close']   = '</a></li>';
             $config['num_tag_open']    = '<li class="page-item page-link">';
+            $config['num_tag_close']   = '</li>';
+            
+            if (get_instance()->uri->segment($uriSegment) == "") {
+                $numbers = 0;
+            } else {
+                $numbers = get_instance()->uri->segment($uriSegment);
+            }
+            
+            get_instance()->pagination->initialize($config);
+            $links = get_instance()->pagination->create_links();
+
+            return array('numbers' => $numbers, 'links' => $links);
+        }
+    }
+
+    /**
+     * Generate Pagination Blog
+     * --------------------------------------------------------------------------
+     * Using for generate pagination on view
+     * 
+     * @param   string  string for base url after click pagination
+     * @param   int     integer for total rows data on page
+     * @param   int     integer for limit rows data on page
+     * @param   int     integer for segement will appear
+     * @return  int,string  
+     * 
+     */
+    if (!function_exists('generatePaginationBlog')) {
+        function generatePaginationBlog($baseUrl, $totalRows, $perPage, $uriSegment){
+           
+            $config                    = array();
+            $config["base_url"]        = $baseUrl;
+            $config["total_rows"]      = $totalRows;
+            $config["per_page"]        = $perPage;
+            $config["uri_segment"]     = $uriSegment;
+            $choice                    = $config["total_rows"] / $config["per_page"];
+            $config['full_tag_open']   = '<ul class="justify-content-center">';
+            $config['full_tag_close']  = '</ul>';
+            $config['first_link']      = 'First';
+            $config['last_link']       = 'Last';
+            $config['prev_link']       = '&laquo';
+            $config['next_link']       = '&raquo';
+            $config['first_tag_open']  = '<li>';
+            $config['first_tag_close'] = '</li>';
+            $config['prev_tag_open']   = '<li class="prev">';
+            $config['prev_tag_close']  = '</li>';
+            $config['next_tag_open']   = '<li>';
+            $config['next_tag_close']  = '</li>';
+            $config['last_tag_open']   = '<li>';
+            $config['last_tag_close']  = '</li>';
+            $config['cur_tag_open']    = '<li class="active"><a href="#">';
+            $config['cur_tag_close']   = '</a></li>';
+            $config['num_tag_open']    = '<li>';
             $config['num_tag_close']   = '</li>';
             
             if (get_instance()->uri->segment($uriSegment) == "") {

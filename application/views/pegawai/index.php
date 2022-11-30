@@ -9,11 +9,18 @@
                 <!-- Breadcrumb -->
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?php echo site_url('dashboard/index'); ?>"> Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Data Pegawai</li>
                     </ol>
                 </nav>
             </div>
         </div>
+        <?php 
+            if ($this->session->flashdata('alert')) {
+                echo $this->session->flashdata('alert');
+                unset($_SESSION['alert']);
+            } 
+        ?>
     </div>
 
     <!-- Page content -->
@@ -24,7 +31,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-2 text-center">
-                            <img src="<?php echo base_url(); ?>assets/images/kota_kendari.png" alt="Logo Kota Kendari" height="120">
+                            <img src="<?php echo base_url(); ?>assets/core-images/kota_kendari.png" alt="Logo Kota Kendari" height="120">
                         </div>
                         <div class="col-8 text-center">
                             <h4>DINAS KESEHATAN KOTA KENDARI</h4>
@@ -32,7 +39,7 @@
                             <p><small><?php echo $setting[0]->setting_address; ?> Telp <?php echo $setting[0]->setting_phone; ?> <br> Email : <?php echo $setting[0]->setting_email; ?></small></p>
                         </div>
                         <div class="col-2 text-center">
-                            <img src="<?php echo base_url(); ?>assets/images/puskesmas.png" alt="Logo Puskesmas" height="120">
+                            <img src="<?php echo base_url(); ?>assets/core-images/puskesmas.png" alt="Logo Puskesmas" height="120">
                         </div>
                         <hr>
                     </div>
@@ -41,7 +48,7 @@
                 <div class="card-content">
                     <div class="row me-4">
                         <div class="col-md-12 col-12 text-end">
-                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-sm btn-primary btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#FormTambah"><i class="fas fa-plus"></i>
                                     Tambah
                             </button>
@@ -139,11 +146,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- cetak -->
-                            <a href="<?= site_url('pegawai/index'); ?>" target="_blank" class="btn btn-sm btn-secondary">
-                                <i class="fas fa-print"></i> Cetak
-                            </a>
                         </div>
                     </div>
 
@@ -183,16 +185,16 @@
                                                             </button>
                                                             <ul class="dropdown-menu">
                                                                 <li>
-                                                                    <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#FormDetail<?php echo $key->id_pegawai;?>">Detail</button>
+                                                                    <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#FormDetail<?php echo $key->pegawai_id;?>">Detail</button>
                                                                 </li>
                                                                 <li>
-                                                                    <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#FormUbah<?php echo $key->id_pegawai;?>">Ubah</button>
+                                                                    <button type="submit" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#FormUbah<?php echo $key->pegawai_id;?>">Ubah</button>
                                                                 </li>
                                                                 <li>
                                                                     <?php echo form_open("pegawai/delete") ?>
                                                                     <?php echo csrf(); ?>
                                                                     <button type="submit" class="dropdown-item">Hapus</button>
-                                                                    <input type="hidden" class="form-control" name="id_pegawai" required="required" value="<?php echo $key->id_pegawai; ?>">
+                                                                    <input type="hidden" class="form-control" name="pegawai_id" required="required" value="<?php echo $key->pegawai_id; ?>">
                                                                     <?php echo form_close(); ?>
                                                                 </li>
                                                             </ul>
@@ -201,7 +203,7 @@
                                                 </tr>
 
                                                 <!-- Modal Detail Pegawai -->
-                                                <div class="modal fade text-start" id="FormDetail<?php echo $key->id_pegawai;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+                                                <div class="modal fade text-start" id="FormDetail<?php echo $key->pegawai_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
                                                         role="document">
                                                         <div class="modal-content">
@@ -266,7 +268,7 @@
                                                 </div>
 
                                                 <!-- Modal Ubah Pegawai -->
-                                                <div class="modal fade text-start" id="FormUbah<?php echo $key->id_pegawai;?>" tabindex="-1" role="dialog"
+                                                <div class="modal fade text-start" id="FormUbah<?php echo $key->pegawai_id;?>" tabindex="-1" role="dialog"
                                                     aria-labelledby="myModalLabel33" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
                                                         role="document">

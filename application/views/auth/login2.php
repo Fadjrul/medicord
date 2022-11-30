@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $setting[0]->setting_short_appname; ?></title>
     <!-- Favicons -->
-    <link href="<?php echo base_url(); ?>assets/images/<?php echo $setting[0]->setting_logo; ?>" rel="icon">
+    <link href="<?php echo base_url(); ?>assets/core-images/<?php echo $setting[0]->setting_logo; ?>" rel="icon">
     <!-- css -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/loginStyle/style.css">
 
@@ -16,15 +16,16 @@
 <body>
     <div class="box">
         <div class="form">
-            <h3> <img src="<?php echo base_url() ?>assets/images/<?php echo $setting[0]->setting_logo; ?>" alt="Logo aplikasi"> <?php echo $setting[0]->setting_short_appname; ?></h3>
+            <h3> <img src="<?php echo base_url() ?>assets/core-images/<?php echo $setting[0]->setting_logo; ?>" alt="Logo aplikasi"> <?php echo $setting[0]->setting_short_appname; ?></h3>
             <p>Sign in untuk memulai aplikasi</p>
             <div class="row">
                 <div class="col-12 text-sm text-white">
                     <!-- ALERT -->
-                    <?php
-                    if ($this->session->flashdata('alert')) {
-                        echo $this->session->flashdata('alert');
-                    }
+                    <?php 
+                        if ($this->session->flashdata('alert')) {
+                            echo $this->session->flashdata('alert');
+                            unset($_SESSION['alert']);
+                        } 
                     ?>
                 </div>
             </div>

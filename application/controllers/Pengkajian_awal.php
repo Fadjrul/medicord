@@ -6,7 +6,7 @@ class Pengkajian_awal extends CI_Controller {
         $this->load->model('m_pengkajian_awal');
         $this->load->model('m_pasien');
         $this->load->model('m_pegawai');
-        if (!$this->session->userdata('id_user') OR $this->session->userdata('user_group')!=1) {
+        if (!$this->session->userdata('user_id') OR $this->session->userdata('user_group')!=1) {
 			// ALERT
 			$alertStatus  = 'failed';
 			$alertMessage = 'Anda tidak memiliki Hak Akses atau Session anda sudah habis';
@@ -83,7 +83,7 @@ class Pengkajian_awal extends CI_Controller {
         //DATA
         $data['setting']       = getSetting();
         $data['title']         = 'Tambah Data';
-        $data['pasien']  = $this->m_pasien->read('', '', '', '', '');
+        $data['pasien']  = $this->m_pasien->read('', '', '', '', '', '');
         $data['pegawai']  = $this->m_pegawai->read('', '', '', '', '');
         $data['pengkajian_awal']       = $this->m_pengkajian_awal->read('', '', '', '', '');
 
@@ -100,7 +100,7 @@ class Pengkajian_awal extends CI_Controller {
         $data['setting']       = getSetting();
         $data['title']         = 'Detail Data';
         $data['pengkajian_awal']  = $this->m_pengkajian_awal->get($this->uri->segment(3));
-        $data['pasien']  = $this->m_pasien->read('', '', '', '', '');
+        $data['pasien']  = $this->m_pasien->read('', '', '', '', '', '');
         $data['pegawai']  = $this->m_pegawai->read('', '', '', '', '');
         $data['pengkajian_awals']        = $this->m_pengkajian_awal->read('', '', '', '', '');
 
@@ -117,7 +117,7 @@ class Pengkajian_awal extends CI_Controller {
         $data['setting']       = getSetting();
         $data['title']         = 'Ubah Data';
         $data['pengkajian_awal']  = $this->m_pengkajian_awal->get($this->uri->segment(3));
-        $data['pasien']  = $this->m_pasien->read('', '', '', '', '');
+        $data['pasien']  = $this->m_pasien->read('', '', '', '', '', '');
         $data['pegawai']  = $this->m_pegawai->read('', '', '', '', '');
         $data['pengkajian_awals']        = $this->m_pengkajian_awal->read('', '', '', '', '');
 
@@ -131,7 +131,7 @@ class Pengkajian_awal extends CI_Controller {
     public function create() {
         csrfValidate();
         // POST
-        $data['id_pengkajian_awal']   = '';
+        $data['pengkajian_awal_id']   = '';
         $data['pasien_id'] = $this->input->post('pasien_id');
         $data['pegawai_id'] = $this->input->post('pegawai_id');
         $data['riwayat_penyakit'] = $this->input->post('riwayat_penyakit');
@@ -212,7 +212,7 @@ class Pengkajian_awal extends CI_Controller {
     public function update() {
         csrfValidate();
         // POST
-        $data['id_pengkajian_awal']   = '';
+        $data['pengkajian_awal_id']   = '';
         $data['pasien_id'] = $this->input->post('pasien_id');
         $data['pegawai_id'] = $this->input->post('pegawai_id');
         $data['riwayat_penyakit'] = $this->input->post('riwayat_penyakit');
@@ -292,7 +292,7 @@ class Pengkajian_awal extends CI_Controller {
     public function delete() {
         csrfValidate();
         // POST
-        $this->m_pengkajian_awal->delete($this->input->post('id_pengkajian_awal'));
+        $this->m_pengkajian_awal->delete($this->input->post('pengkajian_awal_id'));
 
         // ALERT
         $alertStatus  = "failed";

@@ -16,17 +16,18 @@
     <div class="col-lg-5 col-12">
         <div id="auth-left">
             <div class="auth-logo">
-                <img src="<?php echo base_url() ?>assets/images/<?php echo $setting[0]->setting_logo; ?>" alt="Logo aplikasi"> <h1><?php echo $setting[0]->setting_short_appname; ?></h1>
+                <img src="<?php echo base_url() ?>assets/core-images/<?php echo $setting[0]->setting_logo; ?>" alt="Logo aplikasi"> <h4 class="auth-title"><?php echo $setting[0]->setting_short_appname; ?></h4>
             </div>
             
             <p class="auth-subtitle mb-3">Sign in untuk memulai aplikasi.</p>
             <div class="row">
                 <div class="col-12 text-sm text-dark">
                     <!-- ALERT -->
-                    <?php
-                    if ($this->session->flashdata('alert')) {
-                        echo $this->session->flashdata('alert');
-                    }
+                    <?php 
+                        if ($this->session->flashdata('alert')) {
+                            echo $this->session->flashdata('alert');
+                            unset($_SESSION['alert']);
+                        } 
                     ?>
                 </div>
             </div>
@@ -56,14 +57,13 @@
         <!-- footer form login -->
         <div>
                 <p class="text-center">
-                    <?php echo $setting[0]->setting_owner_name; ?><br>
-                    <b>Copyright @<?php echo date('Y'); ?></b>
+                Created by <a href="https://instagram.com/fadjrul00"><?php echo $setting[0]->setting_owner_name;?></a> <br><b>Copyright &copy; <?php echo date('Y'); ?> <?php echo $setting[0]->setting_short_appname; ?>, version 1.0</b>
                 </p>
             </div>
     </div>
     <div class="col-lg-7 d-none d-lg-block">
         <div id="auth-right">
-            <img src="<?php echo base_url(); ?>assets/images/mekar-1.jpeg" alt="background" style="height : 100%;">
+            <img src="<?php echo base_url();?>assets/core-images/<?php echo $setting[0]->setting_background;?>" alt="background" style="height : 100vh;">
         </div>
     </div>
 </div>

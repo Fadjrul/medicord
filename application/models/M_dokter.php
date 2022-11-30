@@ -14,9 +14,7 @@ class M_dokter extends CI_Model {
             $this->db->like("nama_dokter", $key);
             $this->db->like("spesialis", $key);
             $this->db->like("jenis_kelamin", $key);
-            $this->db->like("alamat", $key);
-            $this->db->like("no_telp", $key);
-            $this->db->like("ttd_dokter", $key);
+            $this->db->like("ttdDokter", $key);
         }
 
         if($limit !="" OR $start !=""){
@@ -38,22 +36,22 @@ class M_dokter extends CI_Model {
     }
     
     public function update($data) {
-        $this->db->update('tbl_dokter', $data, array('id_dokter' => $data['id_dokter']));
+        $this->db->update('tbl_dokter', $data, array('dokter_id' => $data['dokter_id']));
     }
     
     public function delete($id) {
-        $this->db->delete('tbl_dokter', array('id_dokter' => $id));
+        $this->db->delete('tbl_dokter', array('dokter_id' => $id));
     }
     
     public function get($id) {
-        $this->db->where('id_dokter', $id);
+        $this->db->where('dokter_id', $id);
         $query = $this->db->get('tbl_dokter', 1);
         return $query->result();
     }
 
     public function widget() {
         $query  = $this->db->query(" SELECT
-            (SELECT count(id_dokter) FROM tbl_dokter) as total_dokter
+            (SELECT count(dokter_id) FROM tbl_dokter) as total_dokter
         ");
         return $query->result();
     }

@@ -34,15 +34,15 @@ class M_faq extends CI_Model {
     }
     
     public function update($data) {
-        $this->db->update('tbl_faq', $data, array('id_faq' => $data['id_faq']));
+        $this->db->update('tbl_faq', $data, array('faq_id' => $data['faq_id']));
     }
     
     public function delete($id) {
-        $this->db->delete('tbl_faq', array('id_faq' => $id));
+        $this->db->delete('tbl_faq', array('faq_id' => $id));
     }
     
     public function get($id) {
-        $this->db->where('id_faq', $id);
+        $this->db->where('faq_id', $id);
         $query = $this->db->get('tbl_faq', 1);
         return $query->result();
     }

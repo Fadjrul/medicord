@@ -4,7 +4,7 @@ class Poliklinik extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('m_poliklinik');
-        if (!$this->session->userdata('id_user') OR $this->session->userdata('user_group')!=1) {
+        if (!$this->session->userdata('user_id') OR $this->session->userdata('user_group')!=1) {
 			// ALERT
 			$alertStatus  = 'failed';
 			$alertMessage = 'Anda tidak memiliki Hak Akses atau Session anda sudah habis';
@@ -79,7 +79,7 @@ class Poliklinik extends CI_Controller {
     public function create() {
         csrfValidate();
         // POST
-        $data['id_poliklinik']   = '';
+        $data['poliklinik_id']   = '';
         $data['nama_poliklinik'] = $this->input->post('nama_poliklinik');
         $data['gedung'] = $this->input->post('gedung');
         $data['createtime']  = date('Y-m-d H:i:s');
@@ -97,7 +97,7 @@ class Poliklinik extends CI_Controller {
     public function update() {
         csrfValidate();
         // POST
-        $data['id_poliklinik']   = $this->input->post('id_poliklinik');
+        $data['poliklinik_id']   = $this->input->post('poliklinik_id');
         $data['nama_poliklinik'] = $this->input->post('nama_poliklinik');
         $data['gedung'] = $this->input->post('gedung');
         $this->m_poliklinik->update($data);
@@ -114,7 +114,7 @@ class Poliklinik extends CI_Controller {
     public function delete() {
         csrfValidate();
         // POST
-        $this->m_poliklinik->delete($this->input->post('id_poliklinik'));
+        $this->m_poliklinik->delete($this->input->post('poliklinik_id'));
         
         // ALERT
         $alertStatus  = "failed";

@@ -12,7 +12,7 @@ class Auth extends CI_Controller
 	public function index()
 	{
 		// check session data
-		if ($this->session->userdata('id_user')) {
+		if ($this->session->userdata('user_id')) {
 			// ALERT
 			$alertStatus  = 'success';
 			$alertMessage = 'Selamat Datang, ' . $this->session->userdata('user_fullname');
@@ -23,7 +23,7 @@ class Auth extends CI_Controller
 			$data['setting'] = getSetting();
 
 			// TEMPLATE
-			$view         = "auth/login2";
+			$view         = "auth/login";
 			$viewCategory = "single";
 			TemplateApp($data, $view, $viewCategory);
 		}
@@ -39,7 +39,7 @@ class Auth extends CI_Controller
 				if (password_verify($this->input->post('password'), $result[0]->user_password)) {
 					// SESSION DATA
 					$data = array(
-						'id_user'         => $result[0]->id_user,
+						'user_id'         => $result[0]->user_id,
 						'user_name'       => $result[0]->user_name,
 						'user_fullname'   => $result[0]->user_fullname,
 						'user_photo'      => $result[0]->user_photo,
@@ -50,6 +50,10 @@ class Auth extends CI_Controller
 						'IsAuthorized'    => true
 					);
 					$this->session->set_userdata($data);
+
+					// LOG
+					$logMessage = $data['user_fullname'] . " melakukan login ke sistem";
+					createLog($logMessage);
 
 					redirect('dashboard/index');
 				} else {

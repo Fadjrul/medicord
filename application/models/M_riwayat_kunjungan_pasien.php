@@ -7,7 +7,7 @@ class M_riwayat_kunjungan_pasien extends CI_Model {
     }
     
     public function read($limit, $start, $key) {
-        $this->db->select('id_riwayat_kunjungan_pasien, pasien_id');
+        $this->db->select('*');
         $this->db->from('tbl_rm_riwayat_kunjungan_pasien');
         
         if($key!=''){
@@ -33,22 +33,22 @@ class M_riwayat_kunjungan_pasien extends CI_Model {
     }
     
     public function update($data) {
-        $this->db->update('tbl_rm_riwayat_kunjungan_pasien', $data, array('id_riwayat_kunjungan_pasien' => $data['id_riwayat_kunjungan_pasien']));
+        $this->db->update('tbl_rm_riwayat_kunjungan_pasien', $data, array('riwayat_kunjungan_pasien_id' => $data['riwayat_kunjungan_pasien_id']));
     }
     
     public function delete($id) {
-        $this->db->delete('tbl_rm_riwayat_kunjungan_pasien', array('id_riwayat_kunjungan_pasien' => $id));
+        $this->db->delete('tbl_rm_riwayat_kunjungan_pasien', array('riwayat_kunjungan_pasien_id' => $id));
     }
     
     public function get($id) {
-        $this->db->where('id_riwayat_kunjungan_pasien', $id);
+        $this->db->where('riwayat_kunjungan_pasien_id', $id);
         $query = $this->db->get('tbl_rm_riwayat_kunjungan_pasien', 1);
         return $query->result();
     }
 
     public function widget() {
         $query  = $this->db->query(" SELECT
-            (SELECT count(id_riwayat_kunjungan_pasien) FROM tbl_rm_riwayat_kunjungan_pasien) as total_rm_riwayat_kunjungan_pasien
+            (SELECT count(riwayat_kunjungan_pasien_id) FROM tbl_rm_riwayat_kunjungan_pasien) as total_rm_riwayat_kunjungan_pasien
         ");
         return $query->result();
     }

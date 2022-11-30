@@ -9,8 +9,8 @@ class M_pengkajian_awal extends CI_Model {
     public function read($limit, $start, $key, $pasien, $pegawai) {
         $this->db->select('a.*, b.*, c.nama_pegawai');
         $this->db->from('tbl_rm_pengkajian_awal a');
-        $this->db->join('tbl_pasien b','a.pasien_id=b.id_pasien','LEFT');
-        $this->db->join('tbl_pegawai c','a.pegawai_id=c.id_pegawai','LEFT');
+        $this->db->join('tbl_pasien b','a.pasien_id=b.pasien_id','LEFT');
+        $this->db->join('tbl_pegawai c','a.pegawai_id=c.pegawai_id','LEFT');
         
         if($pasien !=""){
             $this->db->where('a.pasien_id', $pasien);
@@ -97,7 +97,7 @@ class M_pengkajian_awal extends CI_Model {
             $this->db->limit($limit, $start);
         }
 
-        $this->db->order_by('a.id_pengkajian_awal', 'DESC');
+        $this->db->order_by('a.pengkajian_awal_id', 'DESC');
 
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -114,22 +114,22 @@ class M_pengkajian_awal extends CI_Model {
     }
     
     public function update($data) {
-        $this->db->update('tbl_rm_pengkajian_awal', $data, array('id_pengkajian_awal' => $data['id_pengkajian_awal']));
+        $this->db->update('tbl_rm_pengkajian_awal', $data, array('pengkajian_awal_id' => $data['pengkajian_awal_id']));
     }
     
     public function delete($id) {
-        $this->db->delete('tbl_rm_pengkajian_awal', array('id_pengkajian_awal' => $id));
+        $this->db->delete('tbl_rm_pengkajian_awal', array('pengkajian_awal_id' => $id));
     }
     
     public function get($id) {
-        $this->db->where('id_pengkajian_awal', $id);
+        $this->db->where('pengkajian_awal_id', $id);
         $query = $this->db->get('tbl_rm_pengkajian_awal', 1);
         return $query->result();
     }
 
     public function widget() {
         $query  = $this->db->query(" SELECT
-            (SELECT count(id_pengkajian_awal) FROM tbl_rm_pengkajian_awal) as total_rm_pengkajian_awal
+            (SELECT count(pengkajian_awal_id) FROM tbl_rm_pengkajian_awal) as total_rm_pengkajian_awal
         ");
         return $query->result();
     }

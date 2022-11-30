@@ -6,7 +6,7 @@ class User extends CI_Controller {
         $this->load->model('m_user');
         $this->load->model('m_group');
 
-        if (!$this->session->userdata('id_user') OR $this->session->userdata('user_group')!=1) {
+        if (!$this->session->userdata('user_id') OR $this->session->userdata('user_group')!=1) {
 			// ALERT
 			$alertStatus  = 'failed';
 			$alertMessage = 'Anda tidak memiliki Hak Akses atau Session anda sudah habis';
@@ -83,7 +83,7 @@ class User extends CI_Controller {
     public function create() {
         csrfValidate();
         // POST
-        $data['id_user']        = '';
+        $data['user_id']        = '';
         $data['user_name']      = $this->input->post('user_name');
         $data['user_password']  = password_hash($this->input->post('user_password'), PASSWORD_BCRYPT);
         $data['user_fullname']  = $this->input->post('user_fullname');
@@ -106,7 +106,7 @@ class User extends CI_Controller {
     public function update() {
         csrfValidate();
         // POST
-        $data['id_user']       = $this->input->post('id_user');
+        $data['user_id']       = $this->input->post('user_id');
         $data['user_name']     = $this->input->post('user_name');
         
         if($this->input->post('user_password')!=""){
@@ -130,7 +130,7 @@ class User extends CI_Controller {
     public function delete() {
         csrfValidate();
         // POST
-        $this->m_user->delete($this->input->post('id_user'));
+        $this->m_user->delete($this->input->post('user_id'));
 
         // ALERT
         $alertStatus  = "failed";

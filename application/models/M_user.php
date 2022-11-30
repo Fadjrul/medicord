@@ -9,7 +9,7 @@ class M_user extends CI_Model {
     public function read($limit, $start, $key) {
         $this->db->select('a.*, b.group_name');
         $this->db->from('tbl_user a');
-        $this->db->join('tbl_group b', 'a.group_id = b.id_group','LEFT');
+        $this->db->join('tbl_group b', 'a.group_id = b.group_id','LEFT');
         
         if($key!=''){
             $this->db->like("a.user_name", $key);
@@ -37,18 +37,18 @@ class M_user extends CI_Model {
     }
     
     public function update($data) {
-        $this->db->update('tbl_user', $data, array('id_user' => $data['id_user']));
+        $this->db->update('tbl_user', $data, array('user_id' => $data['user_id']));
     }
     
     public function delete($id) {
-        $this->db->delete('tbl_user', array('id_user' => $id));
+        $this->db->delete('tbl_user', array('user_id' => $id));
     }
     
     public function get($id) {
         $this->db->select('a.*, b.group_name');
         $this->db->from('tbl_user a');
-        $this->db->join('tbl_group b', 'a.group_id = b.id_group','LEFT');
-        $this->db->where('a.id_user', $id);
+        $this->db->join('tbl_group b', 'a.group_id = b.group_id','LEFT');
+        $this->db->where('a.user_id', $id);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $row) {

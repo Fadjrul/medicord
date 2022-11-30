@@ -9,22 +9,29 @@
                 <!-- Breadcrumb -->
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?php echo site_url('dashboard/index'); ?>"> Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Rekam Medis Pengkajian Awal</li>
                     </ol>
                 </nav>
             </div>
         </div>
+        <?php 
+            if ($this->session->flashdata('alert')) {
+                echo $this->session->flashdata('alert');
+                unset($_SESSION['alert']);
+            } 
+        ?>
     </div>
 
     <!-- Page content -->
     <div class="page-content">
-        <!-- Data Obat start -->
+        <!-- Data Pengkajian awal start -->
         <section class="section">
             <div class="card">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-2 text-center">
-                            <img src="<?php echo base_url(); ?>assets/images/kota_kendari.png" alt="Logo Kota Kendari" height="120">
+                            <img src="<?php echo base_url(); ?>assets/core-images/kota_kendari.png" alt="Logo Kota Kendari" height="120">
                         </div>
                         <div class="col-8 text-center">
                             <h4>DINAS KESEHATAN KOTA KENDARI</h4>
@@ -32,7 +39,7 @@
                             <p><small><?php echo $setting[0]->setting_address; ?> Telp <?php echo $setting[0]->setting_phone; ?> <br> Email : <?php echo $setting[0]->setting_email; ?></small></p>
                         </div>
                         <div class="col-2 text-center">
-                            <img src="<?php echo base_url(); ?>assets/images/puskesmas.png" alt="Logo Puskesmas" height="120">
+                            <img src="<?php echo base_url(); ?>assets/core-images/puskesmas.png" alt="Logo Puskesmas" height="120">
                         </div>
                         <hr>
                     </div>
@@ -43,10 +50,6 @@
                         <div class="col-md-12 col-12 text-end">
                             <a href="<?= site_url('pengkajian_awal/create_page'); ?>" class="btn btn-sm btn-primary">
                                 <i class="fas fa-plus"></i> Tambah
-                            </a>
-                            <!-- cetak -->
-                            <a href="<?= site_url('pengkajian_awal/index'); ?>" target="_blank" class="btn btn-sm btn-secondary">
-                                <i class="fas fa-print"></i> Cetak
                             </a>
                         </div>
                     </div>
@@ -88,24 +91,24 @@
                                                             </button>
                                                             <ul class="dropdown-menu">
                                                                 <li>
-                                                                    <?php echo form_open("pengkajian_awal/detail_page/" . $key->id_pengkajian_awal); ?>
+                                                                    <?php echo form_open("pengkajian_awal/detail_page/" . $key->pengkajian_awal_id); ?>
                                                                     <?php echo csrf(); ?>
                                                                     <button type="submit" class="dropdown-item">Detail</button>
-                                                                    <input type="hidden" class="form-control" name="id_pengkajian_awal" required="required">
+                                                                    <input type="hidden" class="form-control" name="pengkajian_awal_id" required="required">
                                                                     <?php echo form_close(); ?>
                                                                 </li>
                                                                 <li>
-                                                                    <?php echo form_open("pengkajian_awal/update_page/" . $key->id_pengkajian_awal); ?>
+                                                                    <?php echo form_open("pengkajian_awal/update_page/" . $key->pengkajian_awal_id); ?>
                                                                     <?php echo csrf(); ?>
                                                                     <button type="submit" class="dropdown-item">Ubah</button>
-                                                                    <input type="hidden" class="form-control" name="id_pengkajian_awal" required="required">
+                                                                    <input type="hidden" class="form-control" name="pengkajian_awal_id" required="required">
                                                                     <?php echo form_close(); ?>
                                                                 </li>
                                                                 <li>
                                                                     <?php echo form_open("pengkajian_awal/delete") ?>
                                                                     <?php echo csrf(); ?>
                                                                     <button type="submit" class="dropdown-item">Hapus</button>
-                                                                    <input type="hidden" class="form-control" name="id_pengkajian_awal" required="required" value="<?php echo $key->id_pengkajian_awal; ?>">
+                                                                    <input type="hidden" class="form-control" name="pengkajian_awal_id" required="required" value="<?php echo $key->pengkajian_awal_id; ?>">
                                                                     <?php echo form_close(); ?>
                                                                 </li>
                                                             </ul>
@@ -137,5 +140,5 @@
             </div>
     
         </section>
-        <!-- Data Obat end -->
+        <!-- Data Pengkajian awal end -->
     </div>

@@ -28,7 +28,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-2 text-center">
-                                    <img src="<?php echo base_url();?>assets/images/kota_kendari.png" alt="Logo Kota Kendari" height="120">
+                                    <img src="<?php echo base_url();?>assets/core-images/kota_kendari.png" alt="Logo Kota Kendari" height="120">
                                 </div>
                                 <div class="col-8 text-center">
                                     <h4>DINAS KESEHATAN KOTA KENDARI</h4>
@@ -36,13 +36,18 @@
                                     <p><small><?php echo $setting[0]->setting_address;?> Telp <?php echo $setting[0]->setting_phone;?> <br> Email : <?php echo $setting[0]->setting_email;?></small></p>
                                 </div>
                                 <div class="col-2 text-center">
-                                    <img src="<?php echo base_url();?>assets/images/puskesmas.png" alt="Logo Puskesmas" height="120">
+                                    <img src="<?php echo base_url();?>assets/core-images/puskesmas.png" alt="Logo Puskesmas" height="120">
                                 </div>
                                 <hr>
                             </div>
                         </div>
 
                         <div class="card-content">
+                            <div class="row me-4 mt-1">
+                                <div class="col-md-12 col-12 text-end">
+                                    <a href="<?php echo site_url('pengkajian_awal')?>" class="btn btn-warning btn-sm" title="Kembali ke halaman sebelumya">kembali</a>
+                                </div>
+                            </div>
                             <div class="card-title">
                                 <div class="row p-4">
                                     <div class="col-md-6 col-12 text-center">
@@ -185,6 +190,7 @@
                                                         </div>
                                                     </td>
                                                     <td>
+                                                        
                                                         <label for="suhu_tubuh">Suhu Tubuh</label>
                                                     </td>
                                                     <td>
@@ -1144,8 +1150,8 @@
                                         </div>
                                         <div class="row mt-4">
                                             <div class="col-12 d-flex justify-content-end mt-2">
-                                                <button type="submit" class="btn btn-primary me-1 mb-1" title="tambah">Simpan</button>
-                                                <button type="reset" class="btn btn-white me-1 mb-1" title="reset">Reset</button>    
+                                                <button type="submit" class="btn btn-primary btn-sm me-1 mb-1" title="tambah">Simpan</button>
+                                                <button type="reset" class="btn btn-light-secondary btn-sm me-1 mb-1" title="reset">Reset</button>    
                                             </div>
                                         </div>
                                     </form>

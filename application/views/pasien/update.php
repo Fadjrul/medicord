@@ -29,7 +29,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-2 text-center">
-                                    <img src="<?php echo base_url(); ?>assets/images/kota_kendari.png" alt="Logo Kota Kendari" height="120">
+                                    <img src="<?php echo base_url(); ?>assets/core-images/kota_kendari.png" alt="Logo Kota Kendari" height="120">
                                 </div>
                                 <div class="col-8 text-center">
                                     <h4>DINAS KESEHATAN KOTA KENDARI</h4>
@@ -37,13 +37,18 @@
                                     <p><small><?php echo $setting[0]->setting_address; ?> Telp <?php echo $setting[0]->setting_phone; ?> <br> Email : <?php echo $setting[0]->setting_email; ?></small></p>
                                 </div>
                                 <div class="col-2 text-center">
-                                    <img src="<?php echo base_url(); ?>assets/images/puskesmas.png" alt="Logo Puskesmas" height="120">
+                                    <img src="<?php echo base_url(); ?>assets/core-images/puskesmas.png" alt="Logo Puskesmas" height="120">
                                 </div>
                                 <hr>
                             </div>
                         </div>
 
                         <div class="card-content">
+                            <div class="row me-4 mt-1">
+                                <div class="col-md-12 col-12 text-end">
+                                    <a href="<?php echo site_url('pasien')?>" class="btn btn-warning btn-sm" title="Kembali ke halaman sebelumya">kembali</a>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <?php echo form_open_multipart("pasien/update") ?>
                                 <form class="form">
@@ -54,7 +59,7 @@
                                             </div>
                                             <div class="col-md-4 form-group">
                                                 <?php echo csrf(); ?>
-                                                <input type="hidden" id="id_pasien" class="form-control" name="id_pasien" required="required" value="<?php echo $pasien[0]->id_pasien; ?>">
+                                                <input type="hidden" id="pasien_id" class="form-control" name="pasien_id" required="required" value="<?php echo $pasien[0]->pasien_id; ?>">
                                                 <input type="text" id="nama_pasien" class="form-control" placeholder="Cnth. John" name="nama_pasien" required="required" value="<?php echo $pasien[0]->nama_pasien; ?>">
                                             </div>
                                             <div class="col-md-2 col-12">
@@ -144,10 +149,10 @@
                                                         <option>- Pilih Status Pasien - </option>
                                                         <?php
                                                         foreach ($status_pasien as $sp) {
-                                                            if ($pasien[0]->status_pasien_id == $sp->id_status_pasien) {
-                                                                echo '<option value="' . $sp->id_status_pasien . '" selected>' . $sp->nama_status_pasien . '</option>';
+                                                            if ($pasien[0]->status_pasien_id == $sp->status_pasien_id) {
+                                                                echo '<option value="' . $sp->status_pasien_id . '" selected>' . $sp->nama_status_pasien . '</option>';
                                                             } else {
-                                                                echo '<option value="' . $sp->id_status_pasien . '">' . $sp->nama_status_pasien . '</option>';
+                                                                echo '<option value="' . $sp->status_pasien_id . '">' . $sp->nama_status_pasien . '</option>';
                                                             }
                                                         }
                                                         ?>
@@ -180,26 +185,29 @@
                                                         <option>- Pilih Jenis Kepesertaan - </option>
                                                         <?php
                                                         foreach ($kepesertaan_pasien as $kp) {
-                                                            if ($pasien[0]->kepesertaan_pasien_id == $kp->id_kepesertaan_pasien) {
-                                                                echo '<option value="' . $kp->id_kepesertaan_pasien . '" selected>' . $kp->nama_kepesertaan_pasien . '</option>';
+                                                            if ($pasien[0]->kepesertaan_pasien_id == $kp->kepesertaan_pasien_id) {
+                                                                echo '<option value="' . $kp->kepesertaan_pasien_id . '" selected>' . $kp->nama_kepesertaan_pasien . '</option>';
                                                             } else {
-                                                                echo '<option value="' . $kp->id_kepesertaan_pasien . '">' . $kp->nama_kepesertaan_pasien . '</option>';
+                                                                echo '<option value="' . $kp->kepesertaan_pasien_id . '">' . $kp->nama_kepesertaan_pasien . '</option>';
                                                             }
                                                         }
                                                         ?>
                                                     </select>
                                                 </fieldset>
                                             </div>
+                                            <div class="col-md-2 col-12">
+                                                    <label for="jns_key_id">Jenis Kunci</label>
+                                                </div>
                                             <div class="col-md-4 form-group">
                                                 <fieldset class="form-group">
                                                     <select class="form-select" id="jns_key_id" name="jns_key_id">
                                                         <option>- Pilih Jenis Kunci - </option>
                                                         <?php
                                                         foreach ($jns_key as $jk) {
-                                                            if ($pasien[0]->jns_key_id == $jk->id_jns_key) {
-                                                                echo '<option value="' . $jk->id_jns_key . '" selected>' . $jk->nama_jns_key . '</option>';
+                                                            if ($pasien[0]->jns_key_id == $jk->jns_key_id) {
+                                                                echo '<option value="' . $jk->jns_key_id . '" selected>' . $jk->nama_jns_key . '</option>';
                                                             } else {
-                                                                echo '<option value="' . $jk->id_jns_key . '">' . $jk->nama_jns_key . '</option>';
+                                                                echo '<option value="' . $jk->jns_key_id . '">' . $jk->nama_jns_key . '</option>';
                                                             }
                                                         }
                                                         ?>
@@ -217,8 +225,8 @@
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                        <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                        <button type="submit" class="btn btn-primary btn-sm me-1 mb-1">Simpan</button>
+                                        <button type="reset" class="btn btn-light-secondary btn-sm me-1 mb-1">Reset</button>
                                     </div>
                                 </form>
                                 <?php echo form_close(); ?>
