@@ -65,7 +65,6 @@ class _SPECK
 
 		}
 
-
 		return $expanded;
 	}
 
@@ -87,8 +86,6 @@ class _SPECK
 			$a++;
 		}
 
-
-
 		$output = ""; //Inisialisasi variable output utk menampung hasil akhir
 
 		for ($i = 0; $i < count($cipher); $i++) {
@@ -104,7 +101,6 @@ class _SPECK
 	}
 	function block_encrypt($_x, $_y, $key)
 	{
-
 		//
 		$x = $_x;
 		$y = $_y;
@@ -115,8 +111,6 @@ class _SPECK
 		}
 		$text[0] = $x;
 		$text[1] = $y;
-
-
 
 		//return array($x,$y);
 		//$cipher = $this->_long2str($x).$this->_long2str($y);
@@ -136,13 +130,7 @@ class _SPECK
 			//Memasukkan ciphertext ke dalam fungsi block-decrypt untuk didekripsi
 			$plain[] = $this->block_decrypt($cipher[$i], $cipher[$i + 1], $key);
 
-
 			//echo "HASIL SETELAH ROUND TERAKHIR [X,Y]:".implode(" ",$plain)."<br>";
-
-
-
-
-
 		}
 		//echo " <br><b>HASIL SETELAH XOR:</b> "."<br>";
 		//echo "PLAINTEXT X,Y Ke 0 (DALAM LONG INTEGER):".implode(" ",$plain[0])."<br>";
